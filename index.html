@@ -59,6 +59,33 @@
 footer{background:#1a1a2e;padding:2rem;text-align:center}
 footer p{color:rgba(255,255,255,.4);font-size:13px}
 footer span{color:#FFD43B}
+
+/* LOGIN MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:16px;padding:2rem;width:100%;max-width:400px;margin:1rem;position:relative}
+.modal h2{font-size:1.2rem;font-weight:700;margin-bottom:.25rem;color:#1a1a2e}
+.modal p{font-size:13px;color:#888;margin-bottom:1.5rem}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:20px;cursor:pointer;color:#888;line-height:1}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:13px;font-weight:500;color:#444;margin-bottom:.35rem}
+.form-group input{width:100%;border:1px solid #ddd;border-radius:8px;padding:9px 12px;font-size:14px;font-family:'Noto Sans TC',sans-serif;outline:none;transition:border-color .15s}
+.form-group input:focus{border-color:var(--ntue)}
+.form-hint{font-size:11px;color:#aaa;margin-top:.3rem}
+.modal-btn{width:100%;background:var(--ntue);color:#fff;border:none;border-radius:9px;padding:12px;font-size:15px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif;margin-top:.5rem;transition:opacity .2s}
+.modal-btn:hover{opacity:.88}
+.modal-divider{text-align:center;font-size:12px;color:#bbb;margin:1rem 0;position:relative}
+.modal-divider::before{content:'';position:absolute;left:0;top:50%;width:42%;height:1px;background:#eee}
+.modal-divider::after{content:'';position:absolute;right:0;top:50%;width:42%;height:1px;background:#eee}
+.modal-switch{text-align:center;font-size:13px;color:#888;margin-top:1rem}
+.modal-switch a{color:var(--ntue);cursor:pointer;font-weight:500}
+
+/* NAV USER */
+.nav-user{display:flex;align-items:center;gap:8px}
+.nav-avatar{width:32px;height:32px;border-radius:50%;background:var(--ntue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer}
+.nav-username{font-size:13px;font-weight:500;color:var(--ntue)}
+.nav-logout{font-size:12px;color:#aaa;cursor:pointer;background:none;border:none;font-family:'Noto Sans TC',sans-serif}
+.nav-logout:hover{color:#E24B4A}
 </style>
 </head>
 <body>
@@ -70,9 +97,65 @@ footer span{color:#FFD43B}
       <a href="search.html">搜尋課程</a>
       <a href="#features">功能介紹</a>
     </div>
-    <a href="search.html" class="nav-cta">開始使用</a>
+    <div id="navRight">
+      <a href="#" class="nav-cta" id="loginBtn" onclick="openModal('login');return false;">登入</a>
+    </div>
   </div>
 </nav>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="關閉">✕</button>
+
+    <!-- LOGIN VIEW -->
+    <div id="loginView">
+      <h2>登入 RatePro</h2>
+      <p>使用國北教大校內信登入</p>
+      <div class="form-group">
+        <label>學校信箱</label>
+        <input type="email" id="loginEmail" placeholder="學號@ntue.edu.tw">
+        <div class="form-hint">僅接受 @ntue.edu.tw 結尾的信箱</div>
+      </div>
+      <div class="form-group">
+        <label>密碼</label>
+        <input type="password" id="loginPassword" placeholder="輸入密碼">
+      </div>
+      <button class="modal-btn" onclick="doLogin()">登入</button>
+      <div class="modal-divider">或</div>
+      <div class="modal-switch">還沒有帳號？<a onclick="switchView('register')">立即註冊</a></div>
+    </div>
+
+    <!-- REGISTER VIEW -->
+    <div id="registerView" style="display:none">
+      <h2>註冊帳號</h2>
+      <p>加入國北教大課程評價社群</p>
+      <div class="form-group">
+        <label>學校信箱</label>
+        <input type="email" id="regEmail" placeholder="學號@ntue.edu.tw">
+        <div class="form-hint">系統將寄送驗證信到此信箱</div>
+      </div>
+      <div class="form-group">
+        <label>設定密碼</label>
+        <input type="password" id="regPassword" placeholder="至少 8 個字元">
+      </div>
+      <div class="form-group">
+        <label>顯示名稱</label>
+        <input type="text" id="regName" placeholder="例如：教育系大三">
+      </div>
+      <button class="modal-btn" onclick="doRegister()">註冊並寄送驗證信</button>
+      <div class="modal-switch">已有帳號？<a onclick="switchView('login')">返回登入</a></div>
+    </div>
+
+    <!-- SUCCESS VIEW -->
+    <div id="successView" style="display:none;text-align:center;padding:1rem 0">
+      <div style="width:60px;height:60px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:26px;color:#1D9E75">✓</div>
+      <h2 id="successTitle">登入成功！</h2>
+      <p id="successMsg" style="margin-bottom:1.5rem">歡迎回來</p>
+      <button class="modal-btn" onclick="closeModal()">開始使用</button>
+    </div>
+  </div>
+</div>
 
 <div class="hero">
   <div class="hero-inner">
@@ -138,5 +221,82 @@ footer span{color:#FFD43B}
   <p>© 2025 <span>NTUE RatePro</span> · 國立台北教育大學課程評價系統 · 僅供學生參考使用</p>
 </footer>
 
+<script>
+let currentUser=null;
+
+function openModal(view){
+  switchView(view);
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+function switchView(v){
+  ['loginView','registerView','successView'].forEach(id=>{
+    document.getElementById(id).style.display='none';
+  });
+  document.getElementById(v+'View').style.display='block';
+}
+
+function doLogin(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPassword').value;
+  if(!email.endsWith('@ntue.edu.tw')){
+    alert('請使用國北教大校內信箱（@ntue.edu.tw）');return;
+  }
+  if(!pass){alert('請輸入密碼');return;}
+  const name=localStorage.getItem('rp_name_'+email)||email.split('@')[0];
+  currentUser={email,name};
+  localStorage.setItem('rp_user',JSON.stringify(currentUser));
+  document.getElementById('successTitle').textContent='登入成功！';
+  document.getElementById('successMsg').textContent='歡迎回來，'+name+'！';
+  switchView('success');
+  updateNavUser();
+}
+
+function doRegister(){
+  const email=document.getElementById('regEmail').value.trim();
+  const pass=document.getElementById('regPassword').value;
+  const name=document.getElementById('regName').value.trim()||email.split('@')[0];
+  if(!email.endsWith('@ntue.edu.tw')){
+    alert('請使用國北教大校內信箱（@ntue.edu.tw）');return;
+  }
+  if(pass.length<8){alert('密碼至少需要 8 個字元');return;}
+  localStorage.setItem('rp_name_'+email,name);
+  currentUser={email,name};
+  localStorage.setItem('rp_user',JSON.stringify(currentUser));
+  document.getElementById('successTitle').textContent='註冊成功！';
+  document.getElementById('successMsg').textContent='歡迎加入，'+name+'！驗證信已寄出。';
+  switchView('success');
+  updateNavUser();
+}
+
+function updateNavUser(){
+  const navRight=document.getElementById('navRight');
+  if(currentUser){
+    const initial=currentUser.name.charAt(0).toUpperCase();
+    navRight.innerHTML=`
+      <div class="nav-user">
+        <div class="nav-avatar" title="${currentUser.name}">${initial}</div>
+        <span class="nav-username">${currentUser.name}</span>
+        <button class="nav-logout" onclick="doLogout()">登出</button>
+      </div>`;
+  } else {
+    navRight.innerHTML=`<a href="#" class="nav-cta" id="loginBtn" onclick="openModal('login');return false;">登入</a>`;
+  }
+}
+
+function doLogout(){
+  currentUser=null;
+  localStorage.removeItem('rp_user');
+  updateNavUser();
+}
+
+// 頁面載入時檢查登入狀態
+window.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('rp_user');
+  if(saved){try{currentUser=JSON.parse(saved);updateNavUser();}catch(e){}}
+});
+</script>
 </body>
 </html>
