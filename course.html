@@ -192,8 +192,17 @@
 
   <div class="section">
     <div class="sec-title"><i class="ti ti-message-circle"></i>學生評論（29 筆）</div>
-    <div class="review-list">
-      <div class="rv-card">
+
+    <div style="display:flex;align-items:center;gap:8px;background:#f8f9fe;border:1px solid var(--border);border-radius:9px;padding:0 12px;height:38px;margin-bottom:1rem">
+      <i class="ti ti-search" style="color:#aaa;font-size:16px"></i>
+      <input type="text" id="reviewSearch" placeholder="搜尋評論關鍵字，例如：報告、給分、點名…"
+        style="flex:1;border:none;outline:none;font-size:13px;background:transparent;font-family:'Noto Sans TC',sans-serif;color:var(--text)"
+        oninput="filterReviews(this.value)">
+      <span id="reviewCount" style="font-size:12px;color:#aaa;white-space:nowrap">4 則</span>
+    </div>
+
+    <div class="review-list" id="reviewList">
+      <div class="rv-card" data-text="內容很扎實，對未來教書非常有幫助。黃老師會把抽象的課程理論連結到真實教學情境，讓人很有收穫。小組報告佔比重，需要找到有責任感的隊友，分工清楚就沒問題。強烈推薦小組合作">
         <div class="rv-top">
           <div class="rv-user">
             <div class="rv-avatar">教</div>
@@ -204,7 +213,7 @@
         <div class="rv-body">內容很扎實，對未來教書非常有幫助。黃老師會把抽象的課程理論連結到真實教學情境，讓人很有收穫。小組報告佔比重，需要找到有責任感的隊友，分工清楚就沒問題。</div>
         <div class="rv-tags"><span class="tag teal">強烈推薦</span><span class="tag gray">小組合作重要</span></div>
       </div>
-      <div class="rv-card">
+      <div class="rv-card" data-text="老師備課很認真，每週都有補充最新的評量研究文獻。期末報告要做一套完整的課程設計方案，工程有點大但成就感十足。給分算中等，認真做報告基本上不會太差。報告量大老師認真">
         <div class="rv-top">
           <div class="rv-user">
             <div class="rv-avatar" style="background:#FAEEDA;color:#854F0B">師</div>
@@ -215,7 +224,7 @@
         <div class="rv-body">老師備課很認真，每週都有補充最新的評量研究文獻。期末報告要做一套完整的課程設計方案，工程有點大但成就感十足。給分算中等，認真做報告基本上不會太差。</div>
         <div class="rv-tags"><span class="tag blue">報告量大</span><span class="tag teal">老師認真</span></div>
       </div>
-      <div class="rv-card">
+      <div class="rv-card" data-text="課程內容很好，但對大學部學生來說閱讀量偏重。老師不太點名，所以如果不逼自己其實很容易只有期末才衝報告。建議提早開始，不要留到最後一週。閱讀量多自律很重要">
         <div class="rv-top">
           <div class="rv-user">
             <div class="rv-avatar" style="background:#E1F5EE;color:#0F6E56">碩</div>
@@ -226,7 +235,7 @@
         <div class="rv-body">課程內容很好，但對大學部學生來說閱讀量偏重。老師不太點名，所以如果不逼自己其實很容易只有期末才衝報告。建議提早開始，不要留到最後一週。</div>
         <div class="rv-tags"><span class="tag amber">閱讀量多</span><span class="tag gray">自律很重要</span></div>
       </div>
-      <div class="rv-card">
+      <div class="rv-card" data-text="原本擔心必修課會很無聊，但黃老師上課很有活力，還會帶大家討論時事教育新聞。雖然是必修，但整體體驗比想像中好很多。最後大家的報告品質都很高，互評環節很有趣。課堂互動佳互評制度">
         <div class="rv-top">
           <div class="rv-user">
             <div class="rv-avatar">大</div>
@@ -237,6 +246,9 @@
         <div class="rv-body">原本擔心必修課會很無聊，但黃老師上課很有活力，還會帶大家討論時事教育新聞。雖然是必修，但整體體驗比想像中好很多。最後大家的報告品質都很高，互評環節很有趣。</div>
         <div class="rv-tags"><span class="tag teal">課堂互動佳</span><span class="tag blue">互評制度</span></div>
       </div>
+    </div>
+    <div id="reviewEmpty" style="display:none;text-align:center;padding:2rem;color:var(--muted);font-size:14px">
+      <i class="ti ti-search-off" style="font-size:32px;display:block;margin-bottom:.5rem;color:#ddd"></i>找不到含有此關鍵字的評論
     </div>
   </div>
 
@@ -285,6 +297,19 @@ new Chart(document.getElementById('radarChart'),{
     }}
   }
 });
+
+function filterReviews(q){
+  const cards=document.querySelectorAll('#reviewList .rv-card');
+  let visible=0;
+  cards.forEach(card=>{
+    const text=card.dataset.text||'';
+    const match=!q||text.includes(q);
+    card.style.display=match?'block':'none';
+    if(match)visible++;
+  });
+  document.getElementById('reviewCount').textContent=visible+' 則';
+  document.getElementById('reviewEmpty').style.display=visible===0?'block':'none';
+}
 </script>
 </body>
 </html>
