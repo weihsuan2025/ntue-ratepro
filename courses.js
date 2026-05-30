@@ -31,7 +31,6 @@
 //   'social' 社會與區域發展學系
 //   'pe'     體育學系
 //   'music'  音樂學系
-//   'cict'  課程與教學傳播科技研究所  
 // ================================================================
 
 const COURSES = [
@@ -135,7 +134,7 @@ const COURSES = [
     attend: 1.5,
     harvest: 4.4,
     reviews: 44,
-    exams: ['exam', 'report','attend',],
+    exams: ['exam', 'report'],
     tags: ['大學部選修', '數位科技'],
     review: '對沒基礎的人有點吃力，但老師課後很願意解惑。'
   },
@@ -203,27 +202,6 @@ const COURSES = [
     tags: ['大學部選修', '藝術設計'],
     review: '超喜歡這門課！期末自己做一本繪本超有成就感。'
   },
-  // ── 課程與教學傳播教育研究所 ───────────────────────────────────────
-  {
-    id: 9,
-    name: '數位內容設計專題',
-    teacher: '胡秋帆',
-    dept: '網頁設計',
-    credit: 3,
-    type: 'elective',
-    level: 'grad',
-    diff: 'americano',
-    rating: 4.2,
-    hours: 2,
-    challenge: 3.0,
-    content: 3.8,
-    attend: 5,
-    harvest: 3,
-    reviews: 2,
-    exams: ['report', 'group','present','attend'],
-    tags: ['研究所選修', '未來趨勢','vibe coding'],
-    review: '期末成果很有成就感，適合有想練習架設互動平台的人。'
-  }
 
   // ================================================================
   // 👇 在這裡繼續新增課程，複製上面的格式貼上即可

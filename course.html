@@ -15,39 +15,50 @@
 .course-title{font-size:1.5rem;font-weight:700;color:#fff;margin:.4rem 0 .5rem}
 .course-sub{font-size:13px;color:rgba(255,255,255,.72);display:flex;gap:16px;flex-wrap:wrap}
 .course-sub span{display:flex;align-items:center;gap:4px}
-
 .stat-strip-wrap{max-width:860px;margin:0 auto;padding:0 2rem}
 .stat-strip{background:#fff;border:1px solid var(--border);border-radius:var(--radius);display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden;transform:translateY(-1.2rem);box-shadow:0 4px 20px rgba(0,0,0,.07)}
 .stat-cell{padding:1rem;text-align:center;border-right:1px solid var(--border)}
 .stat-cell:last-child{border-right:none}
 .stat-val{font-size:1.4rem;font-weight:700;line-height:1.1}
 .stat-lbl{font-size:11px;color:var(--muted);margin-top:4px}
-
 .body{max-width:860px;margin:0 auto;padding:0 2rem 3rem}
 .section{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:16px}
 .sec-title{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-bottom:1.1rem;display:flex;align-items:center;gap:6px}
 .sec-title i{font-size:16px}
-
 .radar-wrap{display:flex;gap:2rem;align-items:center;flex-wrap:wrap}
 .legend{flex:1;min-width:150px;display:flex;flex-direction:column;gap:11px}
 .leg-row{display:flex;align-items:center;gap:9px}
 .leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
 .leg-label{font-size:13px;color:var(--muted);flex:1}
 .leg-val{font-size:14px;font-weight:700;min-width:30px;text-align:right}
-
 .bar-rows{display:flex;flex-direction:column;gap:11px}
 .br{display:flex;align-items:center;gap:10px}
 .br-label{font-size:13px;color:var(--muted);width:84px;flex-shrink:0}
 .br-track{flex:1;height:9px;background:#f0f0f0;border-radius:99px;overflow:hidden}
 .br-fill{height:100%;border-radius:99px}
 .br-val{font-size:13px;font-weight:700;width:34px;text-align:right}
-
 .dist-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
 .dist-star{font-size:12px;color:var(--muted);width:14px;text-align:right}
 .dist-track{flex:1;height:7px;background:#f0f0f0;border-radius:99px;overflow:hidden}
 .dist-fill{height:100%;border-radius:99px;background:#F59F00}
 .dist-count{font-size:11px;color:var(--muted);width:20px}
-
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.res-item{background:#f8f9fe;border-radius:10px;padding:.85rem 1rem;display:flex;align-items:center;gap:10px;cursor:pointer;border:1px solid transparent;transition:border-color .15s}
+.res-item:hover{border-color:var(--ntue-mid)}
+.res-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.res-icon.blue{background:#E6F1FB;color:#185FA5}
+.res-icon.amber{background:#FAEEDA;color:#854F0B}
+.res-icon.teal{background:#E1F5EE;color:#0F6E56}
+.res-name{font-size:13px;font-weight:500}
+.res-meta{font-size:11px;color:var(--muted);margin-top:2px}
+.cta-row{display:flex;gap:10px;margin-top:16px}
+.btn-write{flex:1;background:var(--ntue);color:#E8EDFF;border:none;border-radius:9px;padding:13px;font-size:15px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:opacity .2s}
+.btn-write:hover{opacity:.88}
+.btn-save{background:#fff;color:var(--ntue);border:1px solid var(--ntue);border-radius:9px;padding:13px 18px;font-size:14px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:background .15s}
+.btn-save:hover{background:#f4f6ff}
+/* review */
+.rv-search{display:flex;align-items:center;gap:8px;background:#f8f9fe;border:1px solid var(--border);border-radius:9px;padding:0 12px;height:38px;margin-bottom:1rem}
+.rv-search input{flex:1;border:none;outline:none;font-size:13px;background:transparent;font-family:'Noto Sans TC',sans-serif;color:var(--text)}
 .review-list{display:flex;flex-direction:column;gap:13px}
 .rv-card{background:#f8f9fe;border-radius:10px;padding:1rem 1.1rem}
 .rv-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.55rem}
@@ -58,30 +69,14 @@
 .rv-stars{font-size:13px;color:#F59F00;font-weight:500}
 .rv-body{font-size:13px;color:var(--text);line-height:1.75}
 .rv-tags{display:flex;gap:5px;margin-top:.55rem;flex-wrap:wrap}
-
-.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.res-item{background:#f8f9fe;border-radius:10px;padding:.85rem 1rem;display:flex;align-items:center;gap:10px;cursor:pointer;border:1px solid transparent;transition:border-color .15s}
-.res-item:hover{border-color:var(--ntue-mid)}
-.res-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
-.res-icon.blue{background:#E6F1FB;color:#185FA5}
-.res-icon.amber{background:#FAEEDA;color:#854F0B}
-.res-icon.teal{background:#E1F5EE;color:#0F6E56}
-.res-name{font-size:13px;font-weight:500}
-.res-meta{font-size:11px;color:var(--muted);margin-top:2px}
-
-.cta-row{display:flex;gap:10px;margin-top:16px}
-.btn-write{flex:1;background:var(--ntue);color:#E8EDFF;border:none;border-radius:9px;padding:13px;font-size:15px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:opacity .2s}
-.btn-write:hover{opacity:.88}
-.btn-save{background:#fff;color:var(--ntue);border:1px solid var(--ntue);border-radius:9px;padding:13px 18px;font-size:14px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:background .15s}
-.btn-save:hover{background:#f4f6ff}
-
-@media(max-width:600px){
-  .stat-strip{grid-template-columns:repeat(2,1fr)}
-  .stat-cell:nth-child(2){border-right:none}
-  .stat-cell:nth-child(1),.stat-cell:nth-child(2){border-bottom:1px solid var(--border)}
-  .radar-wrap{flex-direction:column;align-items:flex-start}
-  .res-grid{grid-template-columns:1fr}
-}
+/* lock overlay */
+.lock-section{position:relative;overflow:hidden}
+.lock-blur{filter:blur(4px);pointer-events:none;user-select:none}
+.lock-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(248,249,254,.88);border-radius:var(--radius);text-align:center;padding:1.5rem;z-index:2}
+.lock-icon{width:56px;height:56px;border-radius:50%;background:var(--ntue-light);display:flex;align-items:center;justify-content:center;margin:0 auto .75rem;font-size:24px;color:var(--ntue)}
+.lock-title{font-size:15px;font-weight:700;margin-bottom:.35rem}
+.lock-sub{font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.6}
+.lock-btn{background:var(--ntue);color:#fff;border:none;border-radius:8px;padding:9px 22px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
 </style>
 </head>
 <body>
@@ -91,225 +86,304 @@
     <a href="index.html" class="nav-logo">NTUE <span>RatePro</span></a>
     <div class="nav-links">
       <a href="search.html">搜尋課程</a>
+      <a href="review.html">撰寫評價</a>
     </div>
-    <a href="review.html" class="nav-cta">撰寫評價</a>
+    <div id="navRight"></div>
   </div>
 </nav>
-
-<div class="hero-band">
-  <div class="inner">
-    <div class="breadcrumb">
-      <a href="search.html">搜尋課程</a>
-      <i class="ti ti-chevron-right"></i>
-      <span>課程設計與評量</span>
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="loginView"><h2>登入 RatePro</h2><p>使用國北教大校內信登入</p>
+      <div class="form-group"><label>學校信箱</label><input type="email" id="loginEmail" placeholder="帳號@grad.ntue.edu.tw"><div class="form-hint">僅接受 @grad.ntue.edu.tw</div></div>
+      <div class="form-group"><label>密碼</label><input type="password" id="loginPassword" placeholder="輸入密碼"></div>
+      <button class="modal-btn" onclick="doLogin()">登入</button>
+      <div class="modal-divider">或</div>
+      <div class="modal-switch">還沒有帳號？<a onclick="switchModalView('register')">立即註冊</a></div>
     </div>
-    <div class="course-title">課程設計與評量</div>
-    <div class="course-sub">
-      <span><i class="ti ti-user" style="font-size:13px"></i>黃建國 教授</span>
-      <span><i class="ti ti-building" style="font-size:13px"></i>教育系</span>
-      <span><i class="ti ti-calendar" style="font-size:13px"></i>113學年 第二學期</span>
-      <span><i class="ti ti-coffee" style="font-size:13px"></i>☕☕ 美式（中等難度）</span>
+    <div id="registerView" style="display:none"><h2>註冊帳號</h2><p>加入國北教大課程評價社群</p>
+      <div class="form-group"><label>學校信箱</label><input type="email" id="regEmail" placeholder="帳號@grad.ntue.edu.tw"><div class="form-hint">系統將寄送驗證信</div></div>
+      <div class="form-group"><label>設定密碼</label><input type="password" id="regPassword" placeholder="至少 8 個字元"></div>
+      <div class="form-group"><label>顯示名稱</label><input type="text" id="regName" placeholder="例如：教育系大三"></div>
+      <button class="modal-btn" onclick="doRegister()">註冊</button>
+      <div class="modal-switch">已有帳號？<a onclick="switchModalView('login')">返回登入</a></div>
+    </div>
+    <div id="successView" style="display:none;text-align:center;padding:1rem 0">
+      <div style="width:60px;height:60px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:26px;color:#1D9E75">✓</div>
+      <h2 id="successTitle"></h2><p id="successMsg" style="margin-bottom:1.5rem"></p>
+      <button class="modal-btn" onclick="closeModal();renderReviews()">開始使用</button>
     </div>
   </div>
 </div>
 
-<div class="stat-strip-wrap">
-  <div class="stat-strip">
-    <div class="stat-cell"><div class="stat-val" style="color:#BA7517">3.8</div><div class="stat-lbl">給分甜度</div></div>
-    <div class="stat-cell"><div class="stat-val" style="color:var(--ntue)">4hr</div><div class="stat-lbl">週投入時間</div></div>
-    <div class="stat-cell"><div class="stat-val">29</div><div class="stat-lbl">筆評價</div></div>
-    <div class="stat-cell"><div class="stat-val" style="color:#1D9E75">4.3</div><div class="stat-lbl">學習收穫</div></div>
-  </div>
-</div>
+<!-- Dynamic content -->
+<div id="heroArea"></div>
+<div class="stat-strip-wrap"><div class="stat-strip" id="statStrip"></div></div>
+<div class="body" id="bodyArea"></div>
 
-<div class="body">
-
-  <div class="section">
-    <div class="sec-title"><i class="ti ti-chart-radar"></i>課程雷達圖</div>
-    <div class="radar-wrap">
-      <canvas id="radarChart" width="220" height="220" role="img" aria-label="課程雷達圖"></canvas>
-      <div class="legend">
-        <div class="leg-row"><div class="leg-dot" style="background:#F59F00"></div><div class="leg-label">給分甜度</div><div class="leg-val" style="color:#BA7517">3.8</div></div>
-        <div class="leg-row"><div class="leg-dot" style="background:#3B5BDB"></div><div class="leg-label">挑戰程度</div><div class="leg-val" style="color:#3B5BDB">3.2</div></div>
-        <div class="leg-row"><div class="leg-dot" style="background:#1D9E75"></div><div class="leg-label">內容扎實</div><div class="leg-val" style="color:#1D9E75">4.1</div></div>
-        <div class="leg-row"><div class="leg-dot" style="background:#D85A30"></div><div class="leg-label">點名頻率</div><div class="leg-val" style="color:#D85A30">2.0</div></div>
-        <div class="leg-row"><div class="leg-dot" style="background:#7F77DD"></div><div class="leg-label">學習收穫</div><div class="leg-val" style="color:#534AB7">4.3</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="sec-title"><i class="ti ti-list-details"></i>各維度評分</div>
-    <div class="bar-rows">
-      <div class="br"><div class="br-label">給分甜度</div><div class="br-track"><div class="br-fill" style="width:76%;background:#F59F00"></div></div><div class="br-val" style="color:#BA7517">3.8</div></div>
-      <div class="br"><div class="br-label">挑戰程度</div><div class="br-track"><div class="br-fill" style="width:64%;background:#3B5BDB"></div></div><div class="br-val" style="color:#3B5BDB">3.2</div></div>
-      <div class="br"><div class="br-label">內容扎實</div><div class="br-track"><div class="br-fill" style="width:82%;background:#1D9E75"></div></div><div class="br-val" style="color:#1D9E75">4.1</div></div>
-      <div class="br"><div class="br-label">點名頻率</div><div class="br-track"><div class="br-fill" style="width:40%;background:#D85A30"></div></div><div class="br-val" style="color:#D85A30">2.0</div></div>
-      <div class="br"><div class="br-label">學習收穫</div><div class="br-track"><div class="br-fill" style="width:86%;background:#7F77DD"></div></div><div class="br-val" style="color:#534AB7">4.3</div></div>
-      <div class="br"><div class="br-label">週投入時數</div><div class="br-track"><div class="br-fill" style="width:27%;background:#888"></div></div><div class="br-val" style="color:#555">4hr</div></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="sec-title"><i class="ti ti-tag"></i>課程標籤</div>
-    <div style="margin-bottom:.9rem">
-      <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:500">考核方式</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">
-        <span class="tag gray">期末報告</span><span class="tag gray">小組作業</span><span class="tag gray">課堂參與</span>
-      </div>
-    </div>
-    <div style="margin-bottom:.9rem">
-      <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:500">教材類型</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">
-        <span class="tag blue">講義自編</span><span class="tag blue">指定閱讀</span><span class="tag blue">影片補充</span>
-      </div>
-    </div>
-    <div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:500">課程屬性</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">
-        <span class="tag teal">師資培育</span><span class="tag teal">大學部必修</span><span class="tag amber">2 學分</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="sec-title"><i class="ti ti-star"></i>給分甜度分佈</div>
-    <div style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap">
-      <div style="flex-shrink:0">
-        <div style="font-size:3rem;font-weight:700;color:#BA7517;line-height:1">3.8</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:5px">共 29 筆評價</div>
-        <div style="font-size:16px;color:#F59F00;margin-top:7px;letter-spacing:3px">★★★★☆</div>
-      </div>
-      <div style="flex:1;min-width:140px;padding-top:.25rem">
-        <div class="dist-row"><div class="dist-star">5</div><div class="dist-track"><div class="dist-fill" style="width:28%"></div></div><div class="dist-count">8</div></div>
-        <div class="dist-row"><div class="dist-star">4</div><div class="dist-track"><div class="dist-fill" style="width:38%"></div></div><div class="dist-count">11</div></div>
-        <div class="dist-row"><div class="dist-star">3</div><div class="dist-track"><div class="dist-fill" style="width:21%"></div></div><div class="dist-count">6</div></div>
-        <div class="dist-row"><div class="dist-star">2</div><div class="dist-track"><div class="dist-fill" style="width:10%"></div></div><div class="dist-count">3</div></div>
-        <div class="dist-row"><div class="dist-star">1</div><div class="dist-track"><div class="dist-fill" style="width:3%"></div></div><div class="dist-count">1</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="sec-title"><i class="ti ti-message-circle"></i>學生評論（29 筆）</div>
-
-    <div style="display:flex;align-items:center;gap:8px;background:#f8f9fe;border:1px solid var(--border);border-radius:9px;padding:0 12px;height:38px;margin-bottom:1rem">
-      <i class="ti ti-search" style="color:#aaa;font-size:16px"></i>
-      <input type="text" id="reviewSearch" placeholder="搜尋評論關鍵字，例如：報告、給分、點名…"
-        style="flex:1;border:none;outline:none;font-size:13px;background:transparent;font-family:'Noto Sans TC',sans-serif;color:var(--text)"
-        oninput="filterReviews(this.value)">
-      <span id="reviewCount" style="font-size:12px;color:#aaa;white-space:nowrap">4 則</span>
-    </div>
-
-    <div class="review-list" id="reviewList">
-      <div class="rv-card" data-text="內容很扎實，對未來教書非常有幫助。黃老師會把抽象的課程理論連結到真實教學情境，讓人很有收穫。小組報告佔比重，需要找到有責任感的隊友，分工清楚就沒問題。強烈推薦小組合作">
-        <div class="rv-top">
-          <div class="rv-user">
-            <div class="rv-avatar">教</div>
-            <div><div class="rv-name">教育系大三</div><div class="rv-date">2025年 12月</div></div>
-          </div>
-          <div class="rv-stars">★★★★★ 5.0</div>
-        </div>
-        <div class="rv-body">內容很扎實，對未來教書非常有幫助。黃老師會把抽象的課程理論連結到真實教學情境，讓人很有收穫。小組報告佔比重，需要找到有責任感的隊友，分工清楚就沒問題。</div>
-        <div class="rv-tags"><span class="tag teal">強烈推薦</span><span class="tag gray">小組合作重要</span></div>
-      </div>
-      <div class="rv-card" data-text="老師備課很認真，每週都有補充最新的評量研究文獻。期末報告要做一套完整的課程設計方案，工程有點大但成就感十足。給分算中等，認真做報告基本上不會太差。報告量大老師認真">
-        <div class="rv-top">
-          <div class="rv-user">
-            <div class="rv-avatar" style="background:#FAEEDA;color:#854F0B">師</div>
-            <div><div class="rv-name">師資培育生</div><div class="rv-date">2025年 11月</div></div>
-          </div>
-          <div class="rv-stars" style="color:#BA7517">★★★★☆ 4.0</div>
-        </div>
-        <div class="rv-body">老師備課很認真，每週都有補充最新的評量研究文獻。期末報告要做一套完整的課程設計方案，工程有點大但成就感十足。給分算中等，認真做報告基本上不會太差。</div>
-        <div class="rv-tags"><span class="tag blue">報告量大</span><span class="tag teal">老師認真</span></div>
-      </div>
-      <div class="rv-card" data-text="課程內容很好，但對大學部學生來說閱讀量偏重。老師不太點名，所以如果不逼自己其實很容易只有期末才衝報告。建議提早開始，不要留到最後一週。閱讀量多自律很重要">
-        <div class="rv-top">
-          <div class="rv-user">
-            <div class="rv-avatar" style="background:#E1F5EE;color:#0F6E56">碩</div>
-            <div><div class="rv-name">教育所碩一</div><div class="rv-date">2025年 10月</div></div>
-          </div>
-          <div class="rv-stars" style="color:#D85A30">★★★☆☆ 3.0</div>
-        </div>
-        <div class="rv-body">課程內容很好，但對大學部學生來說閱讀量偏重。老師不太點名，所以如果不逼自己其實很容易只有期末才衝報告。建議提早開始，不要留到最後一週。</div>
-        <div class="rv-tags"><span class="tag amber">閱讀量多</span><span class="tag gray">自律很重要</span></div>
-      </div>
-      <div class="rv-card" data-text="原本擔心必修課會很無聊，但黃老師上課很有活力，還會帶大家討論時事教育新聞。雖然是必修，但整體體驗比想像中好很多。最後大家的報告品質都很高，互評環節很有趣。課堂互動佳互評制度">
-        <div class="rv-top">
-          <div class="rv-user">
-            <div class="rv-avatar">大</div>
-            <div><div class="rv-name">大學部選修生</div><div class="rv-date">2025年 9月</div></div>
-          </div>
-          <div class="rv-stars">★★★★★ 5.0</div>
-        </div>
-        <div class="rv-body">原本擔心必修課會很無聊，但黃老師上課很有活力，還會帶大家討論時事教育新聞。雖然是必修，但整體體驗比想像中好很多。最後大家的報告品質都很高，互評環節很有趣。</div>
-        <div class="rv-tags"><span class="tag teal">課堂互動佳</span><span class="tag blue">互評制度</span></div>
-      </div>
-    </div>
-    <div id="reviewEmpty" style="display:none;text-align:center;padding:2rem;color:var(--muted);font-size:14px">
-      <i class="ti ti-search-off" style="font-size:32px;display:block;margin-bottom:.5rem;color:#ddd"></i>找不到含有此關鍵字的評論
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="sec-title"><i class="ti ti-books"></i>學習資源</div>
-    <div class="res-grid">
-      <div class="res-item"><div class="res-icon blue"><i class="ti ti-notes"></i></div><div><div class="res-name">共筆整理</div><div class="res-meta">3 份可用</div></div></div>
-      <div class="res-item"><div class="res-icon amber"><i class="ti ti-file-description"></i></div><div><div class="res-name">歷年考古題</div><div class="res-meta">2 年份</div></div></div>
-      <div class="res-item"><div class="res-icon teal"><i class="ti ti-book"></i></div><div><div class="res-name">課本轉讓</div><div class="res-meta">1 本待售</div></div></div>
-      <div class="res-item"><div class="res-icon blue"><i class="ti ti-presentation"></i></div><div><div class="res-name">報告範本</div><div class="res-meta">2 份參考</div></div></div>
-    </div>
-  </div>
-
-  <div class="cta-row">
-    <a href="review.html" class="btn-write"><i class="ti ti-pencil"></i> 撰寫我的評價</a>
-    <button class="btn-save"><i class="ti ti-bookmark"></i> 收藏</button>
-  </div>
-
-</div>
-
+<script src="courses.js?v=2"></script>
+<script src="auth.js"></script>
 <script>
-new Chart(document.getElementById('radarChart'),{
-  type:'radar',
-  data:{
-    labels:['給分甜度','挑戰程度','內容扎實','點名頻率','學習收穫'],
-    datasets:[{
-      data:[3.8,3.2,4.1,2.0,4.3],
-      backgroundColor:'rgba(59,91,219,0.1)',
-      borderColor:'#3B5BDB',
-      borderWidth:2.5,
-      pointBackgroundColor:['#F59F00','#3B5BDB','#1D9E75','#D85A30','#7F77DD'],
-      pointBorderColor:'#fff',
-      pointRadius:6,
-      pointBorderWidth:2
-    }]
-  },
-  options:{
-    responsive:false,
-    plugins:{legend:{display:false}},
-    scales:{r:{
-      min:0,max:5,
-      ticks:{stepSize:1,display:false},
-      grid:{color:'rgba(0,0,0,0.07)'},
-      angleLines:{color:'rgba(0,0,0,0.07)'},
+const DIFF_LABEL={latte:'☕ 拿鐵',americano:'☕☕ 美式',espresso:'☕☕☕ 濃縮'};
+const DIFF_COLOR={latte:'teal',americano:'amber',espresso:'coral'};
+const EXAM_LABEL={exam:'筆試',report:'報告',group:'小組作業',attend:'出席',quiz:'小考',present:'上台報告'};
+const DEPT_LABEL={edu:'教育學系',cs:'數位科技設計學系',lang:'語文與創作學系',art:'藝術與造型設計學系',math:'數學暨資訊教育學系',sci:'自然科學教育學系',social:'社會與區域發展學系',pe:'體育學系',music:'音樂學系'};
+const LEVEL_LABEL={required:'必修',elective:'選修'};
+const LEVEL_LEVEL={ug:'大學部',grad:'研究所',inservice:'在職專班'};
+const RATING_COLOR=r=>r>=4?'#1D9E75':r>=3?'#BA7517':'#D85A30';
+
+// Sample reviews per course (keyed by course id)
+const COURSE_REVIEWS={
+  1:[
+    {name:'教育系大三',avatar:'教',bg:'#E8EDFF',fg:'#0C447C',date:'2025年12月',stars:5,text:'老師上課很活潑，互動良好，給分很甜。期末報告題目自由度高，理解重於死背。',tags:['強烈推薦','給分甜']},
+    {name:'師資培育生',avatar:'師',bg:'#FAEEDA',fg:'#854F0B',date:'2025年11月',stars:4,text:'很適合對教育心理有興趣的人，內容豐富且生活化，不太需要死背公式。',tags:['老師認真','課堂互動多']},
+    {name:'教育所碩一',avatar:'碩',bg:'#E1F5EE',fg:'#0F6E56',date:'2025年10月',stars:4,text:'作業份量適中，老師會針對學生回饋調整教學速度，整體很推薦。',tags:['推薦']},
+  ],
+  2:[
+    {name:'教育系大三',avatar:'教',bg:'#E8EDFF',fg:'#0C447C',date:'2025年12月',stars:5,text:'內容很扎實，對未來教書非常有幫助。黃老師會把抽象理論連結到真實情境，小組報告需找到好隊友。',tags:['強烈推薦','小組合作重要']},
+    {name:'師資培育生',avatar:'師',bg:'#FAEEDA',fg:'#854F0B',date:'2025年11月',stars:4,text:'老師備課很認真，每週補充最新評量研究文獻。期末報告工程大但成就感十足。',tags:['報告量大','老師認真']},
+    {name:'教育所碩一',avatar:'碩',bg:'#E1F5EE',fg:'#0F6E56',date:'2025年10月',stars:3,text:'課程內容很好，但閱讀量偏重。老師不太點名，需要自律提早開始報告。',tags:['閱讀量多','建議提早開始']},
+    {name:'大學部選修生',avatar:'大',bg:'#E8EDFF',fg:'#0C447C',date:'2025年9月',stars:5,text:'黃老師上課很有活力，會帶大家討論時事教育新聞。互評環節很有趣。',tags:['課堂互動佳','互評制度']},
+  ],
+  default:[
+    {name:'修課學生A',avatar:'學',bg:'#E8EDFF',fg:'#0C447C',date:'2025年12月',stars:4,text:'整體課程安排得很好，老師說明清楚，作業量適中，推薦給有興趣的同學。',tags:['推薦','老師認真']},
+    {name:'修課學生B',avatar:'學',bg:'#FAEEDA',fg:'#854F0B',date:'2025年11月',stars:3,text:'內容扎實，但節奏稍快，建議課前先預習。小考頻率較高，需要持續關注課程進度。',tags:['建議提早開始']},
+  ]
+};
+
+let radarChart=null;
+let currentCourse=null;
+
+function getCourse(){
+  const params=new URLSearchParams(window.location.search);
+  const id=parseInt(params.get('id')||'0');
+  return COURSES.find(c=>c.id===id)||COURSES[0];
+}
+
+function renderPage(){
+  const c=getCourse();
+  currentCourse=c;
+  document.title=c.name+' | NTUE RatePro';
+  const dc=DIFF_COLOR[c.diff];
+
+  // Hero
+  document.getElementById('heroArea').innerHTML=`
+    <div class="hero-band">
+      <div class="inner">
+        <div class="breadcrumb">
+          <a href="search.html">搜尋課程</a>
+          <i class="ti ti-chevron-right"></i>
+          <span>${c.name}</span>
+        </div>
+        <div class="course-title">${c.name}</div>
+        <div class="course-sub">
+          <span><i class="ti ti-user" style="font-size:13px"></i>${c.teacher} 教授</span>
+          <span><i class="ti ti-building" style="font-size:13px"></i>${DEPT_LABEL[c.dept]||c.dept}</span>
+          <span><i class="ti ti-coffee" style="font-size:13px"></i>${DIFF_LABEL[c.diff]}</span>
+          <span><i class="ti ti-books" style="font-size:13px"></i>${LEVEL_LEVEL[c.level]||''} ${LEVEL_LABEL[c.type]||''} ${c.credit}學分</span>
+        </div>
+      </div>
+    </div>`;
+
+  // Stats
+  document.getElementById('statStrip').innerHTML=`
+    <div class="stat-cell"><div class="stat-val" style="color:${RATING_COLOR(c.rating)}">${c.rating.toFixed(1)}</div><div class="stat-lbl">給分甜度</div></div>
+    <div class="stat-cell"><div class="stat-val" style="color:var(--ntue)">${c.hours}hr</div><div class="stat-lbl">週投入時間</div></div>
+    <div class="stat-cell"><div class="stat-val">${c.reviews}</div><div class="stat-lbl">筆評價</div></div>
+    <div class="stat-cell"><div class="stat-val" style="color:#1D9E75">${c.harvest.toFixed(1)}</div><div class="stat-lbl">學習收穫</div></div>`;
+
+  // Body
+  const starFull=Math.round(c.rating);
+  const distData=[28,38,21,10,3];
+  const distCounts=[8,11,6,3,1];
+
+  document.getElementById('bodyArea').innerHTML=`
+    <div class="section">
+      <div class="sec-title"><i class="ti ti-chart-radar"></i>課程雷達圖</div>
+      <div class="radar-wrap">
+        <canvas id="radarChart" width="220" height="220"></canvas>
+        <div class="legend">
+          <div class="leg-row"><div class="leg-dot" style="background:#F59F00"></div><div class="leg-label">給分甜度</div><div class="leg-val" style="color:#BA7517">${c.rating.toFixed(1)}</div></div>
+          <div class="leg-row"><div class="leg-dot" style="background:#3B5BDB"></div><div class="leg-label">挑戰程度</div><div class="leg-val" style="color:#3B5BDB">${c.challenge.toFixed(1)}</div></div>
+          <div class="leg-row"><div class="leg-dot" style="background:#1D9E75"></div><div class="leg-label">內容扎實</div><div class="leg-val" style="color:#1D9E75">${c.content.toFixed(1)}</div></div>
+          <div class="leg-row"><div class="leg-dot" style="background:#D85A30"></div><div class="leg-label">點名頻率</div><div class="leg-val" style="color:#D85A30">${c.attend.toFixed(1)}</div></div>
+          <div class="leg-row"><div class="leg-dot" style="background:#7F77DD"></div><div class="leg-label">學習收穫</div><div class="leg-val" style="color:#534AB7">${c.harvest.toFixed(1)}</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-title"><i class="ti ti-list-details"></i>各維度評分</div>
+      <div class="bar-rows">
+        <div class="br"><div class="br-label">給分甜度</div><div class="br-track"><div class="br-fill" style="width:${c.rating/5*100}%;background:#F59F00"></div></div><div class="br-val" style="color:#BA7517">${c.rating.toFixed(1)}</div></div>
+        <div class="br"><div class="br-label">挑戰程度</div><div class="br-track"><div class="br-fill" style="width:${c.challenge/5*100}%;background:#3B5BDB"></div></div><div class="br-val" style="color:#3B5BDB">${c.challenge.toFixed(1)}</div></div>
+        <div class="br"><div class="br-label">內容扎實</div><div class="br-track"><div class="br-fill" style="width:${c.content/5*100}%;background:#1D9E75"></div></div><div class="br-val" style="color:#1D9E75">${c.content.toFixed(1)}</div></div>
+        <div class="br"><div class="br-label">點名頻率</div><div class="br-track"><div class="br-fill" style="width:${c.attend/5*100}%;background:#D85A30"></div></div><div class="br-val" style="color:#D85A30">${c.attend.toFixed(1)}</div></div>
+        <div class="br"><div class="br-label">學習收穫</div><div class="br-track"><div class="br-fill" style="width:${c.harvest/5*100}%;background:#7F77DD"></div></div><div class="br-val" style="color:#534AB7">${c.harvest.toFixed(1)}</div></div>
+        <div class="br"><div class="br-label">週投入時數</div><div class="br-track"><div class="br-fill" style="width:${Math.min(c.hours/15*100,100)}%;background:#888"></div></div><div class="br-val" style="color:#555">${c.hours}hr</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-title"><i class="ti ti-tag"></i>課程標籤</div>
+      <div style="margin-bottom:.9rem">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:500">考核方式</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">${c.exams.map(e=>`<span class="tag gray">${EXAM_LABEL[e]||e}</span>`).join('')}</div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:500">課程屬性</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">${c.tags.map(t=>`<span class="tag blue">${t}</span>`).join('')}<span class="tag amber">${c.credit} 學分</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-title"><i class="ti ti-star"></i>給分甜度分佈</div>
+      <div style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap">
+        <div style="flex-shrink:0">
+          <div style="font-size:3rem;font-weight:700;color:${RATING_COLOR(c.rating)};line-height:1">${c.rating.toFixed(1)}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:5px">共 ${c.reviews} 筆評價</div>
+          <div style="font-size:16px;color:#F59F00;margin-top:7px;letter-spacing:3px">${'★'.repeat(starFull)}${'☆'.repeat(5-starFull)}</div>
+        </div>
+        <div style="flex:1;min-width:140px;padding-top:.25rem">
+          ${[5,4,3,2,1].map((s,i)=>`<div class="dist-row"><div class="dist-star">${s}</div><div class="dist-track"><div class="dist-fill" style="width:${distData[i]}%"></div></div><div class="dist-count">${distCounts[i]}</div></div>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="reviewSection">
+      <div class="sec-title"><i class="ti ti-message-circle"></i>學生評論（${c.reviews} 筆）</div>
+      <div id="reviewContent"></div>
+    </div>
+
+    <div class="section">
+      <div class="sec-title"><i class="ti ti-books"></i>學習資源</div>
+      <div class="res-grid">
+        <div class="res-item"><div class="res-icon blue"><i class="ti ti-notes"></i></div><div><div class="res-name">共筆整理</div><div class="res-meta">3 份可用</div></div></div>
+        <div class="res-item"><div class="res-icon amber"><i class="ti ti-file-description"></i></div><div><div class="res-name">歷年考古題</div><div class="res-meta">2 年份</div></div></div>
+        <div class="res-item"><div class="res-icon teal"><i class="ti ti-book"></i></div><div><div class="res-name">課本轉讓</div><div class="res-meta">1 本待售</div></div></div>
+        <div class="res-item"><div class="res-icon blue"><i class="ti ti-presentation"></i></div><div><div class="res-name">報告範本</div><div class="res-meta">2 份參考</div></div></div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a href="review.html?id=${c.id}" class="btn-write"><i class="ti ti-pencil"></i> 撰寫我的評價</a>
+      <button class="btn-save" id="saveBtn" onclick="toggleSave()"><i class="ti ti-bookmark"></i> 收藏</button>
+    </div>`;
+
+  // Radar chart
+  if(radarChart) radarChart.destroy();
+  radarChart=new Chart(document.getElementById('radarChart'),{
+    type:'radar',
+    data:{
+      labels:['給分甜度','挑戰程度','內容扎實','點名頻率','學習收穫'],
+      datasets:[{
+        data:[c.rating,c.challenge,c.content,c.attend,c.harvest],
+        backgroundColor:'rgba(59,91,219,0.1)',borderColor:'#3B5BDB',borderWidth:2.5,
+        pointBackgroundColor:['#F59F00','#3B5BDB','#1D9E75','#D85A30','#7F77DD'],
+        pointBorderColor:'#fff',pointRadius:6,pointBorderWidth:2
+      }]
+    },
+    options:{responsive:false,plugins:{legend:{display:false}},scales:{r:{
+      min:0,max:5,ticks:{stepSize:1,display:false},
+      grid:{color:'rgba(0,0,0,0.07)'},angleLines:{color:'rgba(0,0,0,0.07)'},
       pointLabels:{font:{size:11,family:"'Noto Sans TC',sans-serif"},color:'#888'}
-    }}
+    }}}
+  });
+
+  renderReviews();
+}
+
+function renderReviews(){
+  const user=getUser();
+  const c=currentCourse;
+  if(!c) return;
+  const reviews=COURSE_REVIEWS[c.id]||COURSE_REVIEWS.default;
+  const el=document.getElementById('reviewContent');
+  if(!el) return;
+
+  const searchBar=`
+    <div class="rv-search">
+      <i class="ti ti-search" style="color:#aaa;font-size:16px"></i>
+      <input type="text" id="reviewSearch" placeholder="搜尋評論關鍵字…" oninput="filterReviews(this.value)">
+      <span id="reviewCount" style="font-size:12px;color:#aaa;white-space:nowrap">${reviews.length} 則</span>
+    </div>`;
+
+  const reviewsHtml=reviews.map((r,i)=>`
+    <div class="rv-card" id="rv${i}" data-text="${r.text} ${r.tags.join(' ')}">
+      <div class="rv-top">
+        <div class="rv-user">
+          <div class="rv-avatar" style="background:${r.bg};color:${r.fg}">${r.avatar}</div>
+          <div><div class="rv-name">${r.name}</div><div class="rv-date">${r.date}</div></div>
+        </div>
+        <div class="rv-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)} ${r.stars}.0</div>
+      </div>
+      <div class="rv-body">${r.text}</div>
+      <div class="rv-tags">${r.tags.map(t=>`<span class="tag teal">${t}</span>`).join('')}</div>
+    </div>`).join('');
+
+  if(user){
+    el.innerHTML=searchBar+`<div class="review-list" id="reviewList">${reviewsHtml}</div>
+      <div id="reviewEmpty" style="display:none;text-align:center;padding:2rem;color:var(--muted)">
+        <i class="ti ti-search-off" style="font-size:32px;display:block;margin-bottom:.5rem;color:#ddd"></i>找不到含有此關鍵字的評論
+      </div>`;
+  } else {
+    // 未登入：顯示第一則模糊，其餘鎖定
+    const firstCard=`<div class="rv-card lock-blur">${reviews[0]?`
+      <div class="rv-top">
+        <div class="rv-user">
+          <div class="rv-avatar" style="background:${reviews[0].bg};color:${reviews[0].fg}">${reviews[0].avatar}</div>
+          <div><div class="rv-name">${reviews[0].name}</div><div class="rv-date">${reviews[0].date}</div></div>
+        </div>
+        <div class="rv-stars">${'★'.repeat(reviews[0].stars)} ${reviews[0].stars}.0</div>
+      </div>
+      <div class="rv-body">${reviews[0].text}</div>`:''}</div>`;
+    el.innerHTML=`
+      <div class="lock-section">
+        <div class="review-list">${firstCard}</div>
+        <div class="lock-overlay">
+          <div class="lock-icon"><i class="ti ti-lock"></i></div>
+          <div class="lock-title">先給予，才能解鎖</div>
+          <div class="lock-sub">登入並撰寫一篇課程評價後，<br>即可查看所有同學的完整評論</div>
+          <button class="lock-btn" onclick="openModal('login')">登入 / 註冊</button>
+        </div>
+      </div>`;
   }
-});
+}
 
 function filterReviews(q){
   const cards=document.querySelectorAll('#reviewList .rv-card');
   let visible=0;
   cards.forEach(card=>{
-    const text=card.dataset.text||'';
-    const match=!q||text.includes(q);
+    const text=(card.dataset.text||'').toLowerCase();
+    const match=!q||text.includes(q.toLowerCase());
     card.style.display=match?'block':'none';
     if(match)visible++;
   });
-  document.getElementById('reviewCount').textContent=visible+' 則';
-  document.getElementById('reviewEmpty').style.display=visible===0?'block':'none';
+  const countEl=document.getElementById('reviewCount');
+  if(countEl) countEl.textContent=visible+' 則';
+  const emptyEl=document.getElementById('reviewEmpty');
+  if(emptyEl) emptyEl.style.display=visible===0?'block':'none';
 }
+
+function toggleSave(){
+  const btn=document.getElementById('saveBtn');
+  const isSaved=btn.classList.toggle('saved');
+  btn.innerHTML=isSaved?'<i class="ti ti-bookmark-filled"></i> 已收藏':'<i class="ti ti-bookmark"></i> 收藏';
+  btn.style.background=isSaved?'var(--ntue-light)':'';
+}
+
+window.onLoginSuccess=renderReviews;
+
+document.addEventListener('DOMContentLoaded',()=>{
+  if(typeof COURSES==='undefined'){
+    const s=document.createElement('script');
+    s.src='courses.js?v='+Date.now();
+    s.onload=renderPage;
+    document.head.appendChild(s);
+  } else {
+    renderPage();
+  }
+});
 </script>
 </body>
 </html>

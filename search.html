@@ -77,9 +77,34 @@
       <a href="search.html" style="color:var(--ntue)">搜尋課程</a>
       <a href="index.html#features">功能介紹</a>
     </div>
-    <a href="search.html" class="nav-cta">搜尋課程</a>
+    <div id="navRight"></div>
   </div>
 </nav>
+
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="loginView"><h2>登入 RatePro</h2><p>使用國北教大校內信登入</p>
+      <div class="form-group"><label>學校信箱</label><input type="email" id="loginEmail" placeholder="帳號@grad.ntue.edu.tw"><div class="form-hint">僅接受 @grad.ntue.edu.tw</div></div>
+      <div class="form-group"><label>密碼</label><input type="password" id="loginPassword" placeholder="輸入密碼"></div>
+      <button class="modal-btn" onclick="doLogin()">登入</button>
+      <div class="modal-divider">或</div>
+      <div class="modal-switch">還沒有帳號？<a onclick="switchModalView('register')">立即註冊</a></div>
+    </div>
+    <div id="registerView" style="display:none"><h2>註冊帳號</h2><p>加入國北教大課程評價社群</p>
+      <div class="form-group"><label>學校信箱</label><input type="email" id="regEmail" placeholder="帳號@grad.ntue.edu.tw"></div>
+      <div class="form-group"><label>設定密碼</label><input type="password" id="regPassword" placeholder="至少 8 個字元"></div>
+      <div class="form-group"><label>顯示名稱</label><input type="text" id="regName" placeholder="例如：教育系大三"></div>
+      <button class="modal-btn" onclick="doRegister()">註冊</button>
+      <div class="modal-switch">已有帳號？<a onclick="switchModalView('login')">返回登入</a></div>
+    </div>
+    <div id="successView" style="display:none;text-align:center;padding:1rem 0">
+      <div style="width:60px;height:60px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:26px;color:#1D9E75">✓</div>
+      <h2 id="successTitle"></h2><p id="successMsg" style="margin-bottom:1.5rem"></p>
+      <button class="modal-btn" onclick="closeModal()">開始使用</button>
+    </div>
+  </div>
+</div>
 
 <div class="search-topbar">
   <div class="search-wrap">
@@ -280,5 +305,6 @@ function initApp(){
   render();
 }
 </script>
+<script src="auth.js"></script>
 </body>
 </html>

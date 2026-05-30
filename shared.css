@@ -17,14 +17,20 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text
 
 /* NAV */
 .nav{background:#fff;border-bottom:1px solid var(--border);padding:0 2rem;position:sticky;top:0;z-index:100}
-.nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;height:58px}
+.nav-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:1.25rem;height:58px}
 .nav-logo{font-weight:700;font-size:1.05rem;color:var(--ntue);text-decoration:none;letter-spacing:.5px;flex-shrink:0}
 .nav-logo span{color:var(--accent);background:var(--ntue);padding:1px 6px;border-radius:4px}
-.nav-links{display:flex;gap:1.25rem;margin-left:auto}
-.nav-links a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .15s}
+.nav-links{display:flex;gap:1rem;margin-left:auto}
+.nav-links a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .15s;white-space:nowrap}
 .nav-links a:hover{color:var(--ntue)}
-.nav-cta{background:var(--ntue);color:#fff;border:none;padding:7px 18px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif;text-decoration:none;white-space:nowrap;transition:opacity .2s}
+.nav-cta{background:var(--ntue);color:#fff;border:none;padding:7px 16px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif;text-decoration:none;white-space:nowrap;transition:opacity .2s}
 .nav-cta:hover{opacity:.88}
+.nav-user{display:flex;align-items:center;gap:8px}
+.nav-avatar{width:32px;height:32px;border-radius:50%;background:var(--ntue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;flex-shrink:0}
+.nav-username{font-size:13px;font-weight:500;color:var(--ntue);text-decoration:none}
+.nav-username:hover{text-decoration:underline}
+.nav-logout{font-size:12px;color:#aaa;cursor:pointer;background:none;border:none;font-family:'Noto Sans TC',sans-serif}
+.nav-logout:hover{color:#E24B4A}
 
 /* TAGS */
 .tag{font-size:12px;padding:3px 11px;border-radius:20px;display:inline-block}
@@ -46,7 +52,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text
 
 /* PAGE HEADER */
 .page-header{background:var(--ntue);padding:1.5rem 2rem}
-.page-header-inner{max-width:900px;margin:0 auto}
+.page-header-inner{max-width:960px;margin:0 auto}
 .page-header h1{font-size:1.3rem;font-weight:500;color:#fff}
 .page-header p{font-size:13px;color:rgba(255,255,255,.7);margin-top:3px}
 
@@ -55,3 +61,23 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text
 .breadcrumb a{color:rgba(255,255,255,.65);text-decoration:none}
 .breadcrumb a:hover{color:#fff}
 .breadcrumb i{font-size:12px}
+
+/* LOGIN MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:16px;padding:2rem;width:100%;max-width:400px;margin:1rem;position:relative}
+.modal h2{font-size:1.2rem;font-weight:700;margin-bottom:.25rem;color:#1a1a2e}
+.modal p{font-size:13px;color:#888;margin-bottom:1.5rem}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:20px;cursor:pointer;color:#888;line-height:1}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:13px;font-weight:500;color:#444;margin-bottom:.35rem}
+.form-group input{width:100%;border:1px solid #ddd;border-radius:8px;padding:9px 12px;font-size:14px;font-family:'Noto Sans TC',sans-serif;outline:none;transition:border-color .15s}
+.form-group input:focus{border-color:var(--ntue)}
+.form-hint{font-size:11px;color:#aaa;margin-top:.3rem}
+.modal-btn{width:100%;background:var(--ntue);color:#fff;border:none;border-radius:9px;padding:12px;font-size:15px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif;margin-top:.5rem;transition:opacity .2s}
+.modal-btn:hover{opacity:.88}
+.modal-divider{text-align:center;font-size:12px;color:#bbb;margin:1rem 0;position:relative}
+.modal-divider::before{content:'';position:absolute;left:0;top:50%;width:42%;height:1px;background:#eee}
+.modal-divider::after{content:'';position:absolute;right:0;top:50%;width:42%;height:1px;background:#eee}
+.modal-switch{text-align:center;font-size:13px;color:#888;margin-top:1rem}
+.modal-switch a{color:var(--ntue);cursor:pointer;font-weight:500}

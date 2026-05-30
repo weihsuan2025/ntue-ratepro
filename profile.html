@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個人頁面 | NTUE RatePro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+.hero-band{background:var(--ntue);padding:2rem 2rem 3.5rem}
+.hero-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:1.25rem}
+.avatar-big{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;flex-shrink:0}
+.user-info h1{font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:.25rem}
+.user-info p{font-size:13px;color:rgba(255,255,255,.7)}
+
+.body{max-width:860px;margin:-1.5rem auto 0;padding:0 2rem 3rem;position:relative;z-index:1}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.stat-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center}
+.stat-val{font-size:1.5rem;font-weight:700;line-height:1;margin-bottom:.3rem}
+.stat-lbl{font-size:11px;color:var(--muted)}
+
+.section{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:16px}
+.sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem}
+.sec-title{font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:7px}
+.sec-title i{font-size:16px;color:var(--muted)}
+.sec-link{font-size:13px;color:var(--ntue);text-decoration:none}
+.sec-link:hover{text-decoration:underline}
+
+/* Level bar */
+.level-wrap{margin-bottom:.5rem}
+.level-row{display:flex;align-items:center;gap:12px;margin-bottom:.4rem}
+.level-badge{background:var(--ntue-light);color:var(--ntue);font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px}
+.level-track{flex:1;height:10px;background:#f0f0f0;border-radius:99px;overflow:hidden}
+.level-fill{height:100%;background:var(--ntue);border-radius:99px;transition:width 1s .2s}
+.level-tip{font-size:12px;color:var(--muted);margin-top:4px}
+.level-perks{display:flex;flex-wrap:wrap;gap:6px;margin-top:.85rem}
+.perk{font-size:12px;padding:3px 10px;border-radius:20px;background:#f8f9fe;border:1px solid var(--border);color:var(--muted);display:flex;align-items:center;gap:4px}
+.perk.unlocked{background:var(--ntue-light);border-color:var(--ntue);color:var(--ntue)}
+.perk i{font-size:13px}
+
+/* Review list */
+.rv-item{display:flex;align-items:flex-start;gap:10px;padding:.85rem 0;border-bottom:1px solid var(--border)}
+.rv-item:last-child{border-bottom:none}
+.rv-icon{width:36px;height:36px;border-radius:9px;background:var(--ntue-light);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--ntue);flex-shrink:0}
+.rv-name{font-size:14px;font-weight:500;margin-bottom:2px}
+.rv-name a{color:var(--text);text-decoration:none}
+.rv-name a:hover{color:var(--ntue)}
+.rv-meta{font-size:12px;color:var(--muted)}
+.rv-stars{font-size:12px;color:#F59F00;margin-left:auto;flex-shrink:0}
+.rv-preview{font-size:12px;color:var(--muted);margin-top:4px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+
+/* Saved list */
+.saved-item{display:flex;align-items:center;gap:10px;padding:.75rem 0;border-bottom:1px solid var(--border)}
+.saved-item:last-child{border-bottom:none}
+.saved-info{flex:1;min-width:0}
+.saved-name{font-size:14px;font-weight:500}
+.saved-name a{color:var(--text);text-decoration:none}
+.saved-name a:hover{color:var(--ntue)}
+.saved-meta{font-size:12px;color:var(--muted);margin-top:2px}
+.unsave-btn{font-size:12px;color:#aaa;background:none;border:none;cursor:pointer;font-family:'Noto Sans TC',sans-serif;padding:4px 8px;border-radius:6px}
+.unsave-btn:hover{color:#E24B4A;background:#FAECE7}
+
+.empty-state{text-align:center;padding:2rem 1rem;color:var(--muted)}
+.empty-state i{font-size:32px;display:block;margin-bottom:.5rem;color:#ddd}
+.empty-state a{color:var(--ntue);text-decoration:none;font-weight:500}
+
+.not-logged{text-align:center;padding:5rem 2rem;max-width:400px;margin:0 auto}
+.not-logged i{font-size:48px;color:#ddd;display:block;margin-bottom:1rem}
+.not-logged h2{font-size:1.2rem;font-weight:700;margin-bottom:.5rem}
+.not-logged p{font-size:14px;color:var(--muted);margin-bottom:1.5rem}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">NTUE <span>RatePro</span></a>
+    <div class="nav-links">
+      <a href="search.html">搜尋課程</a>
+      <a href="review.html">撰寫評價</a>
+    </div>
+    <div id="navRight"></div>
+  </div>
+</nav>
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="loginView">
+      <h2>登入 RatePro</h2><p>使用國北教大校內信登入</p>
+      <div class="form-group"><label>學校信箱</label><input type="email" id="loginEmail" placeholder="帳號@grad.ntue.edu.tw"><div class="form-hint">僅接受 @grad.ntue.edu.tw 結尾的信箱</div></div>
+      <div class="form-group"><label>密碼</label><input type="password" id="loginPassword" placeholder="輸入密碼"></div>
+      <button class="modal-btn" onclick="doLogin()">登入</button>
+      <div class="modal-divider">或</div>
+      <div class="modal-switch">還沒有帳號？<a onclick="switchModalView('register')">立即註冊</a></div>
+    </div>
+    <div id="registerView" style="display:none">
+      <h2>註冊帳號</h2><p>加入國北教大課程評價社群</p>
+      <div class="form-group"><label>學校信箱</label><input type="email" id="regEmail" placeholder="帳號@grad.ntue.edu.tw"><div class="form-hint">系統將寄送驗證信到此信箱</div></div>
+      <div class="form-group"><label>設定密碼</label><input type="password" id="regPassword" placeholder="至少 8 個字元"></div>
+      <div class="form-group"><label>顯示名稱</label><input type="text" id="regName" placeholder="例如：教育系大三"></div>
+      <button class="modal-btn" onclick="doRegister()">註冊</button>
+      <div class="modal-switch">已有帳號？<a onclick="switchModalView('login')">返回登入</a></div>
+    </div>
+    <div id="successView" style="display:none;text-align:center;padding:1rem 0">
+      <div style="width:60px;height:60px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:26px;color:#1D9E75">✓</div>
+      <h2 id="successTitle"></h2><p id="successMsg" style="margin-bottom:1.5rem"></p>
+      <button class="modal-btn" onclick="closeModal();renderProfile()">開始使用</button>
+    </div>
+  </div>
+</div>
+
+<!-- 未登入 -->
+<div id="notLoggedView" style="display:none">
+  <div class="not-logged">
+    <i class="ti ti-user-circle"></i>
+    <h2>請先登入</h2>
+    <p>登入後才能查看個人貢獻、評價記錄與收藏清單</p>
+    <button class="modal-btn" style="width:auto;padding:10px 28px" onclick="openModal('login')">立即登入</button>
+  </div>
+</div>
+
+<!-- 已登入 -->
+<div id="loggedView" style="display:none">
+  <div class="hero-band">
+    <div class="hero-inner">
+      <div class="avatar-big" id="avatarBig"></div>
+      <div class="user-info">
+        <h1 id="profileName"></h1>
+        <p id="profileEmail"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-val" style="color:var(--ntue)" id="statLevel">-</div><div class="stat-lbl">貢獻等級</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:#F59F00" id="statPoints">-</div><div class="stat-lbl">貢獻點數</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:#1D9E75" id="statReviews">-</div><div class="stat-lbl">已評課程</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:#D85A30" id="statSaved">-</div><div class="stat-lbl">收藏課程</div></div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header">
+        <div class="sec-title"><i class="ti ti-trophy"></i>貢獻等級</div>
+      </div>
+      <div class="level-wrap">
+        <div class="level-row">
+          <div class="level-badge" id="levelBadge">Lv.1</div>
+          <div class="level-track"><div class="level-fill" id="levelFill" style="width:0%"></div></div>
+          <span style="font-size:12px;color:var(--muted)" id="levelNext"></span>
+        </div>
+        <div class="level-tip" id="levelTip"></div>
+      </div>
+      <div class="level-perks" id="levelPerks"></div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header">
+        <div class="sec-title"><i class="ti ti-message-circle"></i>我的評價</div>
+        <a href="review.html" class="sec-link">新增評價 +</a>
+      </div>
+      <div id="myReviews"></div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header">
+        <div class="sec-title"><i class="ti ti-bookmark"></i>收藏課程</div>
+        <a href="search.html" class="sec-link">瀏覽課程 →</a>
+      </div>
+      <div id="mySaved"></div>
+    </div>
+  </div>
+</div>
+
+<script src="auth.js"></script>
+<script>
+const LEVEL_CONFIG=[
+  {lv:1,label:'新手評課人',min:0,max:20,pct:0,perks:['查看課程雷達圖','查看課程標籤']},
+  {lv:2,label:'活躍貢獻者',min:20,max:60,pct:65,perks:['查看課程雷達圖','查看課程標籤','查看文字評論','解鎖學習資源']},
+  {lv:3,label:'資深評課人',min:60,max:120,pct:0,perks:['所有功能','職涯資源優先顯示','評論置頂資格']},
+  {lv:4,label:'評課大師',min:120,max:999,pct:0,perks:['所有功能','精選評論徽章','帳號驗證標記']},
+];
+
+const SAMPLE_REVIEWS=[
+  {courseId:2,courseName:'課程設計與評量',teacher:'黃建國',stars:5,date:'2025年12月',text:'內容很扎實，對未來教書非常有幫助。小組報告佔比重，需要找到有責任感的隊友。'},
+  {courseId:6,courseName:'兒童文學',teacher:'林淑芬',stars:4,date:'2025年11月',text:'超推薦！老師人很好，作業有趣，幾乎不點名。'},
+  {courseId:1,courseName:'教育心理學',teacher:'王美玲',stars:5,date:'2025年10月',text:'老師上課很活潑，給分算甜，理解重於記憶。'},
+];
+const SAMPLE_SAVED=[
+  {courseId:4,courseName:'統計學（含實習）',teacher:'陳志明',diff:'espresso',rating:2.8},
+  {courseId:7,courseName:'數位媒體設計',teacher:'蔡雅婷',diff:'americano',rating:4.0},
+];
+const DIFF_LABEL={latte:'☕ 拿鐵',americano:'☕☕ 美式',espresso:'☕☕☕ 濃縮'};
+
+function renderProfile(){
+  const user=getUser();
+  if(!user){
+    document.getElementById('notLoggedView').style.display='block';
+    document.getElementById('loggedView').style.display='none';
+    return;
+  }
+  document.getElementById('notLoggedView').style.display='none';
+  document.getElementById('loggedView').style.display='block';
+
+  document.getElementById('avatarBig').textContent=user.name.charAt(0).toUpperCase();
+  document.getElementById('profileName').textContent=user.name;
+  document.getElementById('profileEmail').textContent=user.email;
+
+  const lv=user.level||1;
+  const pts=user.points||0;
+  const cfg=LEVEL_CONFIG[Math.min(lv-1,3)];
+  const nextCfg=LEVEL_CONFIG[Math.min(lv,3)];
+  const pct=lv>=4?100:Math.round((pts-cfg.min)/(cfg.max-cfg.min)*100);
+
+  document.getElementById('statLevel').textContent='Lv.'+lv;
+  document.getElementById('statPoints').textContent=pts;
+  document.getElementById('statReviews').textContent=user.reviewCount||0;
+  document.getElementById('statSaved').textContent=user.savedCount||0;
+
+  document.getElementById('levelBadge').textContent='Lv.'+lv+' '+cfg.label;
+  setTimeout(()=>{ document.getElementById('levelFill').style.width=pct+'%'; },100);
+  document.getElementById('levelNext').textContent=lv<4?(cfg.max-pts)+'點升級':'最高等級';
+  document.getElementById('levelTip').textContent=lv<4?'再評 '+Math.max(1,Math.ceil((cfg.max-pts)/10))+' 門課即可升至 Lv.'+(lv+1):'你已達到最高貢獻等級，感謝你的付出！';
+
+  const allPerks=['查看課程雷達圖','查看課程標籤','查看文字評論','解鎖學習資源','職涯資源優先顯示','評論置頂資格','精選評論徽章','帳號驗證標記'];
+  document.getElementById('levelPerks').innerHTML=allPerks.map(p=>{
+    const unlocked=cfg.perks.includes(p);
+    return `<div class="perk ${unlocked?'unlocked':''}"><i class="ti ti-${unlocked?'check':'lock'}" style="font-size:12px"></i>${p}</div>`;
+  }).join('');
+
+  const rv=user.reviewCount>0?SAMPLE_REVIEWS.slice(0,user.reviewCount):[];
+  document.getElementById('myReviews').innerHTML=rv.length?rv.map(r=>`
+    <div class="rv-item">
+      <div class="rv-icon"><i class="ti ti-book-2"></i></div>
+      <div style="flex:1;min-width:0">
+        <div class="rv-name"><a href="course.html?id=${r.courseId}">${r.courseName}</a> <span style="font-weight:400;font-size:12px;color:var(--muted)">・${r.teacher}</span></div>
+        <div class="rv-preview">${r.text}</div>
+        <div class="rv-meta">${r.date}</div>
+      </div>
+      <div class="rv-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+    </div>`).join(''):`<div class="empty-state"><i class="ti ti-pencil-off"></i>還沒有評價記錄<br><a href="review.html">去評第一門課 →</a></div>`;
+
+  const sv=user.savedCount>0?SAMPLE_SAVED.slice(0,user.savedCount):[];
+  document.getElementById('mySaved').innerHTML=sv.length?sv.map(s=>`
+    <div class="saved-item">
+      <div style="flex:1;min-width:0">
+        <div class="saved-name"><a href="course.html?id=${s.courseId}">${s.courseName}</a></div>
+        <div class="saved-meta">${s.teacher} &nbsp;·&nbsp; ${DIFF_LABEL[s.diff]} &nbsp;·&nbsp; ★ ${s.rating.toFixed(1)}</div>
+      </div>
+      <button class="unsave-btn"><i class="ti ti-bookmark-off"></i> 取消收藏</button>
+    </div>`).join(''):`<div class="empty-state"><i class="ti ti-bookmark-off"></i>還沒有收藏課程<br><a href="search.html">去搜尋課程 →</a></div>`;
+}
+
+window.onLoginSuccess=renderProfile;
+window.onLogoutSuccess=function(){
+  document.getElementById('notLoggedView').style.display='block';
+  document.getElementById('loggedView').style.display='none';
+};
+document.addEventListener('DOMContentLoaded', renderProfile);
+</script>
+</body>
+</html>

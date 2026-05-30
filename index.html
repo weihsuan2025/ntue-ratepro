@@ -95,7 +95,8 @@ footer span{color:#FFD43B}
     <a href="index.html" class="nav-logo">NTUE <span>RatePro</span></a>
     <div class="nav-links">
       <a href="search.html">搜尋課程</a>
-      <a href="#features">功能介紹</a>
+      <a href="review.html">撰寫評價</a>
+      <a href="index.html#features">功能介紹</a>
     </div>
     <div id="navRight">
       <a href="#" class="nav-cta" id="loginBtn" onclick="openModal('login');return false;">登入</a>
@@ -298,5 +299,6 @@ window.addEventListener('DOMContentLoaded',()=>{
   if(saved){try{currentUser=JSON.parse(saved);updateNavUser();}catch(e){}}
 });
 </script>
+<script src="auth.js"></script>
 </body>
 </html>
