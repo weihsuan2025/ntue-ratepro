@@ -5,18 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>個人頁面 | NTUE RatePro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto Sans TC:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <link rel="stylesheet" href="shared.css">
 <style>
 .hero-band{background:var(--ntue);padding:2rem 2rem 3.5rem}
 .hero-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:1.25rem}
 .avatar-big{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;flex-shrink:0}
-.user-info h1{font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:.25rem}
+.user-info h1{font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:.2rem}
 .user-info p{font-size:13px;color:rgba(255,255,255,.7)}
+.role-badge{display:inline-block;background:rgba(255,255,255,.2);color:#fff;font-size:11px;padding:2px 10px;border-radius:20px;margin-top:4px}
 
 .body{max-width:860px;margin:-1.5rem auto 0;padding:0 2rem 3rem;position:relative;z-index:1}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
 .stat-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center}
 .stat-val{font-size:1.5rem;font-weight:700;line-height:1;margin-bottom:.3rem}
 .stat-lbl{font-size:11px;color:var(--muted)}
@@ -28,48 +29,60 @@
 .sec-link{font-size:13px;color:var(--ntue);text-decoration:none}
 .sec-link:hover{text-decoration:underline}
 
-/* Level bar */
-.level-wrap{margin-bottom:.5rem}
 .level-row{display:flex;align-items:center;gap:12px;margin-bottom:.4rem}
 .level-badge{background:var(--ntue-light);color:var(--ntue);font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px}
 .level-track{flex:1;height:10px;background:#f0f0f0;border-radius:99px;overflow:hidden}
 .level-fill{height:100%;background:var(--ntue);border-radius:99px;transition:width 1s .2s}
 .level-tip{font-size:12px;color:var(--muted);margin-top:4px}
-.level-perks{display:flex;flex-wrap:wrap;gap:6px;margin-top:.85rem}
-.perk{font-size:12px;padding:3px 10px;border-radius:20px;background:#f8f9fe;border:1px solid var(--border);color:var(--muted);display:flex;align-items:center;gap:4px}
+.perk{font-size:12px;padding:3px 10px;border-radius:20px;background:#f8f9fe;border:1px solid var(--border);color:var(--muted);display:inline-flex;align-items:center;gap:4px;margin:3px}
 .perk.unlocked{background:var(--ntue-light);border-color:var(--ntue);color:var(--ntue)}
-.perk i{font-size:13px}
 
-/* Review list */
 .rv-item{display:flex;align-items:flex-start;gap:10px;padding:.85rem 0;border-bottom:1px solid var(--border)}
 .rv-item:last-child{border-bottom:none}
 .rv-icon{width:36px;height:36px;border-radius:9px;background:var(--ntue-light);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--ntue);flex-shrink:0}
-.rv-name{font-size:14px;font-weight:500;margin-bottom:2px}
-.rv-name a{color:var(--text);text-decoration:none}
+.rv-name a{color:var(--text);text-decoration:none;font-size:14px;font-weight:500}
 .rv-name a:hover{color:var(--ntue)}
-.rv-meta{font-size:12px;color:var(--muted)}
-.rv-stars{font-size:12px;color:#F59F00;margin-left:auto;flex-shrink:0}
+.rv-meta{font-size:12px;color:var(--muted);margin-top:2px}
 .rv-preview{font-size:12px;color:var(--muted);margin-top:4px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.rv-stars{font-size:12px;color:#F59F00;margin-left:auto;flex-shrink:0}
 
-/* Saved list */
 .saved-item{display:flex;align-items:center;gap:10px;padding:.75rem 0;border-bottom:1px solid var(--border)}
 .saved-item:last-child{border-bottom:none}
-.saved-info{flex:1;min-width:0}
-.saved-name{font-size:14px;font-weight:500}
-.saved-name a{color:var(--text);text-decoration:none}
+.saved-name a{color:var(--text);text-decoration:none;font-size:14px;font-weight:500}
 .saved-name a:hover{color:var(--ntue)}
 .saved-meta{font-size:12px;color:var(--muted);margin-top:2px}
-.unsave-btn{font-size:12px;color:#aaa;background:none;border:none;cursor:pointer;font-family:'Noto Sans TC',sans-serif;padding:4px 8px;border-radius:6px}
-.unsave-btn:hover{color:#E24B4A;background:#FAECE7}
+.unsave-btn{font-size:12px;color:#aaa;background:none;border:none;cursor:pointer;font-family:inherit;padding:4px 8px;border-radius:6px;margin-left:auto}
+.unsave-btn:hover{color:#E24B4A}
+
+/* Form styles */
+.form-row{margin-bottom:1rem}
+.form-row label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:.35rem}
+.form-input{width:100%;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:14px;font-family:inherit;outline:none;transition:border-color .15s}
+.form-input:focus{border-color:var(--ntue)}
+.form-row select.form-input{cursor:pointer}
+.keyword-group{display:flex;flex-wrap:wrap;gap:6px;margin-top:.5rem}
+.kw-chip{border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--muted);cursor:pointer;user-select:none;transition:all .15s}
+.kw-chip.on{background:var(--ntue);color:#E8EDFF;border-color:var(--ntue)}
+.kw-chip:hover{border-color:var(--ntue-mid)}
+.submit-btn{background:var(--ntue);color:#fff;border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;transition:opacity .2s;margin-top:.5rem}
+.submit-btn:hover{opacity:.88}
+
+/* career card */
+.career-card{background:#f8f9fe;border-left:3px solid var(--ntue);border-radius:10px;padding:1rem 1.25rem;margin-bottom:10px}
+.career-type-badge{font-size:11px;font-weight:700;color:var(--ntue);letter-spacing:.5px;margin-bottom:.25rem}
+.career-title{font-size:14px;font-weight:500;margin-bottom:.25rem}
+.career-meta{font-size:12px;color:var(--muted)}
 
 .empty-state{text-align:center;padding:2rem 1rem;color:var(--muted)}
 .empty-state i{font-size:32px;display:block;margin-bottom:.5rem;color:#ddd}
-.empty-state a{color:var(--ntue);text-decoration:none;font-weight:500}
+.empty-state a{color:var(--ntue);font-weight:500;text-decoration:none}
 
-.not-logged{text-align:center;padding:5rem 2rem;max-width:400px;margin:0 auto}
+.not-logged{text-align:center;padding:5rem 2rem}
 .not-logged i{font-size:48px;color:#ddd;display:block;margin-bottom:1rem}
-.not-logged h2{font-size:1.2rem;font-weight:700;margin-bottom:.5rem}
-.not-logged p{font-size:14px;color:var(--muted);margin-bottom:1.5rem}
+
+.tab-row{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
+.p-tab{padding:.6rem 1.1rem;font-size:13px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
+.p-tab.active{color:var(--ntue);border-bottom-color:var(--ntue);font-weight:500}
 </style>
 </head>
 <body>
@@ -84,44 +97,16 @@
     <div id="navRight"></div>
   </div>
 </nav>
-<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div id="loginView">
-      <h2>登入 RatePro</h2><p>使用國北教大校內信登入</p>
-      <div class="form-group"><label>學校信箱</label><input type="email" id="loginEmail" placeholder="帳號@grad.ntue.edu.tw"><div class="form-hint">僅接受 @grad.ntue.edu.tw 結尾的信箱</div></div>
-      <div class="form-group"><label>密碼</label><input type="password" id="loginPassword" placeholder="輸入密碼"></div>
-      <button class="modal-btn" onclick="doLogin()">登入</button>
-      <div class="modal-divider">或</div>
-      <div class="modal-switch">還沒有帳號？<a onclick="switchModalView('register')">立即註冊</a></div>
-    </div>
-    <div id="registerView" style="display:none">
-      <h2>註冊帳號</h2><p>加入國北教大課程評價社群</p>
-      <div class="form-group"><label>學校信箱</label><input type="email" id="regEmail" placeholder="帳號@grad.ntue.edu.tw"><div class="form-hint">系統將寄送驗證信到此信箱</div></div>
-      <div class="form-group"><label>設定密碼</label><input type="password" id="regPassword" placeholder="至少 8 個字元"></div>
-      <div class="form-group"><label>顯示名稱</label><input type="text" id="regName" placeholder="例如：教育系大三"></div>
-      <button class="modal-btn" onclick="doRegister()">註冊</button>
-      <div class="modal-switch">已有帳號？<a onclick="switchModalView('login')">返回登入</a></div>
-    </div>
-    <div id="successView" style="display:none;text-align:center;padding:1rem 0">
-      <div style="width:60px;height:60px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:26px;color:#1D9E75">✓</div>
-      <h2 id="successTitle"></h2><p id="successMsg" style="margin-bottom:1.5rem"></p>
-      <button class="modal-btn" onclick="closeModal();renderProfile()">開始使用</button>
-    </div>
-  </div>
-</div>
 
-<!-- 未登入 -->
 <div id="notLoggedView" style="display:none">
   <div class="not-logged">
     <i class="ti ti-user-circle"></i>
-    <h2>請先登入</h2>
-    <p>登入後才能查看個人貢獻、評價記錄與收藏清單</p>
-    <button class="modal-btn" style="width:auto;padding:10px 28px" onclick="openModal('login')">立即登入</button>
+    <h2 style="margin-bottom:.5rem">請先登入</h2>
+    <p style="color:var(--muted);margin-bottom:1.5rem">登入後才能查看個人貢獻、評價記錄與收藏清單</p>
+    <button style="background:var(--ntue);color:#fff;border:none;border-radius:9px;padding:10px 28px;font-size:15px;font-weight:500;cursor:pointer;font-family:inherit" onclick="openModal('login')">立即登入</button>
   </div>
 </div>
 
-<!-- 已登入 -->
 <div id="loggedView" style="display:none">
   <div class="hero-band">
     <div class="hero-inner">
@@ -129,6 +114,7 @@
       <div class="user-info">
         <h1 id="profileName"></h1>
         <p id="profileEmail"></p>
+        <span class="role-badge" id="roleBadge"></span>
       </div>
     </div>
   </div>
@@ -145,54 +131,38 @@
       <div class="sec-header">
         <div class="sec-title"><i class="ti ti-trophy"></i>貢獻等級</div>
       </div>
-      <div class="level-wrap">
-        <div class="level-row">
-          <div class="level-badge" id="levelBadge">Lv.1</div>
-          <div class="level-track"><div class="level-fill" id="levelFill" style="width:0%"></div></div>
-          <span style="font-size:12px;color:var(--muted)" id="levelNext"></span>
-        </div>
-        <div class="level-tip" id="levelTip"></div>
+      <div class="level-row">
+        <div class="level-badge" id="levelBadge">Lv.1</div>
+        <div class="level-track"><div class="level-fill" id="levelFill" style="width:0%"></div></div>
+        <span style="font-size:12px;color:var(--muted)" id="levelNext"></span>
       </div>
-      <div class="level-perks" id="levelPerks"></div>
+      <div class="level-tip" id="levelTip"></div>
+      <div style="margin-top:.85rem" id="levelPerks"></div>
     </div>
 
-    <div class="section">
-      <div class="sec-header">
-        <div class="sec-title"><i class="ti ti-message-circle"></i>我的評價</div>
-        <a href="review.html" class="sec-link">新增評價 +</a>
-      </div>
-      <div id="myReviews"></div>
-    </div>
+    <!-- 分頁（在學生/校友共用） -->
+    <div class="tab-row" id="profileTabs"></div>
 
-    <div class="section">
-      <div class="sec-header">
-        <div class="sec-title"><i class="ti ti-bookmark"></i>收藏課程</div>
-        <a href="search.html" class="sec-link">瀏覽課程 →</a>
-      </div>
-      <div id="mySaved"></div>
-    </div>
+    <div id="tabContent"></div>
   </div>
 </div>
 
+<script src="modal.js"></script>
 <script src="auth.js"></script>
 <script>
+const ROLE_LABEL={student:'在學生',alumni:'校友',teacher:'教師'};
+const DEPT_LABEL={edu:'教育學系',cs:'數位科技設計學系',lang:'語文與創作學系',art:'藝術與造型設計學系',math:'數學暨資訊教育學系',sci:'自然科學教育學系',social:'社會與區域發展學系',pe:'體育學系',music:'音樂學系'};
 const LEVEL_CONFIG=[
-  {lv:1,label:'新手評課人',min:0,max:20,pct:0,perks:['查看課程雷達圖','查看課程標籤']},
-  {lv:2,label:'活躍貢獻者',min:20,max:60,pct:65,perks:['查看課程雷達圖','查看課程標籤','查看文字評論','解鎖學習資源']},
-  {lv:3,label:'資深評課人',min:60,max:120,pct:0,perks:['所有功能','職涯資源優先顯示','評論置頂資格']},
-  {lv:4,label:'評課大師',min:120,max:999,pct:0,perks:['所有功能','精選評論徽章','帳號驗證標記']},
+  {lv:1,label:'新手評課人',min:0,max:20,perks:['查看課程雷達圖','查看課程標籤']},
+  {lv:2,label:'活躍貢獻者',min:20,max:60,perks:['查看課程雷達圖','查看課程標籤','查看文字評論','解鎖學習資源']},
+  {lv:3,label:'資深評課人',min:60,max:120,perks:['所有功能','職涯資源優先顯示','評論置頂資格']},
+  {lv:4,label:'評課大師',min:120,max:999,perks:['所有功能','精選評論徽章','帳號驗證標記']},
 ];
+const ALL_PERKS=['查看課程雷達圖','查看課程標籤','查看文字評論','解鎖學習資源','職涯資源優先顯示','評論置頂資格','精選評論徽章','帳號驗證標記'];
 
-const SAMPLE_REVIEWS=[
-  {courseId:2,courseName:'課程設計與評量',teacher:'黃建國',stars:5,date:'2025年12月',text:'內容很扎實，對未來教書非常有幫助。小組報告佔比重，需要找到有責任感的隊友。'},
-  {courseId:6,courseName:'兒童文學',teacher:'林淑芬',stars:4,date:'2025年11月',text:'超推薦！老師人很好，作業有趣，幾乎不點名。'},
-  {courseId:1,courseName:'教育心理學',teacher:'王美玲',stars:5,date:'2025年10月',text:'老師上課很活潑，給分算甜，理解重於記憶。'},
-];
-const SAMPLE_SAVED=[
-  {courseId:4,courseName:'統計學（含實習）',teacher:'陳志明',diff:'espresso',rating:2.8},
-  {courseId:7,courseName:'數位媒體設計',teacher:'蔡雅婷',diff:'americano',rating:4.0},
-];
-const DIFF_LABEL={latte:'☕ 拿鐵',americano:'☕☕ 美式',espresso:'☕☕☕ 濃縮'};
+const CAREER_KEYWORDS=['教育學','課程設計','數位科技','語文創作','藝術設計','數學教育','自然科學','社會發展','體育','音樂','師培','研究助理','課輔','程式設計','資料分析','品牌行銷','人資','公部門','非營利組織','新創'];
+
+let currentProfileTab='reviews';
 
 function renderProfile(){
   const user=getUser();
@@ -207,50 +177,219 @@ function renderProfile(){
   document.getElementById('avatarBig').textContent=user.name.charAt(0).toUpperCase();
   document.getElementById('profileName').textContent=user.name;
   document.getElementById('profileEmail').textContent=user.email;
+  document.getElementById('roleBadge').textContent=(ROLE_LABEL[user.role]||'在學生')+
+    (user.dept?' · '+(DEPT_LABEL[user.dept]||user.dept):'')+(user.grade?' · '+user.grade:'');
 
   const lv=user.level||1;
   const pts=user.points||0;
   const cfg=LEVEL_CONFIG[Math.min(lv-1,3)];
-  const nextCfg=LEVEL_CONFIG[Math.min(lv,3)];
   const pct=lv>=4?100:Math.round((pts-cfg.min)/(cfg.max-cfg.min)*100);
 
   document.getElementById('statLevel').textContent='Lv.'+lv;
   document.getElementById('statPoints').textContent=pts;
   document.getElementById('statReviews').textContent=user.reviewCount||0;
   document.getElementById('statSaved').textContent=user.savedCount||0;
-
   document.getElementById('levelBadge').textContent='Lv.'+lv+' '+cfg.label;
-  setTimeout(()=>{ document.getElementById('levelFill').style.width=pct+'%'; },100);
+  setTimeout(()=>document.getElementById('levelFill').style.width=pct+'%',100);
   document.getElementById('levelNext').textContent=lv<4?(cfg.max-pts)+'點升級':'最高等級';
-  document.getElementById('levelTip').textContent=lv<4?'再評 '+Math.max(1,Math.ceil((cfg.max-pts)/10))+' 門課即可升至 Lv.'+(lv+1):'你已達到最高貢獻等級，感謝你的付出！';
-
-  const allPerks=['查看課程雷達圖','查看課程標籤','查看文字評論','解鎖學習資源','職涯資源優先顯示','評論置頂資格','精選評論徽章','帳號驗證標記'];
-  document.getElementById('levelPerks').innerHTML=allPerks.map(p=>{
-    const unlocked=cfg.perks.includes(p);
-    return `<div class="perk ${unlocked?'unlocked':''}"><i class="ti ti-${unlocked?'check':'lock'}" style="font-size:12px"></i>${p}</div>`;
+  document.getElementById('levelTip').textContent=lv<4?'再評 '+Math.max(1,Math.ceil((cfg.max-pts)/10))+' 門課即可升至 Lv.'+(lv+1):'你已達到最高貢獻等級！';
+  document.getElementById('levelPerks').innerHTML=ALL_PERKS.map(p=>{
+    const on=cfg.perks.includes(p);
+    return `<span class="perk ${on?'unlocked':''}"><i class="ti ti-${on?'check':'lock'}" style="font-size:12px"></i>${p}</span>`;
   }).join('');
 
-  const rv=user.reviewCount>0?SAMPLE_REVIEWS.slice(0,user.reviewCount):[];
-  document.getElementById('myReviews').innerHTML=rv.length?rv.map(r=>`
-    <div class="rv-item">
+  // 建立分頁
+  const tabs=[
+    {id:'reviews',label:'我的評價',icon:'ti-message-circle'},
+    {id:'saved',label:'收藏課程',icon:'ti-bookmark'},
+    {id:'resources',label:'分享學習資源',icon:'ti-books'},
+  ];
+  if(user.role==='alumni') tabs.push({id:'career',label:'職涯資源',icon:'ti-briefcase'});
+
+  document.getElementById('profileTabs').innerHTML=tabs.map(t=>
+    `<div class="p-tab ${t.id===currentProfileTab?'active':''}" onclick="switchProfileTab('${t.id}')">
+      <i class="ti ${t.icon}"></i> ${t.label}
+    </div>`).join('');
+
+  renderProfileTab(currentProfileTab, user);
+}
+
+function switchProfileTab(tab){
+  currentProfileTab=tab;
+  document.querySelectorAll('.p-tab').forEach(el=>{
+    el.classList.toggle('active',el.getAttribute('onclick').includes(`'${tab}'`));
+  });
+  renderProfileTab(tab, getUser());
+}
+
+function renderProfileTab(tab, user){
+  const el=document.getElementById('tabContent');
+  if(tab==='reviews') el.innerHTML=renderMyReviews(user);
+  if(tab==='saved') el.innerHTML=renderMySaved(user);
+  if(tab==='resources') el.innerHTML=renderShareResources(user);
+  if(tab==='career') el.innerHTML=renderCareerShare(user);
+}
+
+function renderMyReviews(user){
+  let reviews=[];
+  try{ reviews=JSON.parse(localStorage.getItem('rp_reviews')||'[]').slice(0,10); }catch(e){}
+  if(!reviews.length) return `<div class="section"><div class="empty-state"><i class="ti ti-pencil-off"></i>還沒有評價記錄<br><a href="review.html">去評第一門課 →</a></div></div>`;
+  return `<div class="section">
+    <div class="sec-header"><div class="sec-title"><i class="ti ti-message-circle"></i>我的評價（${reviews.length} 筆）</div><a href="review.html" class="sec-link">新增 +</a></div>
+    ${reviews.map(r=>`<div class="rv-item">
       <div class="rv-icon"><i class="ti ti-book-2"></i></div>
       <div style="flex:1;min-width:0">
-        <div class="rv-name"><a href="course.html?id=${r.courseId}">${r.courseName}</a> <span style="font-weight:400;font-size:12px;color:var(--muted)">・${r.teacher}</span></div>
+        <div class="rv-name"><a href="course.html?id=${r.courseId||''}">${r.courseName}</a> <span style="font-size:12px;color:var(--muted)">· ${r.teacher}</span></div>
         <div class="rv-preview">${r.text}</div>
         <div class="rv-meta">${r.date}</div>
       </div>
       <div class="rv-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
-    </div>`).join(''):`<div class="empty-state"><i class="ti ti-pencil-off"></i>還沒有評價記錄<br><a href="review.html">去評第一門課 →</a></div>`;
+    </div>`).join('')}
+  </div>`;
+}
 
-  const sv=user.savedCount>0?SAMPLE_SAVED.slice(0,user.savedCount):[];
-  document.getElementById('mySaved').innerHTML=sv.length?sv.map(s=>`
-    <div class="saved-item">
-      <div style="flex:1;min-width:0">
-        <div class="saved-name"><a href="course.html?id=${s.courseId}">${s.courseName}</a></div>
-        <div class="saved-meta">${s.teacher} &nbsp;·&nbsp; ${DIFF_LABEL[s.diff]} &nbsp;·&nbsp; ★ ${s.rating.toFixed(1)}</div>
+function renderMySaved(user){
+  return `<div class="section">
+    <div class="sec-header"><div class="sec-title"><i class="ti ti-bookmark"></i>收藏課程</div><a href="search.html" class="sec-link">瀏覽 →</a></div>
+    <div class="empty-state"><i class="ti ti-bookmark-off"></i>還沒有收藏課程<br><a href="search.html">去搜尋課程 →</a></div>
+  </div>`;
+}
+
+function renderShareResources(user){
+  let myResources=[];
+  try{ myResources=JSON.parse(localStorage.getItem('rp_resources')||'[]').filter(r=>r.uploaderEmail===user.email); }catch(e){}
+
+  return `<div class="section">
+    <div class="sec-header"><div class="sec-title"><i class="ti ti-books"></i>分享學習資源</div></div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:1rem">分享共筆、考古題或課本轉讓，幫助其他同學！每次分享可獲得貢獻點數。</p>
+    <div class="form-row">
+      <label>資源類型</label>
+      <select id="resType" class="form-input">
+        <option value="">請選擇</option>
+        <option value="notes">共筆整理</option>
+        <option value="exam">考古題</option>
+        <option value="book">課本轉讓</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>對應課程名稱</label>
+      <input type="text" id="resCourseName" class="form-input" placeholder="例如：教育心理學">
+    </div>
+    <div class="form-row">
+      <label>資源標題</label>
+      <input type="text" id="resTitle" class="form-input" placeholder="例如：113-2 期末完整共筆">
+    </div>
+    <div class="form-row">
+      <label>說明</label>
+      <input type="text" id="resDesc" class="form-input" placeholder="簡短描述資源內容">
+    </div>
+    <button class="submit-btn" onclick="submitResource()"><i class="ti ti-upload"></i> 上傳資源</button>
+    ${myResources.length?`<div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)">
+      <div style="font-size:13px;font-weight:500;margin-bottom:.75rem">我的分享（${myResources.length} 筆）</div>
+      ${myResources.map(r=>`<div style="background:#f8f9fe;border-radius:8px;padding:.75rem 1rem;margin-bottom:8px;font-size:13px">
+        <strong>${r.title}</strong> <span class="tag gray" style="margin-left:6px">${r.type}</span><br>
+        <span style="color:var(--muted)">${r.courseName} · ${r.date}</span>
+      </div>`).join('')}
+    </div>`:''}
+  </div>`;
+}
+
+function renderCareerShare(user){
+  let myCareer=[];
+  try{ myCareer=JSON.parse(localStorage.getItem('rp_career')||'[]').filter(r=>r.uploaderEmail===user.email); }catch(e){}
+
+  return `<div class="section">
+    <div class="sec-header"><div class="sec-title"><i class="ti ti-briefcase"></i>分享職涯資源</div></div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:1rem">分享你的正職、兼職或實習經歷，幫助學弟妹了解出路。選擇關鍵字後，資源會出現在對應課程頁面。</p>
+    <div class="form-row">
+      <label>職缺類型</label>
+      <select id="careerType" class="form-input">
+        <option value="正職">正職</option>
+        <option value="兼職">兼職</option>
+        <option value="實習">實習</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>職缺名稱</label>
+      <input type="text" id="careerTitle" class="form-input" placeholder="例如：初等教育研究助理">
+    </div>
+    <div class="form-row">
+      <label>機構/公司名稱</label>
+      <input type="text" id="careerOrg" class="form-input" placeholder="例如：台北市立某國小">
+    </div>
+    <div class="form-row">
+      <label>工作時數</label>
+      <input type="text" id="careerHours" class="form-input" placeholder="例如：週40hr 或 週8-16hr">
+    </div>
+    <div class="form-row">
+      <label>修課背景要求</label>
+      <input type="text" id="careerBg" class="form-input" placeholder="例如：修過課程設計相關課程、大二以上">
+    </div>
+    <div class="form-row">
+      <label>職位說明</label>
+      <textarea id="careerDesc" class="form-input" rows="3" placeholder="描述工作內容、適合對象…"></textarea>
+    </div>
+    <div class="form-row">
+      <label>選擇關鍵字（最多 3 個）<span style="font-size:11px;color:var(--muted);margin-left:6px">選取後此資源會出現在對應課程頁</span></label>
+      <div class="keyword-group" id="kwGroup">
+        ${CAREER_KEYWORDS.map(k=>`<div class="kw-chip" onclick="toggleKw(this)">${k}</div>`).join('')}
       </div>
-      <button class="unsave-btn"><i class="ti ti-bookmark-off"></i> 取消收藏</button>
-    </div>`).join(''):`<div class="empty-state"><i class="ti ti-bookmark-off"></i>還沒有收藏課程<br><a href="search.html">去搜尋課程 →</a></div>`;
+      <div style="font-size:11px;color:var(--muted);margin-top:.4rem" id="kwCount">已選 0 / 3 個關鍵字</div>
+    </div>
+    <button class="submit-btn" onclick="submitCareer()"><i class="ti ti-send"></i> 發布職涯資訊</button>
+
+    ${myCareer.length?`<div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)">
+      <div style="font-size:13px;font-weight:500;margin-bottom:.75rem">我的職涯分享（${myCareer.length} 筆）</div>
+      ${myCareer.map(c=>`<div class="career-card">
+        <div class="career-type-badge">${c.type}</div>
+        <div class="career-title">${c.title}</div>
+        <div class="career-meta">${c.org} · ${c.hours}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:.4rem">${(c.keywords||[]).map(k=>`<span class="tag purple">${k}</span>`).join('')}</div>
+      </div>`).join('')}
+    </div>`:''}
+  </div>`;
+}
+
+function toggleKw(el){
+  const selected=document.querySelectorAll('#kwGroup .kw-chip.on');
+  if(!el.classList.contains('on')&&selected.length>=3){ alert('最多只能選 3 個關鍵字');return; }
+  el.classList.toggle('on');
+  const count=document.querySelectorAll('#kwGroup .kw-chip.on').length;
+  document.getElementById('kwCount').textContent=`已選 ${count} / 3 個關鍵字`;
+}
+
+function submitResource(){
+  const type=document.getElementById('resType').value;
+  const course=document.getElementById('resCourseName').value.trim();
+  const title=document.getElementById('resTitle').value.trim();
+  const desc=document.getElementById('resDesc').value.trim();
+  if(!type||!course||!title){alert('請填寫必要欄位');return;}
+  const user=getUser();
+  let resources=[];
+  try{resources=JSON.parse(localStorage.getItem('rp_resources')||'[]');}catch(e){}
+  resources.push({type,courseName:course,title,desc,uploaderEmail:user.email,uploader:user.name,date:new Date().toLocaleDateString('zh-TW')});
+  localStorage.setItem('rp_resources',JSON.stringify(resources));
+  alert('資源上傳成功！');
+  renderProfile();
+}
+
+function submitCareer(){
+  const type=document.getElementById('careerType').value;
+  const title=document.getElementById('careerTitle').value.trim();
+  const org=document.getElementById('careerOrg').value.trim();
+  const hours=document.getElementById('careerHours').value.trim();
+  const bg=document.getElementById('careerBg').value.trim();
+  const desc=document.getElementById('careerDesc').value.trim();
+  const keywords=[...document.querySelectorAll('#kwGroup .kw-chip.on')].map(el=>el.textContent);
+  if(!title||!org){alert('請填寫職缺名稱與機構名稱');return;}
+  if(keywords.length===0){alert('請至少選擇 1 個關鍵字');return;}
+  const user=getUser();
+  let career=[];
+  try{career=JSON.parse(localStorage.getItem('rp_career')||'[]');}catch(e){}
+  career.push({type,title,org,hours,bg,desc,keywords,uploaderEmail:user.email,uploader:user.name,date:new Date().toLocaleDateString('zh-TW'),fromAlumni:true});
+  localStorage.setItem('rp_career',JSON.stringify(career));
+  alert('職涯資訊發布成功！已出現在對應課程頁面。');
+  renderProfile();
 }
 
 window.onLoginSuccess=renderProfile;
@@ -258,7 +397,7 @@ window.onLogoutSuccess=function(){
   document.getElementById('notLoggedView').style.display='block';
   document.getElementById('loggedView').style.display='none';
 };
-document.addEventListener('DOMContentLoaded', renderProfile);
+document.addEventListener('DOMContentLoaded',renderProfile);
 </script>
 </body>
 </html>

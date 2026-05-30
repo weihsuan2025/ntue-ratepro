@@ -75,36 +75,14 @@
     <a href="index.html" class="nav-logo">NTUE <span>RatePro</span></a>
     <div class="nav-links">
       <a href="search.html" style="color:var(--ntue)">搜尋課程</a>
+      <a href="review.html">撰寫評價</a>
       <a href="index.html#features">功能介紹</a>
     </div>
     <div id="navRight"></div>
   </div>
 </nav>
 
-<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div id="loginView"><h2>登入 RatePro</h2><p>使用國北教大校內信登入</p>
-      <div class="form-group"><label>學校信箱</label><input type="email" id="loginEmail" placeholder="帳號@grad.ntue.edu.tw"><div class="form-hint">僅接受 @grad.ntue.edu.tw</div></div>
-      <div class="form-group"><label>密碼</label><input type="password" id="loginPassword" placeholder="輸入密碼"></div>
-      <button class="modal-btn" onclick="doLogin()">登入</button>
-      <div class="modal-divider">或</div>
-      <div class="modal-switch">還沒有帳號？<a onclick="switchModalView('register')">立即註冊</a></div>
-    </div>
-    <div id="registerView" style="display:none"><h2>註冊帳號</h2><p>加入國北教大課程評價社群</p>
-      <div class="form-group"><label>學校信箱</label><input type="email" id="regEmail" placeholder="帳號@grad.ntue.edu.tw"></div>
-      <div class="form-group"><label>設定密碼</label><input type="password" id="regPassword" placeholder="至少 8 個字元"></div>
-      <div class="form-group"><label>顯示名稱</label><input type="text" id="regName" placeholder="例如：教育系大三"></div>
-      <button class="modal-btn" onclick="doRegister()">註冊</button>
-      <div class="modal-switch">已有帳號？<a onclick="switchModalView('login')">返回登入</a></div>
-    </div>
-    <div id="successView" style="display:none;text-align:center;padding:1rem 0">
-      <div style="width:60px;height:60px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:26px;color:#1D9E75">✓</div>
-      <h2 id="successTitle"></h2><p id="successMsg" style="margin-bottom:1.5rem"></p>
-      <button class="modal-btn" onclick="closeModal()">開始使用</button>
-    </div>
-  </div>
-</div>
+
 
 <div class="search-topbar">
   <div class="search-wrap">
@@ -203,15 +181,42 @@ const DIFF_COLOR={latte:'teal',americano:'amber',espresso:'coral'};
 const EXAM_LABEL={exam:'筆試',report:'報告',group:'小組作業',attend:'出席',quiz:'小考',present:'上台報告'};
 const RATING_COLOR=r=>r>=4?'#1D9E75':r>=3?'#BA7517':'#D85A30';
 
+let ALL_COURSES=[];
 let state={search:'',diff:'all',dept:'all',minRating:1,maxHours:15,exams:[],sort:'rating'};
 
+function buildCourseList(){
+  // 合併 courses.js 資料 + 用戶新增課程
+  let list=[...COURSES];
+  try{
+    const userCourses=JSON.parse(localStorage.getItem('rp_user_courses')||'[]');
+    // 過濾掉與現有課程同名的重複
+    const existingNames=new Set(COURSES.map(c=>c.name+'_'+c.teacher));
+    userCourses.forEach(uc=>{
+      if(!existingNames.has(uc.name+'_'+uc.teacher)) list.push(uc);
+    });
+  }catch(e){}
+  // 用 localStorage 的評價數更新
+  try{
+    const extras=JSON.parse(localStorage.getItem('rp_course_extras')||'{}');
+    list=list.map(c=>{
+      if(extras[c.id]){
+        return {...c,
+          reviews: c.reviews+(extras[c.id].reviewCount||0),
+          review: extras[c.id].latestReview||c.review
+        };
+      }
+      return c;
+    });
+  }catch(e){}
+  ALL_COURSES=list;
+}
+
 function getFiltered(){
-  return COURSES.filter(c=>{
+  return ALL_COURSES.filter(c=>{
     if(state.diff!=='all'&&c.diff!==state.diff)return false;
     if(state.dept!=='all'&&c.dept!==state.dept)return false;
-    if(c.rating<state.minRating)return false;
-    if(c.hours>state.maxHours)return false;
-    if(state.exams.length>0&&!state.exams.some(e=>c.exams.includes(e)))return false;
+    if((c.rating||0)<state.minRating)return false;
+    if((c.hours||0)>state.maxHours)return false;
     if(state.search){
       const q=state.search.toLowerCase();
       const searchable=[c.name,c.teacher,c.review||'',...(c.tags||[])].join(' ').toLowerCase();
@@ -219,43 +224,52 @@ function getFiltered(){
     }
     return true;
   }).sort((a,b)=>{
-    if(state.sort==='rating')return b.rating-a.rating;
-    if(state.sort==='reviews')return b.reviews-a.reviews;
-    if(state.sort==='hours')return a.hours-b.hours;
-    if(state.sort==='challenge')return a.challenge-b.challenge;
+    if(state.sort==='rating')return (b.rating||0)-(a.rating||0);
+    if(state.sort==='reviews')return (b.reviews||0)-(a.reviews||0);
+    if(state.sort==='hours')return (a.hours||0)-(b.hours||0);
+    if(state.sort==='challenge')return (a.challenge||0)-(b.challenge||0);
     return 0;
   });
 }
 
+function getExamLabel(e){
+  return EXAM_LABEL[e]||e; // 用戶新增的 exams 可能是中文標籤直接存
+}
+
 function renderCard(c){
-  const dc=DIFF_COLOR[c.diff];
+  const dc=DIFF_COLOR[c.diff]||'blue';
+  const diffLabel=DIFF_LABEL[c.diff]||c.diff||'';
   const bars=[
-    {l:'給分',v:c.rating/5,col:'#F59F00'},
-    {l:'挑戰',v:c.challenge/5,col:'#3B5BDB'},
-    {l:'扎實',v:c.content/5,col:'#1D9E75'},
-    {l:'點名',v:c.attend/5,col:'#D85A30'}
+    {l:'給分',v:(c.rating||0)/5,col:'#F59F00'},
+    {l:'挑戰',v:(c.challenge||0)/5,col:'#3B5BDB'},
+    {l:'扎實',v:(c.content||0)/5,col:'#1D9E75'},
+    {l:'點名',v:(c.attend||0)/5,col:'#D85A30'}
   ];
-  return `<a class="course-card" href="course.html?id=${c.id}">
+  const courseLink=c.userAdded?'#':`course.html?id=${c.id}`;
+  const userBadge=c.userAdded?`<span class="tag purple" style="font-size:10px">新增</span>`:'';
+  const tags=Array.isArray(c.tags)?c.tags:[];
+  const exams=Array.isArray(c.exams)?c.exams:[];
+  return `<a class="course-card" href="${courseLink}" ${c.userAdded?'onclick="return false"':''}>
     <div class="card-top">
       <div style="flex:1;min-width:0">
-        <div class="card-name">${c.name}</div>
-        <div class="card-meta">${c.teacher} &nbsp;·&nbsp; ${c.reviews} 筆評價 &nbsp;·&nbsp; 週約 ${c.hours}hr</div>
+        <div class="card-name">${c.name} ${userBadge}</div>
+        <div class="card-meta">${c.teacher} &nbsp;·&nbsp; ${c.reviews||1} 筆評價 &nbsp;·&nbsp; 週約 ${c.hours||0}hr</div>
       </div>
       <div class="card-right">
         <div style="text-align:right">
           <div style="font-size:10px;color:#aaa">給分甜度</div>
-          <div class="rating-big" style="color:${RATING_COLOR(c.rating)}">★ ${c.rating.toFixed(1)}</div>
+          <div class="rating-big" style="color:${RATING_COLOR(c.rating||0)}">★ ${(c.rating||0).toFixed(1)}</div>
         </div>
-        <span class="tag ${dc}">${DIFF_LABEL[c.diff]}</span>
+        <span class="tag ${dc}">${diffLabel}</span>
       </div>
     </div>
     <div class="card-tags">
-      ${c.tags.map(t=>`<span class="tag blue">${t}</span>`).join('')}
-      ${c.exams.map(e=>`<span class="tag gray">${EXAM_LABEL[e]}</span>`).join('')}
+      ${tags.map(t=>`<span class="tag blue">${t}</span>`).join('')}
+      ${exams.map(e=>`<span class="tag gray">${getExamLabel(e)}</span>`).join('')}
     </div>
     <div class="card-divider"></div>
     <div class="card-bottom">
-      <div class="card-review">${c.review}</div>
+      <div class="card-review">${c.review||''}</div>
       <div class="mini-bars">
         ${bars.map(b=>`<div class="mb-row"><span class="mb-label">${b.l}</span><div class="mb-track"><div class="mb-fill" style="width:${Math.round(b.v*100)}%;background:${b.col}"></div></div></div>`).join('')}
       </div>
@@ -264,6 +278,7 @@ function renderCard(c){
 }
 
 function render(){
+  buildCourseList();
   const list=getFiltered();
   document.getElementById('countSpan').textContent=list.length;
   const el=document.getElementById('resultList');
@@ -272,6 +287,7 @@ function render(){
 }
 
 function initApp(){
+  buildCourseList();
   document.getElementById('searchInput').addEventListener('input',function(){
     state.search=this.value;
     document.getElementById('clearBtn').style.display=this.value?'flex':'none';
@@ -305,6 +321,7 @@ function initApp(){
   render();
 }
 </script>
+<script src="modal.js"></script>
 <script src="auth.js"></script>
 </body>
 </html>

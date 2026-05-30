@@ -5,43 +5,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>課程詳細 | NTUE RatePro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <link rel="stylesheet" href="shared.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
-.hero-band{background:var(--ntue);padding:1.5rem 2rem 2.5rem}
+.hero-band{background:var(--ntue);padding:1.5rem 2rem 2rem}
 .hero-band .inner{max-width:860px;margin:0 auto}
 .course-title{font-size:1.5rem;font-weight:700;color:#fff;margin:.4rem 0 .5rem}
-.course-sub{font-size:13px;color:rgba(255,255,255,.72);display:flex;gap:16px;flex-wrap:wrap}
+.course-sub{font-size:13px;color:rgba(255,255,255,.72);display:flex;gap:14px;flex-wrap:wrap}
 .course-sub span{display:flex;align-items:center;gap:4px}
+
 .stat-strip-wrap{max-width:860px;margin:0 auto;padding:0 2rem}
-.stat-strip{background:#fff;border:1px solid var(--border);border-radius:var(--radius);display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden;transform:translateY(-1.2rem);box-shadow:0 4px 20px rgba(0,0,0,.07)}
-.stat-cell{padding:1rem;text-align:center;border-right:1px solid var(--border)}
+.stat-strip{background:#fff;border:1px solid var(--border);border-radius:var(--radius);display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden;transform:translateY(-1rem);box-shadow:0 4px 20px rgba(0,0,0,.07)}
+.stat-cell{padding:.9rem;text-align:center;border-right:1px solid var(--border)}
 .stat-cell:last-child{border-right:none}
-.stat-val{font-size:1.4rem;font-weight:700;line-height:1.1}
+.stat-val{font-size:1.35rem;font-weight:700;line-height:1.1}
 .stat-lbl{font-size:11px;color:var(--muted);margin-top:4px}
-.body{max-width:860px;margin:0 auto;padding:0 2rem 3rem}
+
+/* TABS */
+.tab-bar{max-width:860px;margin:0 auto;padding:0 2rem;display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:0}
+.tab-btn{padding:.75rem 1.5rem;font-size:14px;font-weight:500;color:var(--muted);cursor:pointer;border:none;background:none;font-family:'Noto Sans TC',sans-serif;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .15s;display:flex;align-items:center;gap:6px}
+.tab-btn.active{color:var(--ntue);border-bottom-color:var(--ntue)}
+.tab-btn:hover{color:var(--ntue)}
+.tab-btn i{font-size:16px}
+
+.body{max-width:860px;margin:0 auto;padding:1.25rem 2rem 3rem}
 .section{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:16px}
-.sec-title{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-bottom:1.1rem;display:flex;align-items:center;gap:6px}
+.sec-title{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:1.1rem;display:flex;align-items:center;gap:6px}
 .sec-title i{font-size:16px}
+
 .radar-wrap{display:flex;gap:2rem;align-items:center;flex-wrap:wrap}
-.legend{flex:1;min-width:150px;display:flex;flex-direction:column;gap:11px}
+.legend{flex:1;min-width:150px;display:flex;flex-direction:column;gap:10px}
 .leg-row{display:flex;align-items:center;gap:9px}
-.leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .leg-label{font-size:13px;color:var(--muted);flex:1}
 .leg-val{font-size:14px;font-weight:700;min-width:30px;text-align:right}
-.bar-rows{display:flex;flex-direction:column;gap:11px}
+
+.bar-rows{display:flex;flex-direction:column;gap:10px}
 .br{display:flex;align-items:center;gap:10px}
 .br-label{font-size:13px;color:var(--muted);width:84px;flex-shrink:0}
-.br-track{flex:1;height:9px;background:#f0f0f0;border-radius:99px;overflow:hidden}
+.br-track{flex:1;height:8px;background:#f0f0f0;border-radius:99px;overflow:hidden}
 .br-fill{height:100%;border-radius:99px}
 .br-val{font-size:13px;font-weight:700;width:34px;text-align:right}
-.dist-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
-.dist-star{font-size:12px;color:var(--muted);width:14px;text-align:right}
-.dist-track{flex:1;height:7px;background:#f0f0f0;border-radius:99px;overflow:hidden}
-.dist-fill{height:100%;border-radius:99px;background:#F59F00}
-.dist-count{font-size:11px;color:var(--muted);width:20px}
+
+/* reviews */
+.rv-search{display:flex;align-items:center;gap:8px;background:#f8f9fe;border:1px solid var(--border);border-radius:9px;padding:0 12px;height:38px;margin-bottom:1rem}
+.rv-search input{flex:1;border:none;outline:none;font-size:13px;background:transparent;font-family:'Noto Sans TC',sans-serif;color:var(--text)}
+.rv-card{background:#f8f9fe;border-radius:10px;padding:1rem 1.1rem;margin-bottom:12px}
+.rv-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.rv-user{display:flex;align-items:center;gap:9px}
+.rv-avatar{width:32px;height:32px;border-radius:50%;background:#E8EDFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--ntue);flex-shrink:0}
+.rv-name-text{font-size:13px;font-weight:500}
+.rv-date{font-size:11px;color:var(--muted)}
+.rv-stars{font-size:13px;color:#F59F00;font-weight:500}
+.rv-body{font-size:13px;color:var(--text);line-height:1.75}
+.rv-tags-row{display:flex;gap:5px;margin-top:.5rem;flex-wrap:wrap}
+
+/* lock */
+.lock-blur-wrap{filter:blur(5px);pointer-events:none;user-select:none;max-height:140px;overflow:hidden}
+.lock-cta{margin-top:1rem;background:#E8EDFF;border-radius:10px;padding:1.1rem 1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.lock-icon-sm{width:40px;height:40px;border-radius:50%;background:var(--ntue);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;flex-shrink:0}
+.lock-text .lock-title{font-size:14px;font-weight:700;margin-bottom:3px}
+.lock-text .lock-sub{font-size:12px;color:var(--muted);line-height:1.6}
+.lock-btn{background:var(--ntue);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif;white-space:nowrap}
+.lock-btn:hover{opacity:.88}
+
+/* resource tab */
 .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .res-item{background:#f8f9fe;border-radius:10px;padding:.85rem 1rem;display:flex;align-items:center;gap:10px;cursor:pointer;border:1px solid transparent;transition:border-color .15s;text-decoration:none;color:inherit}
 .res-item:hover{border-color:var(--ntue-mid)}
@@ -51,36 +81,35 @@
 .res-icon.teal{background:#E1F5EE;color:#0F6E56}
 .res-name{font-size:13px;font-weight:500}
 .res-meta{font-size:11px;color:var(--muted);margin-top:2px}
-.cta-row{display:flex;gap:10px;margin-top:16px}
-.btn-write{flex:1;background:var(--ntue);color:#E8EDFF;border:none;border-radius:9px;padding:13px;font-size:15px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:opacity .2s}
+
+/* career tab */
+.career-card{background:#f8f9fe;border-radius:10px;padding:1rem 1.25rem;margin-bottom:12px;border-left:3px solid var(--ntue)}
+.career-type{font-size:11px;font-weight:700;letter-spacing:1px;color:var(--ntue);margin-bottom:.3rem;display:flex;align-items:center;gap:5px}
+.career-title{font-size:14px;font-weight:500;margin-bottom:.35rem}
+.career-meta{font-size:12px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;margin-bottom:.5rem}
+.career-desc{font-size:13px;color:var(--text);line-height:1.65}
+.career-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:.6rem}
+
+/* dist */
+.dist-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.dist-star{font-size:12px;color:var(--muted);width:14px;text-align:right}
+.dist-track{flex:1;height:7px;background:#f0f0f0;border-radius:99px;overflow:hidden}
+.dist-fill{height:100%;border-radius:99px;background:#F59F00}
+.dist-count{font-size:11px;color:var(--muted);width:20px}
+
+.cta-row{display:flex;gap:10px;margin-top:4px}
+.btn-write{flex:1;background:var(--ntue);color:#E8EDFF;border:none;border-radius:9px;padding:12px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:opacity .2s}
 .btn-write:hover{opacity:.88}
-.btn-save{background:#fff;color:var(--ntue);border:1px solid var(--ntue);border-radius:9px;padding:13px 18px;font-size:14px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:background .15s}
+.btn-save{background:#fff;color:var(--ntue);border:1px solid var(--ntue);border-radius:9px;padding:12px 16px;font-size:14px;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
 .btn-save:hover{background:#f4f6ff}
-/* review */
-.rv-search{display:flex;align-items:center;gap:8px;background:#f8f9fe;border:1px solid var(--border);border-radius:9px;padding:0 12px;height:38px;margin-bottom:1rem}
-.rv-search input{flex:1;border:none;outline:none;font-size:13px;background:transparent;font-family:'Noto Sans TC',sans-serif;color:var(--text)}
-.review-list{display:flex;flex-direction:column;gap:13px}
-.rv-card{background:#f8f9fe;border-radius:10px;padding:1rem 1.1rem}
-.rv-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.55rem}
-.rv-user{display:flex;align-items:center;gap:9px}
-.rv-avatar{width:32px;height:32px;border-radius:50%;background:#E8EDFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--ntue);flex-shrink:0}
-.rv-name{font-size:13px;font-weight:500}
-.rv-date{font-size:11px;color:var(--muted)}
-.rv-stars{font-size:13px;color:#F59F00;font-weight:500}
-.rv-body{font-size:13px;color:var(--text);line-height:1.75}
-.rv-tags{display:flex;gap:5px;margin-top:.55rem;flex-wrap:wrap}
-/* lock overlay */
-.lock-section{position:relative;overflow:hidden}
-.lock-blur{filter:blur(4px);pointer-events:none;user-select:none}
-.lock-section{position:relative}
-.lock-blur-wrap{filter:blur(5px);pointer-events:none;user-select:none;max-height:160px;overflow:hidden}
-.lock-cta{margin-top:1.25rem;background:#E8EDFF;border-radius:10px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-.lock-icon{width:44px;height:44px;border-radius:50%;background:var(--ntue);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0}
-.lock-text{flex:1}
-.lock-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
-.lock-sub{font-size:12px;color:var(--muted);line-height:1.6}
-.lock-btn{background:var(--ntue);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif;white-space:nowrap;flex-shrink:0}
-.lock-btn:hover{opacity:.88}
+
+@media(max-width:600px){
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .stat-cell:nth-child(2){border-right:none}
+  .stat-cell:nth-child(1),.stat-cell:nth-child(2){border-bottom:1px solid var(--border)}
+  .res-grid{grid-template-columns:1fr}
+  .tab-btn{padding:.65rem .85rem;font-size:13px}
+}
 </style>
 </head>
 <body>
@@ -95,72 +124,62 @@
     <div id="navRight"></div>
   </div>
 </nav>
-<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div id="loginView"><h2>登入 RatePro</h2><p>使用國北教大校內信登入</p>
-      <div class="form-group"><label>學校信箱</label><input type="email" id="loginEmail" placeholder="帳號@grad.ntue.edu.tw"><div class="form-hint">僅接受 @grad.ntue.edu.tw</div></div>
-      <div class="form-group"><label>密碼</label><input type="password" id="loginPassword" placeholder="輸入密碼"></div>
-      <button class="modal-btn" onclick="doLogin()">登入</button>
-      <div class="modal-divider">或</div>
-      <div class="modal-switch">還沒有帳號？<a onclick="switchModalView('register')">立即註冊</a></div>
-    </div>
-    <div id="registerView" style="display:none"><h2>註冊帳號</h2><p>加入國北教大課程評價社群</p>
-      <div class="form-group"><label>學校信箱</label><input type="email" id="regEmail" placeholder="帳號@grad.ntue.edu.tw"><div class="form-hint">系統將寄送驗證信</div></div>
-      <div class="form-group"><label>設定密碼</label><input type="password" id="regPassword" placeholder="至少 8 個字元"></div>
-      <div class="form-group"><label>顯示名稱</label><input type="text" id="regName" placeholder="例如：教育系大三"></div>
-      <button class="modal-btn" onclick="doRegister()">註冊</button>
-      <div class="modal-switch">已有帳號？<a onclick="switchModalView('login')">返回登入</a></div>
-    </div>
-    <div id="successView" style="display:none;text-align:center;padding:1rem 0">
-      <div style="width:60px;height:60px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:26px;color:#1D9E75">✓</div>
-      <h2 id="successTitle"></h2><p id="successMsg" style="margin-bottom:1.5rem"></p>
-      <button class="modal-btn" onclick="closeModal();renderReviews()">開始使用</button>
-    </div>
+
+<div id="heroArea"></div>
+<div class="stat-strip-wrap"><div class="stat-strip" id="statStrip"></div></div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" id="tabReview" onclick="switchTab('review')"><i class="ti ti-message-circle"></i>評價</button>
+  <button class="tab-btn" id="tabResource" onclick="switchTab('resource')"><i class="ti ti-books"></i>學習資源</button>
+  <button class="tab-btn" id="tabCareer" onclick="switchTab('career')"><i class="ti ti-briefcase"></i>職涯機會</button>
+</div>
+
+<div class="body">
+  <div id="panelReview"></div>
+  <div id="panelResource" style="display:none"></div>
+  <div id="panelCareer" style="display:none"></div>
+  <div class="cta-row">
+    <a id="writeBtn" href="review.html" class="btn-write"><i class="ti ti-pencil"></i> 撰寫我的評價</a>
+    <button class="btn-save" id="saveBtn" onclick="toggleSave()"><i class="ti ti-bookmark"></i> 收藏</button>
   </div>
 </div>
 
-<!-- Dynamic content -->
-<div id="heroArea"></div>
-<div class="stat-strip-wrap"><div class="stat-strip" id="statStrip"></div></div>
-<div class="body" id="bodyArea"></div>
-
-<script src="courses.js?v=2"></script>
+<script src="courses.js?v=4"></script>
+<script src="modal.js"></script>
 <script src="auth.js"></script>
 <script>
 const DIFF_LABEL={latte:'☕ 拿鐵',americano:'☕☕ 美式',espresso:'☕☕☕ 濃縮'};
 const DIFF_COLOR={latte:'teal',americano:'amber',espresso:'coral'};
 const EXAM_LABEL={exam:'筆試',report:'報告',group:'小組作業',attend:'出席',quiz:'小考',present:'上台報告'};
 const DEPT_LABEL={edu:'教育學系',cs:'數位科技設計學系',lang:'語文與創作學系',art:'藝術與造型設計學系',math:'數學暨資訊教育學系',sci:'自然科學教育學系',social:'社會與區域發展學系',pe:'體育學系',music:'音樂學系'};
-const LEVEL_LABEL={required:'必修',elective:'選修'};
-const LEVEL_LEVEL={ug:'大學部',grad:'研究所',inservice:'在職專班'};
-const RATING_COLOR=r=>r>=4?'#1D9E75':r>=3?'#BA7517':'#D85A30';
+const RC=r=>r>=4?'#1D9E75':r>=3?'#BA7517':'#D85A30';
 
-// Sample reviews per course (keyed by course id)
-const COURSE_REVIEWS={
-  1:[
-    {name:'教育系大三',avatar:'教',bg:'#E8EDFF',fg:'#0C447C',date:'2025年12月',stars:5,text:'老師上課很活潑，互動良好，給分很甜。期末報告題目自由度高，理解重於死背。',tags:['強烈推薦','給分甜']},
-    {name:'師資培育生',avatar:'師',bg:'#FAEEDA',fg:'#854F0B',date:'2025年11月',stars:4,text:'很適合對教育心理有興趣的人，內容豐富且生活化，不太需要死背公式。',tags:['老師認真','課堂互動多']},
-    {name:'教育所碩一',avatar:'碩',bg:'#E1F5EE',fg:'#0F6E56',date:'2025年10月',stars:4,text:'作業份量適中，老師會針對學生回饋調整教學速度，整體很推薦。',tags:['推薦']},
+const SAMPLE_REVIEWS={
+  default:[
+    {name:'教育系大三',av:'教',bg:'#E8EDFF',fg:'#0C447C',date:'2025年12月',stars:5,text:'老師課堂很有活力，給分算甜，作業份量適中，推薦給有興趣的同學。',tags:['推薦','給分甜']},
+    {name:'師資培育生',av:'師',bg:'#FAEEDA',fg:'#854F0B',date:'2025年11月',stars:4,text:'備課認真，內容扎實，需要認真跟上進度。期末報告工程大但有成就感。',tags:['老師認真','報告量大']},
   ],
   2:[
-    {name:'教育系大三',avatar:'教',bg:'#E8EDFF',fg:'#0C447C',date:'2025年12月',stars:5,text:'內容很扎實，對未來教書非常有幫助。黃老師會把抽象理論連結到真實情境，小組報告需找到好隊友。',tags:['強烈推薦','小組合作重要']},
-    {name:'師資培育生',avatar:'師',bg:'#FAEEDA',fg:'#854F0B',date:'2025年11月',stars:4,text:'老師備課很認真，每週補充最新評量研究文獻。期末報告工程大但成就感十足。',tags:['報告量大','老師認真']},
-    {name:'教育所碩一',avatar:'碩',bg:'#E1F5EE',fg:'#0F6E56',date:'2025年10月',stars:3,text:'課程內容很好，但閱讀量偏重。老師不太點名，需要自律提早開始報告。',tags:['閱讀量多','建議提早開始']},
-    {name:'大學部選修生',avatar:'大',bg:'#E8EDFF',fg:'#0C447C',date:'2025年9月',stars:5,text:'黃老師上課很有活力，會帶大家討論時事教育新聞。互評環節很有趣。',tags:['課堂互動佳','互評制度']},
-  ],
-  default:[
-    {name:'修課學生A',avatar:'學',bg:'#E8EDFF',fg:'#0C447C',date:'2025年12月',stars:4,text:'整體課程安排得很好，老師說明清楚，作業量適中，推薦給有興趣的同學。',tags:['推薦','老師認真']},
-    {name:'修課學生B',avatar:'學',bg:'#FAEEDA',fg:'#854F0B',date:'2025年11月',stars:3,text:'內容扎實，但節奏稍快，建議課前先預習。小考頻率較高，需要持續關注課程進度。',tags:['建議提早開始']},
+    {name:'教育系大三',av:'教',bg:'#E8EDFF',fg:'#0C447C',date:'2025年12月',stars:5,text:'內容扎實，對未來教書非常有幫助。小組報告佔比重，需找到有責任感的隊友。',tags:['強烈推薦','小組合作重要']},
+    {name:'師資培育生',av:'師',bg:'#FAEEDA',fg:'#854F0B',date:'2025年11月',stars:4,text:'老師每週補充最新評量研究文獻，期末報告工程大但成就感十足。',tags:['報告量大','老師認真']},
+    {name:'教育所碩一',av:'碩',bg:'#E1F5EE',fg:'#0F6E56',date:'2025年10月',stars:3,text:'閱讀量偏重，老師不太點名，需要自律提早開始報告。',tags:['閱讀量多','建議提早開始']},
+    {name:'大學部選修生',av:'大',bg:'#E8EDFF',fg:'#0C447C',date:'2025年9月',stars:5,text:'老師上課很有活力，討論時事教育新聞，互評環節很有趣。',tags:['課堂互動佳']},
   ]
 };
 
-let radarChart=null;
+const CAREER_DATA={
+  default:[
+    {type:'實習',typeColor:'#3B5BDB',title:'初等教育研究助理',org:'台北市立某國小',period:'暑期 2個月',hours:'週40hr',bg:'修過課程設計相關課程',desc:'協助教師進行課程設計與學習評量，適合有師培背景的學生。',tags:['師培','課程設計','教育研究']},
+    {type:'兼職',typeColor:'#1D9E75',title:'家教/課輔老師',org:'自行接案',period:'長期',hours:'週8-16hr',bg:'大二以上，成績良好',desc:'為國小、國中學生提供個別化課後輔導，時薪約300-500元。',tags:['教學','課輔','彈性']},
+  ]
+};
+
 let currentCourse=null;
+let radarChart=null;
+let currentTab='review';
 
 function getCourse(){
-  const params=new URLSearchParams(window.location.search);
-  const id=parseInt(params.get('id')||'0');
+  const id=parseInt(new URLSearchParams(window.location.search).get('id')||'0');
   return COURSES.find(c=>c.id===id)||COURSES[0];
 }
 
@@ -168,44 +187,107 @@ function renderPage(){
   const c=getCourse();
   currentCourse=c;
   document.title=c.name+' | NTUE RatePro';
-  const dc=DIFF_COLOR[c.diff];
 
-  // Hero
   document.getElementById('heroArea').innerHTML=`
     <div class="hero-band">
       <div class="inner">
         <div class="breadcrumb">
           <a href="search.html">搜尋課程</a>
-          <i class="ti ti-chevron-right"></i>
-          <span>${c.name}</span>
+          <i class="ti ti-chevron-right"></i><span>${c.name}</span>
         </div>
         <div class="course-title">${c.name}</div>
         <div class="course-sub">
           <span><i class="ti ti-user" style="font-size:13px"></i>${c.teacher} 教授</span>
           <span><i class="ti ti-building" style="font-size:13px"></i>${DEPT_LABEL[c.dept]||c.dept}</span>
           <span><i class="ti ti-coffee" style="font-size:13px"></i>${DIFF_LABEL[c.diff]}</span>
-          <span><i class="ti ti-books" style="font-size:13px"></i>${LEVEL_LEVEL[c.level]||''} ${LEVEL_LABEL[c.type]||''} ${c.credit}學分</span>
+          <span><i class="ti ti-books" style="font-size:13px"></i>${c.credit||2}學分</span>
         </div>
       </div>
     </div>`;
 
-  // Stats
   document.getElementById('statStrip').innerHTML=`
-    <div class="stat-cell"><div class="stat-val" style="color:${RATING_COLOR(c.rating)}">${c.rating.toFixed(1)}</div><div class="stat-lbl">給分甜度</div></div>
+    <div class="stat-cell"><div class="stat-val" style="color:${RC(c.rating)}">${c.rating.toFixed(1)}</div><div class="stat-lbl">給分甜度</div></div>
     <div class="stat-cell"><div class="stat-val" style="color:var(--ntue)">${c.hours}hr</div><div class="stat-lbl">週投入時間</div></div>
     <div class="stat-cell"><div class="stat-val">${c.reviews}</div><div class="stat-lbl">筆評價</div></div>
     <div class="stat-cell"><div class="stat-val" style="color:#1D9E75">${c.harvest.toFixed(1)}</div><div class="stat-lbl">學習收穫</div></div>`;
 
-  // Body
-  const starFull=Math.round(c.rating);
-  const distData=[28,38,21,10,3];
-  const distCounts=[8,11,6,3,1];
+  document.getElementById('writeBtn').href=`review.html?id=${c.id}`;
+  renderTab('review');
+}
 
-  document.getElementById('bodyArea').innerHTML=`
+function switchTab(tab){
+  const user=getUser();
+  // 資源與職涯需要解鎖
+  if(tab!=='review' && !hasUnlockedResources()){
+    showLockPrompt(tab);
+    return;
+  }
+  currentTab=tab;
+  ['review','resource','career'].forEach(t=>{
+    document.getElementById('panel'+t.charAt(0).toUpperCase()+t.slice(1)).style.display=t===tab?'block':'none';
+    document.getElementById('tab'+t.charAt(0).toUpperCase()+t.slice(1)).classList.toggle('active',t===tab);
+  });
+  renderTab(tab);
+}
+
+function showLockPrompt(tab){
+  const label=tab==='resource'?'學習資源':'職涯機會';
+  const panel=document.getElementById('panel'+tab.charAt(0).toUpperCase()+tab.slice(1));
+  // 先切換顯示
+  ['review','resource','career'].forEach(t=>{
+    document.getElementById('panel'+t.charAt(0).toUpperCase()+t.slice(1)).style.display='none';
+    document.getElementById('tab'+t.charAt(0).toUpperCase()+t.slice(1)).classList.remove('active');
+  });
+  panel.style.display='block';
+  document.getElementById('tab'+tab.charAt(0).toUpperCase()+tab.slice(1)).classList.add('active');
+
+  panel.innerHTML=`
+    <div style="text-align:center;padding:3rem 1.5rem;background:#fff;border-radius:var(--radius);border:1px solid var(--border)">
+      <div style="width:64px;height:64px;border-radius:50%;background:#E8EDFF;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:28px;color:var(--ntue)">
+        <i class="ti ti-lock"></i>
+      </div>
+      <div style="font-size:1.05rem;font-weight:700;margin-bottom:.5rem">解鎖「${label}」</div>
+      <div style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;max-width:320px;margin-left:auto;margin-right:auto">
+        撰寫一篇課程評價後，即可查看所有<br>學習資源與校友職涯分享
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <a href="review.html?id=${currentCourse.id}" style="background:var(--ntue);color:#fff;border:none;border-radius:9px;padding:10px 24px;font-size:14px;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+          <i class="ti ti-pencil"></i> 去撰寫評價
+        </a>
+        ${getUser()?'':'<button style="background:#fff;color:var(--ntue);border:1px solid var(--ntue);border-radius:9px;padding:10px 20px;font-size:14px;cursor:pointer;font-family:inherit" onclick="openModal(\'login\')">登入帳號</button>'}
+      </div>
+    </div>`;
+}
+
+function renderTab(tab){
+  const c=currentCourse;
+  if(!c) return;
+
+  if(tab==='review') renderReviewPanel(c);
+  if(tab==='resource') renderResourcePanel(c);
+  if(tab==='career') renderCareerPanel(c);
+}
+
+function renderReviewPanel(c){
+  const user=getUser();
+  const reviews=[...(SAMPLE_REVIEWS[c.id]||SAMPLE_REVIEWS.default)];
+
+  // 加入 localStorage 的用戶評價
+  try{
+    const allReviews=JSON.parse(localStorage.getItem('rp_reviews')||'[]');
+    allReviews.filter(r=>r.courseId===c.id).forEach(r=>{
+      reviews.unshift({
+        name:r.name,av:r.name.charAt(0),bg:'#E8EDFF',fg:'#0C447C',
+        date:r.date,stars:r.stars,text:r.text,tags:r.tags||[]
+      });
+    });
+  }catch(e){}
+
+  const radarHtml=`
     <div class="section">
       <div class="sec-title"><i class="ti ti-chart-radar"></i>課程雷達圖</div>
       <div class="radar-wrap">
-        <canvas id="radarChart" width="220" height="220"></canvas>
+        <canvas id="radarChart" width="200" height="200"></canvas>
         <div class="legend">
           <div class="leg-row"><div class="leg-dot" style="background:#F59F00"></div><div class="leg-label">給分甜度</div><div class="leg-val" style="color:#BA7517">${c.rating.toFixed(1)}</div></div>
           <div class="leg-row"><div class="leg-dot" style="background:#3B5BDB"></div><div class="leg-label">挑戰程度</div><div class="leg-val" style="color:#3B5BDB">${c.challenge.toFixed(1)}</div></div>
@@ -215,182 +297,195 @@ function renderPage(){
         </div>
       </div>
     </div>
-
-    <div class="section">
-      <div class="sec-title"><i class="ti ti-list-details"></i>各維度評分</div>
-      <div class="bar-rows">
-        <div class="br"><div class="br-label">給分甜度</div><div class="br-track"><div class="br-fill" style="width:${c.rating/5*100}%;background:#F59F00"></div></div><div class="br-val" style="color:#BA7517">${c.rating.toFixed(1)}</div></div>
-        <div class="br"><div class="br-label">挑戰程度</div><div class="br-track"><div class="br-fill" style="width:${c.challenge/5*100}%;background:#3B5BDB"></div></div><div class="br-val" style="color:#3B5BDB">${c.challenge.toFixed(1)}</div></div>
-        <div class="br"><div class="br-label">內容扎實</div><div class="br-track"><div class="br-fill" style="width:${c.content/5*100}%;background:#1D9E75"></div></div><div class="br-val" style="color:#1D9E75">${c.content.toFixed(1)}</div></div>
-        <div class="br"><div class="br-label">點名頻率</div><div class="br-track"><div class="br-fill" style="width:${c.attend/5*100}%;background:#D85A30"></div></div><div class="br-val" style="color:#D85A30">${c.attend.toFixed(1)}</div></div>
-        <div class="br"><div class="br-label">學習收穫</div><div class="br-track"><div class="br-fill" style="width:${c.harvest/5*100}%;background:#7F77DD"></div></div><div class="br-val" style="color:#534AB7">${c.harvest.toFixed(1)}</div></div>
-        <div class="br"><div class="br-label">週投入時數</div><div class="br-track"><div class="br-fill" style="width:${Math.min(c.hours/15*100,100)}%;background:#888"></div></div><div class="br-val" style="color:#555">${c.hours}hr</div></div>
-      </div>
-    </div>
-
     <div class="section">
       <div class="sec-title"><i class="ti ti-tag"></i>課程標籤</div>
-      <div style="margin-bottom:.9rem">
+      <div style="margin-bottom:.75rem">
         <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:500">考核方式</div>
         <div style="display:flex;flex-wrap:wrap;gap:6px">${c.exams.map(e=>`<span class="tag gray">${EXAM_LABEL[e]||e}</span>`).join('')}</div>
       </div>
       <div>
         <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:500">課程屬性</div>
-        <div style="display:flex;flex-wrap:wrap;gap:6px">${c.tags.map(t=>`<span class="tag blue">${t}</span>`).join('')}<span class="tag amber">${c.credit} 學分</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">${c.tags.map(t=>`<span class="tag blue">${t}</span>`).join('')}</div>
       </div>
-    </div>
-
-    <div class="section">
-      <div class="sec-title"><i class="ti ti-star"></i>給分甜度分佈</div>
-      <div style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap">
-        <div style="flex-shrink:0">
-          <div style="font-size:3rem;font-weight:700;color:${RATING_COLOR(c.rating)};line-height:1">${c.rating.toFixed(1)}</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:5px">共 ${c.reviews} 筆評價</div>
-          <div style="font-size:16px;color:#F59F00;margin-top:7px;letter-spacing:3px">${'★'.repeat(starFull)}${'☆'.repeat(5-starFull)}</div>
-        </div>
-        <div style="flex:1;min-width:140px;padding-top:.25rem">
-          ${[5,4,3,2,1].map((s,i)=>`<div class="dist-row"><div class="dist-star">${s}</div><div class="dist-track"><div class="dist-fill" style="width:${distData[i]}%"></div></div><div class="dist-count">${distCounts[i]}</div></div>`).join('')}
-        </div>
-      </div>
-    </div>
-
-    <div class="section" id="reviewSection">
-      <div class="sec-title"><i class="ti ti-message-circle"></i>學生評論（${c.reviews} 筆）</div>
-      <div id="reviewContent"></div>
-    </div>
-
-    <div class="section">
-      <div class="sec-title"><i class="ti ti-books"></i>學習資源</div>
-      <div class="res-grid">
-        <a class="res-item" href="resource.html?type=notes&id=${c.id}"><div class="res-icon blue"><i class="ti ti-notes"></i></div><div><div class="res-name">共筆整理</div><div class="res-meta">3 份可用</div></div></a>
-        <a class="res-item" href="resource.html?type=exam&id=${c.id}"><div class="res-icon amber"><i class="ti ti-file-description"></i></div><div><div class="res-name">歷年考古題</div><div class="res-meta">2 年份</div></div></a>
-        <a class="res-item" href="resource.html?type=book&id=${c.id}"><div class="res-icon teal"><i class="ti ti-book"></i></div><div><div class="res-name">課本轉讓</div><div class="res-meta">1 本待售</div></div></a>
-        <a class="res-item" href="resource.html?type=report&id=${c.id}"><div class="res-icon blue"><i class="ti ti-presentation"></i></div><div><div class="res-name">報告範本</div><div class="res-meta">2 份參考</div></div></a>
-      </div>
-    </div>
-
-    <div class="cta-row">
-      <a href="review.html?id=${c.id}" class="btn-write"><i class="ti ti-pencil"></i> 撰寫我的評價</a>
-      <button class="btn-save" id="saveBtn" onclick="toggleSave()"><i class="ti ti-bookmark"></i> 收藏</button>
     </div>`;
 
-  // Radar chart
-  if(radarChart) radarChart.destroy();
-  radarChart=new Chart(document.getElementById('radarChart'),{
-    type:'radar',
-    data:{
-      labels:['給分甜度','挑戰程度','內容扎實','點名頻率','學習收穫'],
-      datasets:[{
-        data:[c.rating,c.challenge,c.content,c.attend,c.harvest],
-        backgroundColor:'rgba(59,91,219,0.1)',borderColor:'#3B5BDB',borderWidth:2.5,
-        pointBackgroundColor:['#F59F00','#3B5BDB','#1D9E75','#D85A30','#7F77DD'],
-        pointBorderColor:'#fff',pointRadius:6,pointBorderWidth:2
-      }]
-    },
-    options:{responsive:false,plugins:{legend:{display:false}},scales:{r:{
-      min:0,max:5,ticks:{stepSize:1,display:false},
-      grid:{color:'rgba(0,0,0,0.07)'},angleLines:{color:'rgba(0,0,0,0.07)'},
-      pointLabels:{font:{size:11,family:"'Noto Sans TC',sans-serif"},color:'#888'}
-    }}}
-  });
-
-  renderReviews();
-}
-
-function renderReviews(){
-  const user=getUser();
-  const c=currentCourse;
-  if(!c) return;
-  const reviews=COURSE_REVIEWS[c.id]||COURSE_REVIEWS.default;
-  const el=document.getElementById('reviewContent');
-  if(!el) return;
-
-  const searchBar=`
-    <div class="rv-search">
-      <i class="ti ti-search" style="color:#aaa;font-size:16px"></i>
-      <input type="text" id="reviewSearch" placeholder="搜尋評論關鍵字…" oninput="filterReviews(this.value)">
-      <span id="reviewCount" style="font-size:12px;color:#aaa;white-space:nowrap">${reviews.length} 則</span>
-    </div>`;
-
-  const reviewsHtml=reviews.map((r,i)=>`
+  let reviewsHtml;
+  const reviewCards=reviews.map((r,i)=>`
     <div class="rv-card" id="rv${i}" data-text="${r.text} ${r.tags.join(' ')}">
       <div class="rv-top">
         <div class="rv-user">
-          <div class="rv-avatar" style="background:${r.bg};color:${r.fg}">${r.avatar}</div>
-          <div><div class="rv-name">${r.name}</div><div class="rv-date">${r.date}</div></div>
+          <div class="rv-avatar" style="background:${r.bg};color:${r.fg}">${r.av}</div>
+          <div><div class="rv-name-text">${r.name}</div><div class="rv-date">${r.date}</div></div>
         </div>
         <div class="rv-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)} ${r.stars}.0</div>
       </div>
       <div class="rv-body">${r.text}</div>
-      <div class="rv-tags">${r.tags.map(t=>`<span class="tag teal">${t}</span>`).join('')}</div>
+      <div class="rv-tags-row">${r.tags.map(t=>`<span class="tag teal">${t}</span>`).join('')}</div>
     </div>`).join('');
 
   if(user){
-    el.innerHTML=searchBar+`<div class="review-list" id="reviewList">${reviewsHtml}</div>
+    reviewsHtml=`
+      <div class="rv-search">
+        <i class="ti ti-search" style="color:#aaa;font-size:16px"></i>
+        <input type="text" placeholder="搜尋評論關鍵字…" oninput="filterReviews(this.value)">
+        <span id="reviewCount" style="font-size:12px;color:#aaa">${reviews.length} 則</span>
+      </div>
+      <div id="reviewList">${reviewCards}</div>
       <div id="reviewEmpty" style="display:none;text-align:center;padding:2rem;color:var(--muted)">
-        <i class="ti ti-search-off" style="font-size:32px;display:block;margin-bottom:.5rem;color:#ddd"></i>找不到含有此關鍵字的評論
+        <i class="ti ti-search-off" style="font-size:28px;display:block;margin-bottom:.5rem;color:#ddd"></i>找不到符合關鍵字的評論
       </div>`;
   } else {
-    // 未登入：評論文字打霧，CTA 顯示在下方（不彈 modal 提示）
-    const previewCards = reviews.slice(0,2).map(r=>`
-      <div class="rv-card">
+    const blurCard=reviews[0]?`
+      <div class="rv-card lock-blur-wrap">
         <div class="rv-top">
           <div class="rv-user">
-            <div class="rv-avatar" style="background:${r.bg};color:${r.fg}">${r.avatar}</div>
-            <div><div class="rv-name">${r.name}</div><div class="rv-date">${r.date}</div></div>
+            <div class="rv-avatar" style="background:${reviews[0].bg};color:${reviews[0].fg}">${reviews[0].av}</div>
+            <div><div class="rv-name-text">${reviews[0].name}</div><div class="rv-date">${reviews[0].date}</div></div>
           </div>
-          <div class="rv-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)} ${r.stars}.0</div>
+          <div class="rv-stars">${'★'.repeat(reviews[0].stars)} ${reviews[0].stars}.0</div>
         </div>
-        <div class="rv-body" style="filter:blur(4px);user-select:none">${r.text}</div>
-        <div class="rv-tags" style="filter:blur(4px);user-select:none">${r.tags.map(t=>`<span class="tag teal">${t}</span>`).join('')}</div>
-      </div>`).join('');
-    el.innerHTML=`
-      <div class="lock-section">
-        <div class="review-list">${previewCards}</div>
-        <div class="lock-cta">
-          <div class="lock-icon"><i class="ti ti-lock"></i></div>
-          <div class="lock-text">
-            <div class="lock-title">先給予，才能解鎖評論</div>
-            <div class="lock-sub">登入並撰寫一篇課程評價，即可查看所有同學的完整評論</div>
-          </div>
-          <button class="lock-btn" onclick="openModal('login')">登入 / 註冊</button>
+        <div class="rv-body">${reviews[0].text}</div>
+      </div>`:'';
+    reviewsHtml=`
+      ${blurCard}
+      <div class="lock-cta">
+        <div class="lock-icon-sm"><i class="ti ti-lock"></i></div>
+        <div class="lock-text">
+          <div class="lock-title">先給予，才能解鎖評論</div>
+          <div class="lock-sub">登入並撰寫一篇評價，即可查看所有同學的完整評論</div>
         </div>
+        <button class="lock-btn" onclick="openModal('login')">登入 / 註冊</button>
       </div>`;
   }
+
+  document.getElementById('panelReview').innerHTML=radarHtml+`
+    <div class="section">
+      <div class="sec-title"><i class="ti ti-message-circle"></i>學生評論（${c.reviews} 筆）</div>
+      ${reviewsHtml}
+    </div>`;
+
+  // Init radar
+  if(radarChart) radarChart.destroy();
+  radarChart=new Chart(document.getElementById('radarChart'),{
+    type:'radar',
+    data:{labels:['給分甜度','挑戰程度','內容扎實','點名頻率','學習收穫'],
+      datasets:[{data:[c.rating,c.challenge,c.content,c.attend,c.harvest],
+        backgroundColor:'rgba(59,91,219,0.1)',borderColor:'#3B5BDB',borderWidth:2.5,
+        pointBackgroundColor:['#F59F00','#3B5BDB','#1D9E75','#D85A30','#7F77DD'],
+        pointBorderColor:'#fff',pointRadius:6,pointBorderWidth:2}]},
+    options:{responsive:false,plugins:{legend:{display:false}},
+      scales:{r:{min:0,max:5,ticks:{stepSize:1,display:false},
+        grid:{color:'rgba(0,0,0,0.07)'},angleLines:{color:'rgba(0,0,0,0.07)'},
+        pointLabels:{font:{size:11,family:"'Noto Sans TC',sans-serif"},color:'#888'}}}}
+  });
+}
+
+function renderResourcePanel(c){
+  // 從 localStorage 取用戶上傳的資源
+  let userResources=[];
+  try{
+    const all=JSON.parse(localStorage.getItem('rp_resources')||'[]');
+    userResources=all.filter(r=>r.courseId===c.id);
+  }catch(e){}
+
+  document.getElementById('panelResource').innerHTML=`
+    <div class="section">
+      <div class="sec-title"><i class="ti ti-notes"></i>共筆整理</div>
+      <div class="res-grid">
+        <a class="res-item" href="resource.html?type=notes&id=${c.id}"><div class="res-icon blue"><i class="ti ti-notes"></i></div><div><div class="res-name">113-2 完整共筆</div><div class="res-meta">3 份 · 教育系大三上傳</div></div></a>
+        <a class="res-item" href="resource.html?type=notes&id=${c.id}"><div class="res-icon blue"><i class="ti ti-notes"></i></div><div><div class="res-name">112-2 期中重點整理</div><div class="res-meta">1 份 · 師資培育生上傳</div></div></a>
+      </div>
+    </div>
+    <div class="section">
+      <div class="sec-title"><i class="ti ti-file-description"></i>歷年考古題</div>
+      <div class="res-grid">
+        <a class="res-item" href="resource.html?type=exam&id=${c.id}"><div class="res-icon amber"><i class="ti ti-file-description"></i></div><div><div class="res-name">113-1 期末考題（含解答）</div><div class="res-meta">6頁 · 大學部選修生上傳</div></div></a>
+        <a class="res-item" href="resource.html?type=exam&id=${c.id}"><div class="res-icon amber"><i class="ti ti-file-description"></i></div><div><div class="res-name">112-2 期中考題</div><div class="res-meta">4頁 · 無解答</div></div></a>
+      </div>
+    </div>
+    <div class="section">
+      <div class="sec-title"><i class="ti ti-book"></i>課本轉讓</div>
+      <div class="res-grid">
+        <a class="res-item" href="resource.html?type=book&id=${c.id}"><div class="res-icon teal"><i class="ti ti-book"></i></div><div><div class="res-name">《課程設計與評量》第三版</div><div class="res-meta">書況良好 · 350元</div></div></a>
+      </div>
+    </div>
+    ${userResources.length?`<div class="section">
+      <div class="sec-title"><i class="ti ti-star"></i>校友新增資源</div>
+      ${userResources.map(r=>`<div class="res-item" style="margin-bottom:8px"><div class="res-icon blue"><i class="ti ti-cloud-upload"></i></div><div><div class="res-name">${r.title}</div><div class="res-meta">${r.uploader} · ${r.date}</div></div></div>`).join('')}
+    </div>`:''}`;
+}
+
+function renderCareerPanel(c){
+  // 從 localStorage 取校友職涯分享
+  let careerItems=[...(CAREER_DATA.default)];
+  try{
+    const all=JSON.parse(localStorage.getItem('rp_career')||'[]');
+    // 顯示關鍵字有對應到這門課名稱、老師或系所的職涯資源
+    all.forEach(item=>{
+      const keywords=(item.keywords||[]).map(k=>k.toLowerCase());
+      const match=keywords.some(k=>
+        c.name.toLowerCase().includes(k)||
+        c.teacher.toLowerCase().includes(k)||
+        (DEPT_LABEL[c.dept]||'').toLowerCase().includes(k)||
+        k.includes(c.dept)
+      );
+      if(match) careerItems.unshift({...item, fromAlumni:true});
+    });
+  }catch(e){}
+
+  const typeColor={正職:'#3B5BDB',兼職:'#1D9E75',實習:'#F59F00'};
+  document.getElementById('panelCareer').innerHTML=careerItems.map(item=>`
+    <div class="career-card" style="border-left-color:${typeColor[item.type]||'#3B5BDB'}">
+      <div class="career-type" style="color:${typeColor[item.type]||'#3B5BDB'}">
+        <i class="ti ti-briefcase"></i> ${item.type} ${item.fromAlumni?'<span style="font-size:10px;background:#E8EDFF;color:var(--ntue);padding:1px 7px;border-radius:20px;margin-left:4px">校友分享</span>':''}
+      </div>
+      <div class="career-title">${item.title}</div>
+      <div class="career-meta">
+        <span><i class="ti ti-building" style="font-size:11px"></i>${item.org}</span>
+        <span><i class="ti ti-calendar" style="font-size:11px"></i>${item.period}</span>
+        <span><i class="ti ti-clock" style="font-size:11px"></i>${item.hours}</span>
+      </div>
+      <div style="font-size:12px;color:#854F0B;background:#FAEEDA;border-radius:6px;padding:4px 10px;display:inline-block;margin-bottom:.5rem">
+        修課背景：${item.bg}
+      </div>
+      <div class="career-desc">${item.desc}</div>
+      <div class="career-tags">${(item.tags||[]).map(t=>`<span class="tag purple">${t}</span>`).join('')}</div>
+    </div>`).join('')+`
+    <div style="text-align:center;padding:1rem 0;font-size:13px;color:var(--muted)">
+      是校友嗎？<a href="profile.html" style="color:var(--ntue);font-weight:500">前往個人頁面分享職涯資源 →</a>
+    </div>`;
 }
 
 function filterReviews(q){
   const cards=document.querySelectorAll('#reviewList .rv-card');
   let visible=0;
   cards.forEach(card=>{
-    const text=(card.dataset.text||'').toLowerCase();
-    const match=!q||text.includes(q.toLowerCase());
+    const match=!q||(card.dataset.text||'').toLowerCase().includes(q.toLowerCase());
     card.style.display=match?'block':'none';
-    if(match)visible++;
+    if(match) visible++;
   });
-  const countEl=document.getElementById('reviewCount');
-  if(countEl) countEl.textContent=visible+' 則';
-  const emptyEl=document.getElementById('reviewEmpty');
-  if(emptyEl) emptyEl.style.display=visible===0?'block':'none';
+  const ce=document.getElementById('reviewCount');
+  if(ce) ce.textContent=visible+' 則';
+  const ee=document.getElementById('reviewEmpty');
+  if(ee) ee.style.display=visible===0?'block':'none';
 }
 
 function toggleSave(){
   const btn=document.getElementById('saveBtn');
-  const isSaved=btn.classList.toggle('saved');
-  btn.innerHTML=isSaved?'<i class="ti ti-bookmark-filled"></i> 已收藏':'<i class="ti ti-bookmark"></i> 收藏';
-  btn.style.background=isSaved?'var(--ntue-light)':'';
+  const on=btn.classList.toggle('saved');
+  btn.innerHTML=on?'<i class="ti ti-bookmark-filled"></i> 已收藏':'<i class="ti ti-bookmark"></i> 收藏';
+  btn.style.background=on?'var(--ntue-light)':'';
 }
 
-window.onLoginSuccess=renderReviews;
+window.onLoginSuccess=()=>{ renderTab(currentTab); };
 
 document.addEventListener('DOMContentLoaded',()=>{
-  if(typeof COURSES==='undefined'){
+  if(typeof COURSES!=='undefined'){ renderPage(); }
+  else{
     const s=document.createElement('script');
     s.src='courses.js?v='+Date.now();
     s.onload=renderPage;
     document.head.appendChild(s);
-  } else {
-    renderPage();
   }
 });
 </script>

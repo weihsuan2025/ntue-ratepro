@@ -1,40 +1,61 @@
-// auth.js — 共用登入/登出邏輯，所有頁面引入
+// auth.js — 共用登入/登出/modal 邏輯
 
-function getUser(){
-  try{ return JSON.parse(localStorage.getItem('rp_user')); }catch(e){ return null; }
-}
+function getUser(){ try{return JSON.parse(localStorage.getItem('rp_user'));}catch(e){return null;} }
 function saveUser(u){ localStorage.setItem('rp_user',JSON.stringify(u)); }
 function clearUser(){ localStorage.removeItem('rp_user'); }
 
-// 登入驗證
+// 貢獻門檻：至少 1 篇評價才能解鎖資源
+function hasUnlockedResources(){
+  const u=getUser(); if(!u) return false;
+  return (u.reviewCount||0)>=1 || (u.role==='alumni') || (u.role==='teacher');
+}
+
+/* ── LOGIN ── */
 function doLogin(){
   const email=document.getElementById('loginEmail').value.trim();
   const pass=document.getElementById('loginPassword').value;
   if(!email.endsWith('@grad.ntue.edu.tw')){
-    alert('請使用國北教大校內信箱（@grad.ntue.edu.tw）');return;
+    showModalError('loginError','請使用國北教大校內信箱（@grad.ntue.edu.tw）');return;
   }
-  if(!pass){alert('請輸入密碼');return;}
-  const name=localStorage.getItem('rp_name_'+email)||email.split('@')[0];
-  const user={email,name,level:2,points:65,reviewCount:3,savedCount:2};
+  if(!pass){showModalError('loginError','請輸入密碼');return;}
+  const saved=localStorage.getItem('rp_profile_'+email);
+  let user;
+  if(saved){
+    user=JSON.parse(saved);
+  } else {
+    user={email,name:email.split('@')[0],role:'student',dept:'',grade:'',level:1,points:0,reviewCount:0,savedCount:0};
+  }
   saveUser(user);
   document.getElementById('successTitle').textContent='登入成功！';
-  document.getElementById('successMsg').textContent='歡迎回來，'+name+'！';
+  document.getElementById('successMsg').textContent='歡迎回來，'+user.name+'！';
   switchModalView('success');
   updateNavUser();
   if(window.onLoginSuccess) window.onLoginSuccess();
 }
 
-// 註冊
+/* ── REGISTER ── */
 function doRegister(){
   const email=document.getElementById('regEmail').value.trim();
-  const pass=document.getElementById('regPassword').value;
+  const role=document.getElementById('regRole').value;
   const name=document.getElementById('regName').value.trim()||email.split('@')[0];
+
   if(!email.endsWith('@grad.ntue.edu.tw')){
-    alert('請使用國北教大校內信箱（@grad.ntue.edu.tw）');return;
+    showModalError('regError','請使用國北教大校內信箱（@grad.ntue.edu.tw）');return;
   }
-  if(pass.length<8){alert('密碼至少需要 8 個字元');return;}
-  localStorage.setItem('rp_name_'+email,name);
-  const user={email,name,level:1,points:0,reviewCount:0,savedCount:0};
+  if(!role){showModalError('regError','請選擇身份');return;}
+
+  const dept=document.getElementById('regDept')?document.getElementById('regDept').value:'';
+  const grade=document.getElementById('regGrade')?document.getElementById('regGrade').value:'';
+
+  if((role==='student'||role==='alumni')&&!dept){
+    showModalError('regError','請選擇就讀系所');return;
+  }
+
+  const user={
+    email,name,role,dept,grade,
+    level:1,points:0,reviewCount:0,savedCount:0
+  };
+  localStorage.setItem('rp_profile_'+email, JSON.stringify(user));
   saveUser(user);
   document.getElementById('successTitle').textContent='註冊成功！';
   document.getElementById('successMsg').textContent='歡迎加入，'+name+'！';
@@ -43,14 +64,32 @@ function doRegister(){
   if(window.onLoginSuccess) window.onLoginSuccess();
 }
 
-// 登出
+function showModalError(id, msg){
+  let el=document.getElementById(id);
+  if(!el) return;
+  el.textContent=msg;
+  el.style.display='block';
+  setTimeout(()=>{el.style.display='none';},4000);
+}
+
+// 身份改變時，動態顯示/隱藏系所與級數欄位
+function onRoleChange(){
+  const role=document.getElementById('regRole').value;
+  const needDept=role==='student'||role==='alumni';
+  const deptRow=document.getElementById('regDeptRow');
+  const gradeRow=document.getElementById('regGradeRow');
+  if(deptRow) deptRow.style.display=needDept?'block':'none';
+  if(gradeRow) gradeRow.style.display=needDept?'block':'none';
+}
+
+/* ── LOGOUT ── */
 function doLogout(){
   clearUser();
   updateNavUser();
   if(window.onLogoutSuccess) window.onLogoutSuccess();
 }
 
-// Modal 控制
+/* ── MODAL ── */
 function openModal(view){
   switchModalView(view||'login');
   document.getElementById('modalOverlay').classList.add('open');
@@ -63,29 +102,25 @@ function switchModalView(v){
     const el=document.getElementById(id);
     if(el) el.style.display='none';
   });
-  const target=document.getElementById(v+'View');
-  if(target) target.style.display='block';
+  const t=document.getElementById(v+'View');
+  if(t) t.style.display='block';
 }
 
-// Nav 更新
+/* ── NAV ── */
 function updateNavUser(){
   const user=getUser();
   const navRight=document.getElementById('navRight');
   if(!navRight) return;
   if(user){
     const initial=user.name.charAt(0).toUpperCase();
-    navRight.innerHTML=`
-      <div class="nav-user">
-        <a href="profile.html" class="nav-avatar" title="個人頁面">${initial}</a>
-        <a href="profile.html" class="nav-username">${user.name}</a>
-        <button class="nav-logout" onclick="doLogout()">登出</button>
-      </div>`;
+    navRight.innerHTML=`<div class="nav-user">
+      <a href="profile.html" class="nav-avatar" title="個人頁面">${initial}</a>
+      <a href="profile.html" class="nav-username">${user.name}</a>
+      <button class="nav-logout" onclick="doLogout()">登出</button>
+    </div>`;
   } else {
     navRight.innerHTML=`<a href="#" class="nav-cta" onclick="openModal('login');return false;">登入</a>`;
   }
 }
 
-// 頁面載入時初始化
-document.addEventListener('DOMContentLoaded',()=>{
-  updateNavUser();
-});
+document.addEventListener('DOMContentLoaded',()=>{ updateNavUser(); });

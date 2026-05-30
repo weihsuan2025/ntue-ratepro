@@ -90,30 +90,6 @@ textarea:focus{border-color:var(--ntue)}
     <div id="navRight"></div>
   </div>
 </nav>
-<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div id="loginView"><h2>登入 RatePro</h2><p>使用國北教大校內信登入</p>
-      <div class="form-group"><label>學校信箱</label><input type="email" id="loginEmail" placeholder="帳號@grad.ntue.edu.tw"><div class="form-hint">僅接受 @grad.ntue.edu.tw</div></div>
-      <div class="form-group"><label>密碼</label><input type="password" id="loginPassword" placeholder="輸入密碼"></div>
-      <button class="modal-btn" onclick="doLogin()">登入</button>
-      <div class="modal-divider">或</div>
-      <div class="modal-switch">還沒有帳號？<a onclick="switchModalView('register')">立即註冊</a></div>
-    </div>
-    <div id="registerView" style="display:none"><h2>註冊帳號</h2><p>加入國北教大課程評價社群</p>
-      <div class="form-group"><label>學校信箱</label><input type="email" id="regEmail" placeholder="帳號@grad.ntue.edu.tw"></div>
-      <div class="form-group"><label>設定密碼</label><input type="password" id="regPassword" placeholder="至少 8 個字元"></div>
-      <div class="form-group"><label>顯示名稱</label><input type="text" id="regName" placeholder="例如：教育系大三"></div>
-      <button class="modal-btn" onclick="doRegister()">註冊</button>
-      <div class="modal-switch">已有帳號？<a onclick="switchModalView('login')">返回登入</a></div>
-    </div>
-    <div id="successView" style="display:none;text-align:center;padding:1rem 0">
-      <div style="width:60px;height:60px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:26px;color:#1D9E75">✓</div>
-      <h2 id="successTitle"></h2><p id="successMsg" style="margin-bottom:1.5rem"></p>
-      <button class="modal-btn" onclick="closeModal()">開始使用</button>
-    </div>
-  </div>
-</div>
 
 <div class="page-header">
   <div class="page-header-inner">
@@ -310,19 +286,25 @@ textarea:focus{border-color:var(--ntue)}
 </div>
 </div>
 
-<div class="success-screen" id="successView">
-  <div class="success-icon"><i class="ti ti-check"></i></div>
-  <div class="success-title">評價送出成功！</div>
-  <div class="success-sub" id="successSub">感謝你的貢獻，你的評價已發布。現在可以查看所有同學的完整評論了。</div>
-  <div class="level-card">
-    <div class="level-label">貢獻等級提升</div>
-    <div class="level-bar-wrap"><div class="level-track"><div class="level-fill" id="levelFill"></div></div><div class="level-name">Lv.2 貢獻者</div></div>
-    <div class="level-tip">再評 2 門課即可升至 Lv.3，解鎖進階學習資源</div>
+<div id="successView" style="display:none;background:var(--bg);min-height:60vh;padding:2rem">
+  <div style="max-width:500px;margin:2rem auto;text-align:center">
+    <div class="success-icon"><i class="ti ti-check"></i></div>
+    <div class="success-title">評價送出成功！</div>
+    <div class="success-sub" id="successSub">感謝你的貢獻，你的評價已發布。現在可以查看所有同學的完整評論了。</div>
+    <div class="level-card">
+      <div class="level-label">貢獻等級提升</div>
+      <div class="level-bar-wrap"><div class="level-track"><div class="level-fill" id="levelFill"></div></div><div class="level-name">Lv.2 貢獻者</div></div>
+      <div class="level-tip">再評 2 門課即可升至 Lv.3，解鎖進階學習資源</div>
+    </div>
+    <div style="display:flex;gap:10px;flex-direction:column">
+      <a id="backToCourse" href="search.html" class="btn-next" style="text-decoration:none;display:block;border-radius:9px;padding:13px;font-size:15px;font-weight:500;text-align:center;background:var(--ntue);color:#E8EDFF">查看課程評論 →</a>
+      <a href="search.html" style="text-decoration:none;display:block;border-radius:9px;padding:13px;font-size:14px;text-align:center;background:#fff;border:1px solid var(--border);color:var(--muted)">回到搜尋課程</a>
+    </div>
   </div>
-  <a id="backToCourse" href="search.html" class="btn-next" style="text-decoration:none;display:block;border-radius:9px;padding:13px;font-size:15px;font-weight:500;text-align:center;background:var(--ntue);color:#E8EDFF">查看課程評論 →</a>
 </div>
 
 <script src="courses.js?v=3"></script>
+<script src="modal.js"></script>
 <script src="auth.js"></script>
 <script>
 const scores=[3,3,3,3,3];
@@ -479,8 +461,87 @@ function submitReview(){
     const lbl=document.getElementById('starLabel');
     lbl.textContent='請先選擇推薦度！';lbl.style.color='#E24B4A';return;
   }
+
+  // 收集所有資料
+  const name=document.getElementById('inputCourseName').value.trim();
+  const teacher=document.getElementById('inputTeacher').value.trim();
+  const dept=document.getElementById('inputDept').value;
+  const year=document.getElementById('inputYear').value||'113';
+  const sem=document.getElementById('inputSem').value||'2';
+  const text=document.getElementById('reviewText').value.trim();
+  const user=getUser();
+  const isAnon=document.getElementById('anonToggle').classList.contains('on');
+  const displayName=isAnon?(dept?dept+'系學生':'匿名學生'):(user?user.name:'匿名');
+
+  // 從 courses.js 找到對應課程 id（如果是從課程頁來）
+  const targetId=courseId||null;
+
+  // 組成評價物件
+  const review={
+    id: Date.now(),
+    courseId: targetId,
+    courseName: name,
+    teacher,
+    dept,
+    year,
+    sem,
+    text,
+    stars: starVal,
+    name: displayName,
+    date: new Date().toLocaleDateString('zh-TW',{year:'numeric',month:'long'}),
+    scores: [...scores],
+    hours: parseInt(document.getElementById('hoursSlider').value)||4,
+    tags: [...document.querySelectorAll('[data-g="tag"].on')].map(c=>c.textContent),
+  };
+
+  // 存到 localStorage
+  let reviews=[];
+  try{ reviews=JSON.parse(localStorage.getItem('rp_reviews')||'[]'); }catch(e){}
+  reviews.unshift(review);
+  localStorage.setItem('rp_reviews', JSON.stringify(reviews));
+
+  // 更新課程在 localStorage 的評價數（讓搜尋頁讀到）
+  if(targetId){
+    let extras={};
+    try{ extras=JSON.parse(localStorage.getItem('rp_course_extras')||'{}'); }catch(e){}
+    if(!extras[targetId]) extras[targetId]={reviewCount:0,latestReview:''};
+    extras[targetId].reviewCount++;
+    extras[targetId].latestReview=text.slice(0,60)+'…';
+    localStorage.setItem('rp_course_extras', JSON.stringify(extras));
+  } else {
+    // 從 Nav 直接新增的課程 — 存到 userCourses
+    let userCourses=[];
+    try{ userCourses=JSON.parse(localStorage.getItem('rp_user_courses')||'[]'); }catch(e){}
+    // 檢查是否已存在同名課程
+    const existing=userCourses.find(c=>c.name===name&&c.teacher===teacher);
+    if(existing){
+      existing.reviews=(existing.reviews||0)+1;
+      existing.latestReview=text.slice(0,60)+'…';
+    } else {
+      userCourses.push({
+        id: 'u_'+Date.now(),
+        name, teacher, dept,
+        diff: [...document.querySelectorAll('[data-g="diff"].on')].map(c=>c.textContent)[0]||'americano',
+        rating: scores[0],
+        hours: review.hours,
+        challenge: scores[1],
+        content: scores[2],
+        attend: scores[3],
+        harvest: scores[4],
+        reviews: 1,
+        exams: [...document.querySelectorAll('[data-g="exam"].on')].map(c=>c.textContent),
+        tags: [...document.querySelectorAll('[data-g="mat"].on')].map(c=>c.textContent),
+        review: text.slice(0,80)+'…',
+        userAdded: true,
+      });
+    }
+    localStorage.setItem('rp_user_courses', JSON.stringify(userCourses));
+  }
+
+  // 顯示成功畫面
   document.getElementById('formArea').style.display='none';
   document.getElementById('successView').style.display='block';
+  if(targetId) document.getElementById('backToCourse').href='course.html?id='+targetId;
   setTimeout(()=>{document.getElementById('levelFill').style.width='65%';},400);
   window.scrollTo({top:0,behavior:'smooth'});
 }
