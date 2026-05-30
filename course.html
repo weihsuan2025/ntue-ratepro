@@ -43,7 +43,7 @@
 .dist-fill{height:100%;border-radius:99px;background:#F59F00}
 .dist-count{font-size:11px;color:var(--muted);width:20px}
 .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.res-item{background:#f8f9fe;border-radius:10px;padding:.85rem 1rem;display:flex;align-items:center;gap:10px;cursor:pointer;border:1px solid transparent;transition:border-color .15s}
+.res-item{background:#f8f9fe;border-radius:10px;padding:.85rem 1rem;display:flex;align-items:center;gap:10px;cursor:pointer;border:1px solid transparent;transition:border-color .15s;text-decoration:none;color:inherit}
 .res-item:hover{border-color:var(--ntue-mid)}
 .res-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
 .res-icon.blue{background:#E6F1FB;color:#185FA5}
@@ -72,11 +72,15 @@
 /* lock overlay */
 .lock-section{position:relative;overflow:hidden}
 .lock-blur{filter:blur(4px);pointer-events:none;user-select:none}
-.lock-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(248,249,254,.88);border-radius:var(--radius);text-align:center;padding:1.5rem;z-index:2}
-.lock-icon{width:56px;height:56px;border-radius:50%;background:var(--ntue-light);display:flex;align-items:center;justify-content:center;margin:0 auto .75rem;font-size:24px;color:var(--ntue)}
-.lock-title{font-size:15px;font-weight:700;margin-bottom:.35rem}
-.lock-sub{font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.6}
-.lock-btn{background:var(--ntue);color:#fff;border:none;border-radius:8px;padding:9px 22px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
+.lock-section{position:relative}
+.lock-blur-wrap{filter:blur(5px);pointer-events:none;user-select:none;max-height:160px;overflow:hidden}
+.lock-cta{margin-top:1.25rem;background:#E8EDFF;border-radius:10px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.lock-icon{width:44px;height:44px;border-radius:50%;background:var(--ntue);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0}
+.lock-text{flex:1}
+.lock-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
+.lock-sub{font-size:12px;color:var(--muted);line-height:1.6}
+.lock-btn{background:var(--ntue);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif;white-space:nowrap;flex-shrink:0}
+.lock-btn:hover{opacity:.88}
 </style>
 </head>
 <body>
@@ -258,10 +262,10 @@ function renderPage(){
     <div class="section">
       <div class="sec-title"><i class="ti ti-books"></i>學習資源</div>
       <div class="res-grid">
-        <div class="res-item"><div class="res-icon blue"><i class="ti ti-notes"></i></div><div><div class="res-name">共筆整理</div><div class="res-meta">3 份可用</div></div></div>
-        <div class="res-item"><div class="res-icon amber"><i class="ti ti-file-description"></i></div><div><div class="res-name">歷年考古題</div><div class="res-meta">2 年份</div></div></div>
-        <div class="res-item"><div class="res-icon teal"><i class="ti ti-book"></i></div><div><div class="res-name">課本轉讓</div><div class="res-meta">1 本待售</div></div></div>
-        <div class="res-item"><div class="res-icon blue"><i class="ti ti-presentation"></i></div><div><div class="res-name">報告範本</div><div class="res-meta">2 份參考</div></div></div>
+        <a class="res-item" href="resource.html?type=notes&id=${c.id}"><div class="res-icon blue"><i class="ti ti-notes"></i></div><div><div class="res-name">共筆整理</div><div class="res-meta">3 份可用</div></div></a>
+        <a class="res-item" href="resource.html?type=exam&id=${c.id}"><div class="res-icon amber"><i class="ti ti-file-description"></i></div><div><div class="res-name">歷年考古題</div><div class="res-meta">2 年份</div></div></a>
+        <a class="res-item" href="resource.html?type=book&id=${c.id}"><div class="res-icon teal"><i class="ti ti-book"></i></div><div><div class="res-name">課本轉讓</div><div class="res-meta">1 本待售</div></div></a>
+        <a class="res-item" href="resource.html?type=report&id=${c.id}"><div class="res-icon blue"><i class="ti ti-presentation"></i></div><div><div class="res-name">報告範本</div><div class="res-meta">2 份參考</div></div></a>
       </div>
     </div>
 
@@ -327,23 +331,28 @@ function renderReviews(){
         <i class="ti ti-search-off" style="font-size:32px;display:block;margin-bottom:.5rem;color:#ddd"></i>找不到含有此關鍵字的評論
       </div>`;
   } else {
-    // 未登入：顯示第一則模糊，其餘鎖定
-    const firstCard=`<div class="rv-card lock-blur">${reviews[0]?`
-      <div class="rv-top">
-        <div class="rv-user">
-          <div class="rv-avatar" style="background:${reviews[0].bg};color:${reviews[0].fg}">${reviews[0].avatar}</div>
-          <div><div class="rv-name">${reviews[0].name}</div><div class="rv-date">${reviews[0].date}</div></div>
+    // 未登入：評論文字打霧，CTA 顯示在下方（不彈 modal 提示）
+    const previewCards = reviews.slice(0,2).map(r=>`
+      <div class="rv-card">
+        <div class="rv-top">
+          <div class="rv-user">
+            <div class="rv-avatar" style="background:${r.bg};color:${r.fg}">${r.avatar}</div>
+            <div><div class="rv-name">${r.name}</div><div class="rv-date">${r.date}</div></div>
+          </div>
+          <div class="rv-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)} ${r.stars}.0</div>
         </div>
-        <div class="rv-stars">${'★'.repeat(reviews[0].stars)} ${reviews[0].stars}.0</div>
-      </div>
-      <div class="rv-body">${reviews[0].text}</div>`:''}</div>`;
+        <div class="rv-body" style="filter:blur(4px);user-select:none">${r.text}</div>
+        <div class="rv-tags" style="filter:blur(4px);user-select:none">${r.tags.map(t=>`<span class="tag teal">${t}</span>`).join('')}</div>
+      </div>`).join('');
     el.innerHTML=`
       <div class="lock-section">
-        <div class="review-list">${firstCard}</div>
-        <div class="lock-overlay">
+        <div class="review-list">${previewCards}</div>
+        <div class="lock-cta">
           <div class="lock-icon"><i class="ti ti-lock"></i></div>
-          <div class="lock-title">先給予，才能解鎖</div>
-          <div class="lock-sub">登入並撰寫一篇課程評價後，<br>即可查看所有同學的完整評論</div>
+          <div class="lock-text">
+            <div class="lock-title">先給予，才能解鎖評論</div>
+            <div class="lock-sub">登入並撰寫一篇課程評價，即可查看所有同學的完整評論</div>
+          </div>
           <button class="lock-btn" onclick="openModal('login')">登入 / 註冊</button>
         </div>
       </div>`;

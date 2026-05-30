@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>學習資源 | NTUE RatePro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+.body{max-width:760px;margin:0 auto;padding:1.75rem 2rem 3rem}
+.section{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:16px}
+.sec-title{font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;margin-bottom:1.25rem}
+.sec-title i{font-size:18px}
+
+.res-card{display:flex;align-items:flex-start;gap:14px;padding:1rem 0;border-bottom:1px solid var(--border)}
+.res-card:last-child{border-bottom:none}
+.res-thumb{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.res-thumb.blue{background:#E6F1FB;color:#185FA5}
+.res-thumb.amber{background:#FAEEDA;color:#854F0B}
+.res-thumb.teal{background:#E1F5EE;color:#0F6E56}
+.res-thumb.gray{background:#F1EFE8;color:#555}
+.res-info{flex:1;min-width:0}
+.res-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:3px}
+.res-meta{font-size:12px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.res-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.res-action{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+.btn-dl{background:var(--ntue);color:#fff;border:none;border-radius:7px;padding:6px 14px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif;display:inline-flex;align-items:center;gap:5px;text-decoration:none}
+.btn-dl:hover{opacity:.88}
+.btn-preview{background:#fff;color:var(--ntue);border:1px solid var(--ntue);border-radius:7px;padding:6px 14px;font-size:13px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;display:inline-flex;align-items:center;gap:5px}
+.btn-preview:hover{background:#f4f6ff}
+
+.upload-box{border:2px dashed var(--border);border-radius:var(--radius);padding:2rem;text-align:center;cursor:pointer;transition:border-color .15s;margin-top:.5rem}
+.upload-box:hover{border-color:var(--ntue-mid)}
+.upload-box i{font-size:32px;color:#ccc;display:block;margin-bottom:.5rem}
+.upload-box p{font-size:13px;color:var(--muted)}
+.upload-box strong{color:var(--ntue)}
+
+.tab-row{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
+.tab{padding:.65rem 1.25rem;font-size:13px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
+.tab.active{color:var(--ntue);border-bottom-color:var(--ntue);font-weight:500}
+
+.lock-notice{background:#FFF8E1;border:1px solid #FFD43B;border-radius:9px;padding:.85rem 1rem;display:flex;gap:9px;align-items:flex-start;margin-bottom:1.25rem}
+.lock-notice i{font-size:17px;color:#E6A817;flex-shrink:0;margin-top:1px}
+.lock-notice p{font-size:13px;color:#7A5300;line-height:1.6}
+.lock-notice a{color:var(--ntue);font-weight:500;cursor:pointer}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">NTUE <span>RatePro</span></a>
+    <div class="nav-links">
+      <a href="search.html">搜尋課程</a>
+      <a href="review.html">撰寫評價</a>
+    </div>
+    <div id="navRight"></div>
+  </div>
+</nav>
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="loginView"><h2>登入 RatePro</h2><p>使用國北教大校內信登入</p>
+      <div class="form-group"><label>學校信箱</label><input type="email" id="loginEmail" placeholder="帳號@grad.ntue.edu.tw"><div class="form-hint">僅接受 @grad.ntue.edu.tw</div></div>
+      <div class="form-group"><label>密碼</label><input type="password" id="loginPassword" placeholder="輸入密碼"></div>
+      <button class="modal-btn" onclick="doLogin()">登入</button>
+      <div class="modal-divider">或</div>
+      <div class="modal-switch">還沒有帳號？<a onclick="switchModalView('register')">立即註冊</a></div>
+    </div>
+    <div id="registerView" style="display:none"><h2>註冊帳號</h2><p>加入國北教大課程評價社群</p>
+      <div class="form-group"><label>學校信箱</label><input type="email" id="regEmail" placeholder="帳號@grad.ntue.edu.tw"></div>
+      <div class="form-group"><label>設定密碼</label><input type="password" id="regPassword" placeholder="至少 8 個字元"></div>
+      <div class="form-group"><label>顯示名稱</label><input type="text" id="regName" placeholder="例如：教育系大三"></div>
+      <button class="modal-btn" onclick="doRegister()">註冊</button>
+      <div class="modal-switch">已有帳號？<a onclick="switchModalView('login')">返回登入</a></div>
+    </div>
+    <div id="successView" style="display:none;text-align:center;padding:1rem 0">
+      <div style="width:60px;height:60px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:26px;color:#1D9E75">✓</div>
+      <h2 id="successTitle"></h2><p id="successMsg" style="margin-bottom:1.5rem"></p>
+      <button class="modal-btn" onclick="closeModal();renderPage()">開始使用</button>
+    </div>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb" id="bcArea">
+      <a href="search.html">搜尋課程</a>
+      <i class="ti ti-chevron-right"></i>
+      <span>學習資源</span>
+    </div>
+    <h1 id="pageTitle">學習資源</h1>
+    <p id="pageSubtitle">課程共享資源庫</p>
+  </div>
+</div>
+
+<div class="body">
+  <div id="lockNotice" style="display:none">
+    <div class="lock-notice">
+      <i class="ti ti-lock"></i>
+      <p>下載學習資源需要登入帳號。<a onclick="openModal('login')">立即登入</a>或<a onclick="openModal('register')">免費註冊</a>即可存取所有資源。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="tab-row" id="tabRow"></div>
+    <div id="resourceList"></div>
+    <div class="upload-box" id="uploadBox">
+      <i class="ti ti-cloud-upload"></i>
+      <p>拖曳檔案到這裡，或<strong>點擊上傳</strong><br><span style="font-size:11px;color:#bbb">支援 PDF、Word、圖片，最大 20MB</span></p>
+    </div>
+  </div>
+</div>
+
+<script src="courses.js?v=3"></script>
+<script src="auth.js"></script>
+<script>
+const TYPE_CONFIG={
+  notes:{label:'共筆整理',icon:'ti-notes',color:'blue',uploadLabel:'上傳共筆'},
+  exam: {label:'歷年考古題',icon:'ti-file-description',color:'amber',uploadLabel:'上傳考古題'},
+  book: {label:'課本轉讓',icon:'ti-book',color:'teal',uploadLabel:'刊登轉讓'},
+  report:{label:'報告範本',icon:'ti-presentation',color:'blue',uploadLabel:'上傳範本'},
+};
+
+const SAMPLE_DATA={
+  notes:[
+    {title:'113-2 完整共筆（期末版）',uploader:'教育系大三',date:'2025-12-20',pages:48,desc:'涵蓋全學期所有章節，包含老師課堂補充與歷年重點整理。'},
+    {title:'112-2 期中重點整理',uploader:'師資培育生',date:'2024-06-10',pages:22,desc:'針對期中範圍的精簡整理，條列式呈現，適合快速複習。'},
+    {title:'111-2 上課錄音逐字稿',uploader:'教育所碩一',date:'2023-06-30',pages:80,desc:'逐字稿格式，含老師說明的補充例子，內容詳盡。'},
+  ],
+  exam:[
+    {title:'113-1 期末考題（含解答）',uploader:'大學部選修生',date:'2026-01-15',pages:6,desc:'113上學期期末考原題，附同學整理的參考答案。'},
+    {title:'112-2 期中考題',uploader:'教育系大三',date:'2024-06-05',pages:4,desc:'112下期中原題，無解答，可配合共筆練習。'},
+  ],
+  book:[
+    {title:'《課程設計與評量》第三版',uploader:'畢業校友',date:'2026-05-01',pages:null,desc:'書況良好，只有少量鉛筆筆記，定價980元，轉讓價350元。',price:'350元',contact:'請私訊站內信'},
+  ],
+  report:[
+    {title:'113-2 期末課程設計方案（範本）',uploader:'師資培育生',date:'2026-01-10',pages:35,desc:'完整的課程設計方案範本，包含教學目標、評量設計、單元規劃，已去除個人資訊。'},
+    {title:'112-2 小組報告投影片範本',uploader:'教育系大三',date:'2024-06-20',pages:18,desc:'PPT 格式，包含封面、目錄、內容頁、結論，風格簡潔。'},
+  ],
+};
+
+let currentType='notes';
+let courseId=null;
+let courseName='';
+
+function renderPage(){
+  const params=new URLSearchParams(window.location.search);
+  const type=params.get('type')||'notes';
+  const id=parseInt(params.get('id')||'0');
+  currentType=type;
+  courseId=id;
+
+  const cfg=TYPE_CONFIG[type]||TYPE_CONFIG.notes;
+  const user=getUser();
+
+  // Find course name
+  if(id && typeof COURSES!=='undefined'){
+    const c=COURSES.find(x=>x.id===id);
+    if(c){
+      courseName=c.name;
+      document.getElementById('pageTitle').textContent=cfg.label+' — '+c.name;
+      document.getElementById('pageSubtitle').textContent=c.teacher+' · '+c.dept;
+      document.getElementById('bcArea').innerHTML=`
+        <a href="search.html">搜尋課程</a>
+        <i class="ti ti-chevron-right"></i>
+        <a href="course.html?id=${id}">${c.name}</a>
+        <i class="ti ti-chevron-right"></i>
+        <span>${cfg.label}</span>`;
+    }
+  } else {
+    document.getElementById('pageTitle').textContent=cfg.label;
+  }
+
+  // Tabs
+  document.getElementById('tabRow').innerHTML=Object.entries(TYPE_CONFIG).map(([k,v])=>
+    `<div class="tab ${k===type?'active':''}" onclick="switchTab('${k}')">${v.label}</div>`
+  ).join('');
+
+  // Lock notice
+  document.getElementById('lockNotice').style.display=user?'none':'block';
+
+  // Upload box label
+  document.getElementById('uploadBox').querySelector('strong').textContent=cfg.uploadLabel;
+  if(!user) document.getElementById('uploadBox').style.opacity='0.4';
+
+  renderList(type, user);
+}
+
+function switchTab(type){
+  const params=new URLSearchParams(window.location.search);
+  params.set('type',type);
+  window.location.search=params.toString();
+}
+
+function renderList(type, user){
+  const data=SAMPLE_DATA[type]||[];
+  const cfg=TYPE_CONFIG[type];
+  const el=document.getElementById('resourceList');
+
+  if(!data.length){
+    el.innerHTML=`<div style="text-align:center;padding:2rem;color:var(--muted)"><i class="ti ti-inbox" style="font-size:32px;display:block;margin-bottom:.5rem;color:#ddd"></i>目前還沒有資源，成為第一個上傳的人！</div>`;
+    return;
+  }
+
+  el.innerHTML=data.map(r=>`
+    <div class="res-card">
+      <div class="res-thumb ${cfg.color}"><i class="ti ${cfg.icon}"></i></div>
+      <div class="res-info">
+        <div class="res-title">${r.title}</div>
+        <div class="res-meta">
+          <span><i class="ti ti-user" style="font-size:12px"></i> ${r.uploader}</span>
+          <span><i class="ti ti-calendar" style="font-size:12px"></i> ${r.date}</span>
+          ${r.pages?`<span><i class="ti ti-file" style="font-size:12px"></i> ${r.pages} 頁</span>`:''}
+          ${r.price?`<span style="color:#1D9E75;font-weight:500"><i class="ti ti-tag" style="font-size:12px"></i> ${r.price}</span>`:''}
+        </div>
+        <div class="res-desc">${r.desc}</div>
+        <div class="res-action">
+          ${user
+            ? (type==='book'
+                ? `<button class="btn-dl"><i class="ti ti-mail"></i> 聯絡賣家</button>`
+                : `<a class="btn-dl" href="#"><i class="ti ti-download"></i> 下載</a><button class="btn-preview"><i class="ti ti-eye"></i> 預覽</button>`)
+            : `<button class="btn-dl" onclick="openModal('login')"><i class="ti ti-lock"></i> 登入後下載</button>`
+          }
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+window.onLoginSuccess=renderPage;
+document.addEventListener('DOMContentLoaded', renderPage);
+</script>
+</body>
+</html>

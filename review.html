@@ -10,24 +10,20 @@
 <link rel="stylesheet" href="shared.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
-.progress-wrap{background:rgba(255,255,255,.2);height:4px}
+.progress-wrap{background:#DEE2F5;height:4px}
 .progress-fill{height:100%;background:#FFD43B;transition:width .4s}
-
 .form-body{max-width:600px;margin:0 auto;padding:1.75rem 2rem 4rem}
 .step-indicator{display:flex;gap:0;margin-bottom:2rem;background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden}
 .step-item{flex:1;padding:.7rem .5rem;text-align:center;font-size:12px;color:var(--muted);border-right:1px solid var(--border);transition:background .2s}
 .step-item:last-child{border-right:none}
 .step-item.active{background:var(--ntue);color:#fff;font-weight:500}
 .step-item.done{background:#E8EDFF;color:var(--ntue)}
-
-.course-chip{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:13px;color:var(--muted);margin-bottom:1.5rem}
+.course-chip{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:13px;color:var(--muted);margin-bottom:1.5rem;flex-wrap:wrap}
 .course-chip strong{color:var(--text);font-weight:500}
-
 .section{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:16px}
 .sec-title{font-size:13px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:7px;margin-bottom:1.1rem}
 .sec-title i{font-size:16px}
 .required{color:#E24B4A;font-size:11px;margin-left:4px;font-weight:400}
-
 .slider-block{margin-bottom:16px}
 .sl-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px}
 .sl-label{font-size:14px;font-weight:500;color:var(--text)}
@@ -35,9 +31,7 @@
 .sl-value{font-size:1.5rem;font-weight:700;min-width:32px;text-align:right;line-height:1}
 input[type=range]{width:100%;accent-color:var(--ntue);height:6px;cursor:pointer}
 .sl-tips{display:flex;justify-content:space-between;font-size:10px;color:#bbb;margin-top:4px}
-
 .radar-preview{display:flex;justify-content:center;margin-top:1.25rem}
-
 .chip-group{display:flex;flex-wrap:wrap;gap:7px}
 .sel-chip{border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:13px;color:var(--muted);cursor:pointer;background:#fff;transition:all .15s;user-select:none}
 .sel-chip:hover{border-color:var(--ntue-mid)}
@@ -45,16 +39,17 @@ input[type=range]{width:100%;accent-color:var(--ntue);height:6px;cursor:pointer}
 .sel-chip.on.amber{background:#EF9F27;color:#fff;border-color:#EF9F27}
 .sel-chip.on.teal{background:#1D9E75;color:#fff;border-color:#1D9E75}
 .sel-chip.on.purple{background:#6C5CE7;color:#fff;border-color:#6C5CE7}
-
 .star-row{display:flex;gap:8px}
 .star{font-size:34px;cursor:pointer;color:#ddd;transition:color .1s,transform .1s;user-select:none;line-height:1}
 .star:hover,.star.on{color:#F59F00}
 .star:hover{transform:scale(1.1)}
-
 textarea{width:100%;border:1px solid var(--border);border-radius:9px;padding:.85rem 1rem;font-size:14px;font-family:'Noto Sans TC',sans-serif;color:var(--text);background:#fff;resize:vertical;min-height:110px;outline:none;line-height:1.75;transition:border-color .15s}
 textarea:focus{border-color:var(--ntue)}
 .char-count{font-size:12px;color:var(--muted);text-align:right;margin-top:5px}
-
+.form-input{width:100%;border:1px solid var(--border);border-radius:9px;padding:.7rem 1rem;font-size:14px;font-family:'Noto Sans TC',sans-serif;color:var(--text);outline:none;transition:border-color .15s}
+.form-input:focus{border-color:var(--ntue)}
+.form-label{font-size:13px;font-weight:500;color:var(--text);margin-bottom:.4rem;display:block}
+.form-field{margin-bottom:1rem}
 .anon-row{display:flex;align-items:center;gap:10px;padding:.85rem 0;border-top:1px solid var(--border);margin-top:.75rem;cursor:pointer}
 .toggle{width:40px;height:22px;border-radius:11px;background:#ddd;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
 .toggle.on{background:var(--ntue)}
@@ -62,19 +57,14 @@ textarea:focus{border-color:var(--ntue)}
 .toggle.on::after{left:21px}
 .anon-text .anon-label{font-size:14px;font-weight:500}
 .anon-text .anon-sub{font-size:12px;color:var(--muted);margin-top:2px}
-
 .notice{background:#E8EDFF;border-radius:9px;padding:.85rem 1rem;display:flex;gap:9px;margin-bottom:1.5rem}
 .notice i{font-size:17px;color:var(--ntue);flex-shrink:0;margin-top:1px}
 .notice p{font-size:13px;color:#0C447C;line-height:1.65}
-
 .btn-row{display:flex;gap:10px;margin-top:6px}
 .btn-back{background:#fff;color:var(--muted);border:1px solid var(--border);border-radius:9px;padding:12px 20px;font-size:14px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;flex-shrink:0}
 .btn-back:hover{background:#f5f5f5}
 .btn-next{flex:1;background:var(--ntue);color:#E8EDFF;border:none;border-radius:9px;padding:13px;font-size:15px;font-weight:500;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:opacity .2s}
 .btn-next:hover{opacity:.88}
-.btn-next:disabled{opacity:.4;cursor:not-allowed}
-
-/* SUCCESS */
 .success-screen{display:none;max-width:500px;margin:4rem auto;padding:2rem;text-align:center}
 .success-icon{width:72px;height:72px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:32px;color:#1D9E75}
 .success-title{font-size:1.25rem;font-weight:700;margin-bottom:.6rem}
@@ -95,17 +85,40 @@ textarea:focus{border-color:var(--ntue)}
     <a href="index.html" class="nav-logo">NTUE <span>RatePro</span></a>
     <div class="nav-links">
       <a href="search.html">搜尋課程</a>
-      <a href="course.html">課程詳細</a>
+      <a href="review.html" style="color:var(--ntue)">撰寫評價</a>
     </div>
+    <div id="navRight"></div>
   </div>
 </nav>
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="loginView"><h2>登入 RatePro</h2><p>使用國北教大校內信登入</p>
+      <div class="form-group"><label>學校信箱</label><input type="email" id="loginEmail" placeholder="帳號@grad.ntue.edu.tw"><div class="form-hint">僅接受 @grad.ntue.edu.tw</div></div>
+      <div class="form-group"><label>密碼</label><input type="password" id="loginPassword" placeholder="輸入密碼"></div>
+      <button class="modal-btn" onclick="doLogin()">登入</button>
+      <div class="modal-divider">或</div>
+      <div class="modal-switch">還沒有帳號？<a onclick="switchModalView('register')">立即註冊</a></div>
+    </div>
+    <div id="registerView" style="display:none"><h2>註冊帳號</h2><p>加入國北教大課程評價社群</p>
+      <div class="form-group"><label>學校信箱</label><input type="email" id="regEmail" placeholder="帳號@grad.ntue.edu.tw"></div>
+      <div class="form-group"><label>設定密碼</label><input type="password" id="regPassword" placeholder="至少 8 個字元"></div>
+      <div class="form-group"><label>顯示名稱</label><input type="text" id="regName" placeholder="例如：教育系大三"></div>
+      <button class="modal-btn" onclick="doRegister()">註冊</button>
+      <div class="modal-switch">已有帳號？<a onclick="switchModalView('login')">返回登入</a></div>
+    </div>
+    <div id="successView" style="display:none;text-align:center;padding:1rem 0">
+      <div style="width:60px;height:60px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:26px;color:#1D9E75">✓</div>
+      <h2 id="successTitle"></h2><p id="successMsg" style="margin-bottom:1.5rem"></p>
+      <button class="modal-btn" onclick="closeModal()">開始使用</button>
+    </div>
+  </div>
+</div>
 
 <div class="page-header">
   <div class="page-header-inner">
-    <div class="breadcrumb">
+    <div class="breadcrumb" id="breadcrumbArea">
       <a href="search.html">搜尋課程</a>
-      <i class="ti ti-chevron-right"></i>
-      <a href="course.html">課程設計與評量</a>
       <i class="ti ti-chevron-right"></i>
       <span>撰寫評價</span>
     </div>
@@ -113,82 +126,107 @@ textarea:focus{border-color:var(--ntue)}
     <p>你的評價將幫助學弟妹更了解這門課</p>
   </div>
 </div>
-<div class="progress-wrap"><div class="progress-fill" id="progressFill" style="width:33%"></div></div>
+<div class="progress-wrap"><div class="progress-fill" id="progressFill" style="width:25%"></div></div>
 
 <div id="formArea">
 <div class="form-body">
-  <div class="step-indicator">
-    <div class="step-item active" id="si1">① 結構化評分</div>
-    <div class="step-item" id="si2">② 課程資訊</div>
-    <div class="step-item" id="si3">③ 文字評論</div>
+  <div class="step-indicator" id="stepIndicator">
+    <div class="step-item active" id="si0">① 課程資訊</div>
+    <div class="step-item" id="si1">② 結構化評分</div>
+    <div class="step-item" id="si2">③ 課程標籤</div>
+    <div class="step-item" id="si3">④ 文字評論</div>
   </div>
 
-  <div class="course-chip">
-    <i class="ti ti-book-2" style="font-size:14px;color:var(--ntue)"></i>
-    <strong>課程設計與評量</strong>
-    <span>· 黃建國 · 113-2</span>
-  </div>
+  <div id="courseChipArea"></div>
 
   <div class="notice">
     <i class="ti ti-info-circle"></i>
     <p>依據信度保障機制，送出評價後即可查看其他同學的完整評論。評價採匿名保護，教師無法得知身份。</p>
   </div>
 
-  <!-- STEP 1 -->
-  <div id="step1">
+  <!-- STEP 0: 課程資訊（從 nav 進來才顯示；從課程頁進來自動填入並跳過） -->
+  <div id="step0">
+    <div class="section">
+      <div class="sec-title"><i class="ti ti-book-2"></i>課程基本資訊 <span class="required">* 必填</span></div>
+      <div class="form-field">
+        <label class="form-label">課程名稱 <span style="color:#E24B4A">*</span></label>
+        <input type="text" id="inputCourseName" class="form-input" placeholder="例如：教育心理學">
+      </div>
+      <div class="form-field">
+        <label class="form-label">授課教師 <span style="color:#E24B4A">*</span></label>
+        <input type="text" id="inputTeacher" class="form-input" placeholder="例如：王美玲">
+      </div>
+      <div class="form-field">
+        <label class="form-label">開課系所 <span style="color:#E24B4A">*</span></label>
+        <select id="inputDept" class="form-input">
+          <option value="">請選擇系所</option>
+          <option value="edu">教育學系</option>
+          <option value="cs">數位科技設計學系</option>
+          <option value="lang">語文與創作學系</option>
+          <option value="art">藝術與造型設計學系</option>
+          <option value="math">數學暨資訊教育學系</option>
+          <option value="sci">自然科學教育學系</option>
+          <option value="social">社會與區域發展學系</option>
+          <option value="pe">體育學系</option>
+          <option value="music">音樂學系</option>
+        </select>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-field" style="margin-bottom:0">
+          <label class="form-label">修課學年度 <span style="color:#E24B4A">*</span></label>
+          <select id="inputYear" class="form-input">
+            <option value="">請選擇</option>
+            <option value="113">113學年</option>
+            <option value="112">112學年</option>
+            <option value="111">111學年</option>
+            <option value="110">110學年</option>
+          </select>
+        </div>
+        <div class="form-field" style="margin-bottom:0">
+          <label class="form-label">學期</label>
+          <select id="inputSem" class="form-input">
+            <option value="1">第一學期</option>
+            <option value="2">第二學期</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-next" onclick="goFromStep0()">下一步：結構化評分 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 1: 結構化評分 -->
+  <div id="step1" style="display:none">
     <div class="section">
       <div class="sec-title"><i class="ti ti-chart-radar"></i>結構化評分 <span class="required">* 必填</span></div>
-
       <div class="slider-block">
-        <div class="sl-header">
-          <div><div class="sl-label">給分甜度</div><div class="sl-desc">最終成績的慷慨程度</div></div>
-          <div class="sl-value" id="v0" style="color:#F59F00">3</div>
-        </div>
+        <div class="sl-header"><div><div class="sl-label">給分甜度</div><div class="sl-desc">最終成績的慷慨程度</div></div><div class="sl-value" id="v0" style="color:#F59F00">3</div></div>
         <input type="range" min="1" max="5" step="1" value="3" oninput="updateSlider(0,this.value)">
         <div class="sl-tips"><span>很嚴苛</span><span>非常甜</span></div>
       </div>
-
       <div class="slider-block">
-        <div class="sl-header">
-          <div><div class="sl-label">挑戰程度</div><div class="sl-desc">課程內容的難易度</div></div>
-          <div class="sl-value" id="v1" style="color:#3B5BDB">3</div>
-        </div>
+        <div class="sl-header"><div><div class="sl-label">挑戰程度</div><div class="sl-desc">課程內容的難易度</div></div><div class="sl-value" id="v1" style="color:#3B5BDB">3</div></div>
         <input type="range" min="1" max="5" step="1" value="3" oninput="updateSlider(1,this.value)">
         <div class="sl-tips"><span>非常輕鬆</span><span>極度硬核</span></div>
       </div>
-
       <div class="slider-block">
-        <div class="sl-header">
-          <div><div class="sl-label">內容扎實度</div><div class="sl-desc">學術深度與實用程度</div></div>
-          <div class="sl-value" id="v2" style="color:#1D9E75">3</div>
-        </div>
+        <div class="sl-header"><div><div class="sl-label">內容扎實度</div><div class="sl-desc">學術深度與實用程度</div></div><div class="sl-value" id="v2" style="color:#1D9E75">3</div></div>
         <input type="range" min="1" max="5" step="1" value="3" oninput="updateSlider(2,this.value)">
         <div class="sl-tips"><span>內容空洞</span><span>非常扎實</span></div>
       </div>
-
       <div class="slider-block">
-        <div class="sl-header">
-          <div><div class="sl-label">點名頻率</div><div class="sl-desc">出席管控的嚴格程度</div></div>
-          <div class="sl-value" id="v3" style="color:#D85A30">3</div>
-        </div>
+        <div class="sl-header"><div><div class="sl-label">點名頻率</div><div class="sl-desc">出席管控的嚴格程度</div></div><div class="sl-value" id="v3" style="color:#D85A30">3</div></div>
         <input type="range" min="1" max="5" step="1" value="3" oninput="updateSlider(3,this.value)">
         <div class="sl-tips"><span>幾乎不點</span><span>每堂必點</span></div>
       </div>
-
       <div class="slider-block" style="margin-bottom:0">
-        <div class="sl-header">
-          <div><div class="sl-label">學習收穫</div><div class="sl-desc">修完這門課的成長感</div></div>
-          <div class="sl-value" id="v4" style="color:#6C5CE7">3</div>
-        </div>
+        <div class="sl-header"><div><div class="sl-label">學習收穫</div><div class="sl-desc">修完這門課的成長感</div></div><div class="sl-value" id="v4" style="color:#6C5CE7">3</div></div>
         <input type="range" min="1" max="5" step="1" value="3" oninput="updateSlider(4,this.value)">
         <div class="sl-tips"><span>毫無收穫</span><span>獲益良多</span></div>
       </div>
-
-      <div class="radar-preview">
-        <canvas id="previewRadar" width="200" height="200" role="img" aria-label="評分預覽雷達圖"></canvas>
-      </div>
+      <div class="radar-preview"><canvas id="previewRadar" width="200" height="200"></canvas></div>
     </div>
-
     <div class="section">
       <div class="sec-title"><i class="ti ti-clock"></i>每週投入時數 <span class="required">* 必填</span></div>
       <div style="display:flex;align-items:center;gap:14px">
@@ -197,154 +235,207 @@ textarea:focus{border-color:var(--ntue)}
       </div>
       <div class="sl-tips"><span>幾乎沒有</span><span>20hr+</span></div>
     </div>
-
     <div class="btn-row">
-      <button class="btn-next" onclick="goStep(2)">下一步：課程資訊 →</button>
+      <button class="btn-back" onclick="goStep(fromCourse?1:0)" id="backFromStep1">← 上一步</button>
+      <button class="btn-next" onclick="goStep(2)">下一步：課程標籤 →</button>
     </div>
   </div>
 
-  <!-- STEP 2 -->
+  <!-- STEP 2: 課程標籤 -->
   <div id="step2" style="display:none">
     <div class="section">
       <div class="sec-title"><i class="ti ti-clipboard-list"></i>考核方式 <span class="required">* 至少選一項</span></div>
       <div class="chip-group" id="examChips">
-        <div class="sel-chip" data-g="exam" data-v="midterm">期中考</div>
-        <div class="sel-chip" data-g="exam" data-v="final">期末考</div>
-        <div class="sel-chip" data-g="exam" data-v="report">期末報告</div>
-        <div class="sel-chip" data-g="exam" data-v="quiz">隨堂測驗</div>
-        <div class="sel-chip" data-g="exam" data-v="group">小組作業</div>
-        <div class="sel-chip" data-g="exam" data-v="attend">課堂出席</div>
-        <div class="sel-chip" data-g="exam" data-v="hw">平時作業</div>
-        <div class="sel-chip" data-g="exam" data-v="present">上台報告</div>
+        <div class="sel-chip" data-g="exam">期中考</div><div class="sel-chip" data-g="exam">期末考</div>
+        <div class="sel-chip" data-g="exam">期末報告</div><div class="sel-chip" data-g="exam">隨堂測驗</div>
+        <div class="sel-chip" data-g="exam">小組作業</div><div class="sel-chip" data-g="exam">課堂出席</div>
+        <div class="sel-chip" data-g="exam">平時作業</div><div class="sel-chip" data-g="exam">上台報告</div>
       </div>
     </div>
-
     <div class="section">
       <div class="sec-title"><i class="ti ti-book"></i>教材類型（可複選）</div>
       <div class="chip-group">
-        <div class="sel-chip amber" data-g="mat">投影片</div>
-        <div class="sel-chip amber" data-g="mat">自編講義</div>
-        <div class="sel-chip amber" data-g="mat">指定課本</div>
-        <div class="sel-chip amber" data-g="mat">學術論文</div>
-        <div class="sel-chip amber" data-g="mat">影片補充</div>
-        <div class="sel-chip amber" data-g="mat">無指定教材</div>
+        <div class="sel-chip amber" data-g="mat">投影片</div><div class="sel-chip amber" data-g="mat">自編講義</div>
+        <div class="sel-chip amber" data-g="mat">指定課本</div><div class="sel-chip amber" data-g="mat">學術論文</div>
+        <div class="sel-chip amber" data-g="mat">影片補充</div><div class="sel-chip amber" data-g="mat">無指定教材</div>
       </div>
     </div>
-
     <div class="section">
       <div class="sec-title"><i class="ti ti-coffee"></i>難易度 <span class="required">* 必填</span></div>
       <div class="chip-group" id="diffChips">
-        <div class="sel-chip teal" data-g="diff" data-v="latte">☕ 拿鐵（輕鬆）</div>
-        <div class="sel-chip teal" data-g="diff" data-v="americano">☕☕ 美式（中等）</div>
-        <div class="sel-chip teal" data-g="diff" data-v="espresso">☕☕☕ 濃縮（硬核）</div>
+        <div class="sel-chip teal" data-g="diff">☕ 拿鐵（輕鬆）</div>
+        <div class="sel-chip teal" data-g="diff">☕☕ 美式（中等）</div>
+        <div class="sel-chip teal" data-g="diff">☕☕☕ 濃縮（硬核）</div>
       </div>
     </div>
-
     <div class="btn-row">
       <button class="btn-back" onclick="goStep(1)">← 上一步</button>
       <button class="btn-next" onclick="goStep(3)">下一步：文字評論 →</button>
     </div>
   </div>
 
-  <!-- STEP 3 -->
+  <!-- STEP 3: 文字評論 -->
   <div id="step3" style="display:none">
     <div class="section">
       <div class="sec-title"><i class="ti ti-star"></i>整體推薦度 <span class="required">* 必填</span></div>
       <div class="star-row" id="starRow">
-        <span class="star" data-s="1">★</span>
-        <span class="star" data-s="2">★</span>
-        <span class="star" data-s="3">★</span>
-        <span class="star" data-s="4">★</span>
-        <span class="star" data-s="5">★</span>
+        <span class="star" data-s="1">★</span><span class="star" data-s="2">★</span>
+        <span class="star" data-s="3">★</span><span class="star" data-s="4">★</span><span class="star" data-s="5">★</span>
       </div>
       <div id="starLabel" style="font-size:13px;color:var(--muted);margin-top:8px">點擊星星選擇推薦度</div>
     </div>
-
     <div class="section">
       <div class="sec-title"><i class="ti ti-message-circle"></i>文字評論 <span class="required">* 至少 30 字</span></div>
       <textarea id="reviewText" placeholder="分享你的上課體驗：老師的教學風格、課程難度、給分方式、對未來的幫助…讓學弟妹能更了解這門課！" oninput="updateChar()"></textarea>
       <div class="char-count"><span id="charCount">0</span> 字 <span id="charMin" style="color:#E24B4A">（最少 30 字）</span></div>
     </div>
-
     <div class="section">
       <div class="sec-title"><i class="ti ti-tag"></i>快速標籤（可複選）</div>
       <div class="chip-group">
-        <div class="sel-chip purple" data-g="tag">強烈推薦</div>
-        <div class="sel-chip purple" data-g="tag">老師很認真</div>
-        <div class="sel-chip purple" data-g="tag">實用性高</div>
-        <div class="sel-chip purple" data-g="tag">小組合作重要</div>
-        <div class="sel-chip purple" data-g="tag">閱讀量大</div>
-        <div class="sel-chip purple" data-g="tag">建議提早開始</div>
-        <div class="sel-chip purple" data-g="tag">課堂互動多</div>
-        <div class="sel-chip purple" data-g="tag">時間彈性大</div>
+        <div class="sel-chip purple" data-g="tag">強烈推薦</div><div class="sel-chip purple" data-g="tag">老師很認真</div>
+        <div class="sel-chip purple" data-g="tag">實用性高</div><div class="sel-chip purple" data-g="tag">小組合作重要</div>
+        <div class="sel-chip purple" data-g="tag">閱讀量大</div><div class="sel-chip purple" data-g="tag">建議提早開始</div>
+        <div class="sel-chip purple" data-g="tag">課堂互動多</div><div class="sel-chip purple" data-g="tag">時間彈性大</div>
       </div>
-
       <div class="anon-row" onclick="document.getElementById('anonToggle').classList.toggle('on')">
         <div class="toggle on" id="anonToggle"></div>
-        <div class="anon-text">
-          <div class="anon-label">匿名發佈</div>
-          <div class="anon-sub">開啟後顯示為「教育系學生」，不顯示姓名</div>
-        </div>
+        <div class="anon-text"><div class="anon-label">匿名發佈</div><div class="anon-sub">開啟後顯示為「XX系學生」，不顯示姓名</div></div>
       </div>
     </div>
-
     <div class="btn-row">
       <button class="btn-back" onclick="goStep(2)">← 上一步</button>
-      <button class="btn-next" id="submitBtn" onclick="submitReview()">✓ 送出評價</button>
+      <button class="btn-next" onclick="submitReview()">✓ 送出評價</button>
     </div>
   </div>
 </div>
 </div>
 
-<!-- SUCCESS -->
 <div class="success-screen" id="successView">
   <div class="success-icon"><i class="ti ti-check"></i></div>
   <div class="success-title">評價送出成功！</div>
-  <div class="success-sub">感謝你的貢獻，你的評價已通過驗證並發布。<br>現在可以查看所有同學的完整評論了。</div>
+  <div class="success-sub" id="successSub">感謝你的貢獻，你的評價已發布。現在可以查看所有同學的完整評論了。</div>
   <div class="level-card">
     <div class="level-label">貢獻等級提升</div>
-    <div class="level-bar-wrap">
-      <div class="level-track"><div class="level-fill" id="levelFill"></div></div>
-      <div class="level-name">Lv.2 貢獻者</div>
-    </div>
+    <div class="level-bar-wrap"><div class="level-track"><div class="level-fill" id="levelFill"></div></div><div class="level-name">Lv.2 貢獻者</div></div>
     <div class="level-tip">再評 2 門課即可升至 Lv.3，解鎖進階學習資源</div>
   </div>
-  <a href="course.html" class="btn-next" style="text-decoration:none;display:block;border-radius:9px;padding:13px;font-size:15px;font-weight:500;text-align:center;background:var(--ntue);color:#E8EDFF">查看所有評論 →</a>
+  <a id="backToCourse" href="search.html" class="btn-next" style="text-decoration:none;display:block;border-radius:9px;padding:13px;font-size:15px;font-weight:500;text-align:center;background:var(--ntue);color:#E8EDFF">查看課程評論 →</a>
 </div>
 
+<script src="courses.js?v=3"></script>
+<script src="auth.js"></script>
 <script>
 const scores=[3,3,3,3,3];
 const colors=['#F59F00','#3B5BDB','#1D9E75','#D85A30','#6C5CE7'];
 let radarChart, starVal=0;
+let fromCourse=false;
+let courseId=null;
+
+// 判斷是否從課程頁帶入 id
+function initPage(){
+  const params=new URLSearchParams(window.location.search);
+  const id=parseInt(params.get('id')||'0');
+  if(id && typeof COURSES!=='undefined'){
+    const c=COURSES.find(x=>x.id===id);
+    if(c){
+      fromCourse=true;
+      courseId=id;
+      // 填入課程資訊
+      document.getElementById('inputCourseName').value=c.name;
+      document.getElementById('inputTeacher').value=c.teacher;
+      document.getElementById('inputDept').value=c.dept;
+      document.getElementById('inputYear').value='113';
+      // 更新 breadcrumb
+      document.getElementById('breadcrumbArea').innerHTML=`
+        <a href="search.html">搜尋課程</a>
+        <i class="ti ti-chevron-right"></i>
+        <a href="course.html?id=${c.id}">${c.name}</a>
+        <i class="ti ti-chevron-right"></i>
+        <span>撰寫評價</span>`;
+      // 顯示課程 chip，跳過 step0
+      document.getElementById('courseChipArea').innerHTML=`
+        <div class="course-chip">
+          <i class="ti ti-book-2" style="font-size:14px;color:var(--ntue)"></i>
+          <strong>${c.name}</strong>
+          <span>· ${c.teacher} · 113學年</span>
+        </div>`;
+      // 調整 step indicator 為 3 步
+      document.getElementById('stepIndicator').innerHTML=`
+        <div class="step-item active" id="si0">① 結構化評分</div>
+        <div class="step-item" id="si1">② 課程標籤</div>
+        <div class="step-item" id="si2">③ 文字評論</div>`;
+      // 跳過 step0，直接顯示 step1，並重新對應 step 邏輯
+      document.getElementById('step0').style.display='none';
+      document.getElementById('step1').style.display='block';
+      document.getElementById('progressFill').style.width='33%';
+      // 更新返回按鈕 step
+      document.getElementById('backFromStep1').setAttribute('onclick',`location.href='course.html?id=${c.id}'`);
+      // 成功後返回課程頁
+      document.getElementById('backToCourse').href='course.html?id='+c.id;
+    }
+  } else {
+    // 從 Nav 進來，顯示 step0
+    document.getElementById('step0').style.display='block';
+    document.getElementById('step1').style.display='none';
+  }
+  initRadar();
+}
+
+function goFromStep0(){
+  const name=document.getElementById('inputCourseName').value.trim();
+  const teacher=document.getElementById('inputTeacher').value.trim();
+  const dept=document.getElementById('inputDept').value;
+  const year=document.getElementById('inputYear').value;
+  if(!name){alert('請填寫課程名稱');return;}
+  if(!teacher){alert('請填寫授課教師');return;}
+  if(!dept){alert('請選擇開課系所');return;}
+  if(!year){alert('請選擇修課學年度');return;}
+  const sem=document.getElementById('inputSem').value;
+  document.getElementById('courseChipArea').innerHTML=`
+    <div class="course-chip">
+      <i class="ti ti-book-2" style="font-size:14px;color:var(--ntue)"></i>
+      <strong>${name}</strong>
+      <span>· ${teacher} · ${year}學年第${sem}學期</span>
+    </div>`;
+  goStep(1);
+}
+
+function goStep(n){
+  // step ids: 0,1,2,3
+  [0,1,2,3].forEach(i=>{
+    const el=document.getElementById('step'+i);
+    if(el) el.style.display=i===n?'block':'none';
+  });
+  // step indicators
+  const siCount=fromCourse?3:4;
+  const siOffset=fromCourse?-1:0;
+  for(let i=0;i<siCount;i++){
+    const si=document.getElementById('si'+i);
+    if(!si) continue;
+    si.classList.remove('active','done');
+    const mapped=fromCourse?n-1:n;
+    if(i===mapped) si.classList.add('active');
+    else if(i<mapped) si.classList.add('done');
+  }
+  const pctMap=fromCourse?{1:'33%',2:'66%',3:'100%'}:{0:'25%',1:'50%',2:'75%',3:'100%'};
+  document.getElementById('progressFill').style.width=pctMap[n]||'25%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
 function initRadar(){
-  radarChart=new Chart(document.getElementById('previewRadar'),{
+  const ctx=document.getElementById('previewRadar');
+  if(!ctx) return;
+  radarChart=new Chart(ctx,{
     type:'radar',
     data:{
       labels:['給分甜度','挑戰程度','內容扎實','點名頻率','學習收穫'],
-      datasets:[{
-        data:[...scores],
-        backgroundColor:'rgba(59,91,219,0.1)',
-        borderColor:'#3B5BDB',
-        borderWidth:2.5,
-        pointBackgroundColor:colors,
-        pointBorderColor:'#fff',
-        pointRadius:6,
-        pointBorderWidth:2
-      }]
+      datasets:[{data:[...scores],backgroundColor:'rgba(59,91,219,0.1)',borderColor:'#3B5BDB',borderWidth:2.5,
+        pointBackgroundColor:colors,pointBorderColor:'#fff',pointRadius:6,pointBorderWidth:2}]
     },
-    options:{
-      responsive:false,
-      animation:{duration:200},
-      plugins:{legend:{display:false}},
-      scales:{r:{
-        min:0,max:5,
-        ticks:{stepSize:1,display:false},
-        grid:{color:'rgba(0,0,0,0.07)'},
-        angleLines:{color:'rgba(0,0,0,0.07)'},
-        pointLabels:{font:{size:11,family:"'Noto Sans TC',sans-serif"},color:'#aaa'}
-      }}
-    }
+    options:{responsive:false,animation:{duration:200},plugins:{legend:{display:false}},
+      scales:{r:{min:0,max:5,ticks:{stepSize:1,display:false},
+        grid:{color:'rgba(0,0,0,0.07)'},angleLines:{color:'rgba(0,0,0,0.07)'},
+        pointLabels:{font:{size:11,family:"'Noto Sans TC',sans-serif"},color:'#aaa'}}}}
   });
 }
 
@@ -366,9 +457,7 @@ document.getElementById('starRow').addEventListener('click',e=>{
 
 document.querySelectorAll('.sel-chip').forEach(chip=>{
   chip.addEventListener('click',function(){
-    if(this.dataset.g==='diff'){
-      document.querySelectorAll('[data-g="diff"]').forEach(c=>c.classList.remove('on'));
-    }
+    if(this.dataset.g==='diff') document.querySelectorAll('[data-g="diff"]').forEach(c=>c.classList.remove('on'));
     this.classList.toggle('on');
   });
 });
@@ -381,38 +470,14 @@ function updateChar(){
   else{m.style.color='#E24B4A';m.textContent='（最少 30 字）';}
 }
 
-const steps=[null,
-  document.getElementById('step1'),
-  document.getElementById('step2'),
-  document.getElementById('step3')];
-const pct={1:'33%',2:'66%',3:'100%'};
-const sis=[null,
-  document.getElementById('si1'),
-  document.getElementById('si2'),
-  document.getElementById('si3')];
-
-function goStep(n){
-  steps.forEach((s,i)=>{if(s)s.style.display=i===n?'block':'none';});
-  sis.forEach((s,i)=>{
-    if(!s)return;
-    s.classList.remove('active','done');
-    if(i===n)s.classList.add('active');
-    else if(i<n)s.classList.add('done');
-  });
-  document.getElementById('progressFill').style.width=pct[n];
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
 function submitReview(){
   if(document.getElementById('reviewText').value.length<30){
     document.getElementById('reviewText').style.borderColor='#E24B4A';
-    document.getElementById('reviewText').focus();
-    return;
+    document.getElementById('reviewText').focus();return;
   }
   if(starVal===0){
     const lbl=document.getElementById('starLabel');
-    lbl.textContent='請先選擇推薦度！';lbl.style.color='#E24B4A';
-    return;
+    lbl.textContent='請先選擇推薦度！';lbl.style.color='#E24B4A';return;
   }
   document.getElementById('formArea').style.display='none';
   document.getElementById('successView').style.display='block';
@@ -420,8 +485,7 @@ function submitReview(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-initRadar();
+document.addEventListener('DOMContentLoaded', initPage);
 </script>
-<script src="auth.js"></script>
 </body>
 </html>
